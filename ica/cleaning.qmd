@@ -1,5 +1,5 @@
 ---
-title: "Cleaning SFO Weather Data"
+title: "ICA: Cleaning"
 ---
 
 ::: {.callout-note title="Helpful Data Wrangling Notes"}
@@ -36,7 +36,6 @@ Carryout the following steps to clean and save the San Francisco Weather data.  
 library(readr)
 library(tidyverse)
 weather <- read_csv("Data/weather.csv")
-View(weather)
 ```
 ```{r}
 weather_clean <- weather %>%
