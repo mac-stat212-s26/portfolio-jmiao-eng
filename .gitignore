@@ -59,7 +59,7 @@ rsconnect/
 # quarto site
 /.quarto/
 **/*.quarto_ipynb
-/docs
+**/docs/
 /_site
 _freeze/
 *_files/
