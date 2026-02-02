@@ -1,0 +1,90 @@
+---
+title: "Homework 01 Brazilian Companies Capital Stock Analysis"
+---
+
+
+## TidyTuesday Section
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-01-27/readme.md}).  Provide sufficient background for readers to grasp your narrative.
+
+## Data Exploration
+
+```{r}
+install.packages("tidytuesdayR")
+tuesdata <- tidytuesdayR::tt_load('2026-01-27')
+tuesdata <- tidytuesdayR::tt_load(2026, week = 4)
+
+companies <- tuesdata$companies
+legal_nature <- tuesdata$legal_nature
+qualifications <- tuesdata$qualifications
+size <- tuesdata$size
+
+companies <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv')
+legal_nature <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/legal_nature.csv')
+qualifications <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/qualifications.csv')
+size <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/size.csv')
+```
+
+```{r}
+head(companies)
+```
+
+## Research Question
+Within each company size category, which type of owner qualifications are most common in these firms have the highest capital?
+
+## Data Cleaning
+```{r}
+library(dplyr)
+library(ggplot2)
+
+top10 <- companies %>%
+  group_by(company_size) %>%
+  filter(capital_stock >= quantile(capital_stock, 0.90, na.rm = TRUE)) %>%
+  ungroup()
+
+top10_counts <- top10 %>%
+  count(company_size, owner_qualification, name = "n") %>%
+  group_by(company_size) %>%
+  mutate(pct = n / sum(n)) %>%
+  ungroup()
+
+top10_top5 <- top10_counts %>%
+  group_by(company_size) %>%
+  slice_max(order_by = pct, n = 5, with_ties = FALSE) %>%
+  ungroup()
+
+```
+
+```{r}
+head(top10_top5)
+summary(top10_top5$pct)
+```
+
+
+## Visualization
+```{r}
+ggplot(top10_top5, aes(x = pct, y = owner_qualification)) +
+  geom_col() +
+  facet_wrap(~ company_size, scales = "free_y") +
+  labs(
+    title = "Most common owner qualifications among the highest-capital firms",
+    subtitle = "Highest-capital = top 10% of capital_stock within each company size group",
+    x = "Share of firms in top 10% (within size)",
+    y = "Owner qualification"
+  ) +
+  theme_minimal()
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

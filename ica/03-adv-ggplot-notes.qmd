@@ -63,12 +63,22 @@ Examine the [NYTimes 2015 Temperature Visualization (html)](https://www.nytimes.
 
 - Relate the intro paragraph: "Scientists declared that 2015 was Earth’s hottest year on record..." to the *design* of the visualization.  In particular, based on the intro paragraph,
   - What key message/claim does NYTimes want readers to be able to explore? 
+  
+  The message is to let readers to compare the normal temperature and the actual temperature difference.
+  
   - How did this goal inform what information is displayed in the visualization?
+  
+  Having both the highs and lows, showing the range of the normal temp range and actual temp range. 
 
 **Aesthetic Mapping** 
 
 - What specific variables (from the data codebook) underlie the visualization?
+
+dateInYear, Low, High, NormalLow, NormalHigh, RecordLow, RecordHigh
+
 - How do these variables map to aesthetics of the visual elements, eg, position, size, shape, and color of glyphs?
+
+x = dataInYear, Y = NormalHigh/Low, RecordHigh/Low. Color shows "record, normal, observed"
 
 
 
@@ -123,8 +133,9 @@ Look at the [`geom_linerange` documentation page](https://ggplot2.tidyverse.org/
 ![SFO Weather Records in 2011](https://hash-mac.github.io/stat212site-sp26/images/sfo_first_graph.png)
 
 ```{r weather_plot_temp_records}
-ggplot(weather) +
-    theme_classic()
+ggplot(weather, aes(x = dateInYear)) +
+  geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), color = "#ECEBE3") +
+  theme_classic()
 ```
 
 ::: {.callout-tip title="Keyboard Shortcuts"}
@@ -147,6 +158,15 @@ In your visualization, also display the usual temperatures (`NormalLow` and `Nor
 
 ```{r weather_plot_temp_all}
 
+ggplot(weather, aes(x = dateInYear)) +
+  geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), color = "#ECEBE3") +
+  geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), color = "#C8B8BA") +
+  geom_linerange(aes(ymin = Low, ymax = High), color = "#A90248") +
+  theme_classic() +
+  labs(
+    x = "dateInYear",
+    y = "Temperature (°F)"
+  )
 
 ```
 
@@ -161,6 +181,16 @@ If you'd like finer control of the width of these lines/rectangles, check out th
 Recreate the visual demarcations of the months by adding vertical lines separating the months.  Brainstorm how we might draw those vertical lines. What `geom` might we use?  What subset of the data might we use in that `geom` layer to draw lines only at the month divisions? 
 
 ```{r }
+month_starts <- weather %>%
+  group_by(Month) %>%
+  summarize(start = min(dateInYear))
+
+ggplot(weather, aes(x = dateInYear)) +
+  geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), color = "#ECEBE3") +
+  geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), color = "#C8B8BA") +
+  geom_linerange(aes(ymin = Low, ymax = High), color = "#A90248") +
+  geom_vline(data = month_starts, aes(xintercept = start), linewidth = 0.3) +
+  theme_classic()
 
 
 ```
@@ -181,6 +211,37 @@ Try to figuring out this new challenge using search engines and LLMs:
 - **Search Engines.** Use Google to search for possible solutions using the jargon that is most likely to return the most relevant results. Record search queries and your thought process in selecting which search results to look at first.
 
 - **LLMs.** Use [ChatGPT](https://chat.openai.com/) or [Gemini](https://gemini.google.com/) with prompts that will most efficiently get you the desired results. Record the chat prompts used and output given. Evaluate the output. Do you fully understand the code generated? How can you tell that the generated code is correct?
+
+```{r}
+# ChatGPT: (Screenshot of what I have for the code above) How do I Change the x-axis labels so that the month names display in the center of each month's slice of the plot. Use the R built-in variables called `month.abb` and `month.name` that contain abbreviated and full month names.
+
+# ChatGPT result:
+# month_starts you already have:
+month_starts <- weather %>%
+  group_by(Month) %>%
+  summarize(start = min(dateInYear), .groups = "drop") %>%
+  arrange(start)
+
+# compute the midpoint of each month
+month_labels <- month_starts %>%
+  mutate(
+    end = lead(start) - 1,                 # end is day before next month starts
+    end = ifelse(is.na(end), max(weather$dateInYear), end),  # last month ends at max day
+    mid = (start + end) / 2
+  )
+
+ggplot(weather, aes(x = dateInYear)) +
+  geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), color = "#ECEBE3") +
+  geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), color = "#C8B8BA") +
+  geom_linerange(aes(ymin = Low, ymax = High), color = "#A90248") +
+  geom_vline(data = month_starts, aes(xintercept = start), linewidth = 0.3) +
+  theme_classic() +
+  labs(x = NULL, y = "Temperature (°F)") +
+  scale_x_continuous(
+    breaks = month_labels$mid,
+    labels = month.abb
+  )
+```
 
 
 ## Exercise 6 
