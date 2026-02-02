@@ -9,7 +9,6 @@ Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
 ## Data Exploration
 
 ```{r}
-install.packages("tidytuesdayR")
 tuesdata <- tidytuesdayR::tt_load('2026-01-27')
 tuesdata <- tidytuesdayR::tt_load(2026, week = 4)
 
@@ -60,20 +59,7 @@ summary(top10_top5$pct)
 ```
 
 
-## Visualization
-```{r}
-ggplot(top10_top5, aes(x = pct, y = owner_qualification)) +
-  geom_col() +
-  facet_wrap(~ company_size, scales = "free_y") +
-  labs(
-    title = "Most common owner qualifications among the highest-capital firms",
-    subtitle = "Highest-capital = top 10% of capital_stock within each company size group",
-    x = "Share of firms in top 10% (within size)",
-    y = "Owner qualification"
-  ) +
-  theme_minimal()
 
-```
 
 
 

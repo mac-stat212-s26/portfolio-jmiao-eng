@@ -1,45 +1,46 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "COMP/STAT212 Portfolio",
+    "objectID": "tt/hw01-tt.html",
+    "href": "tt/hw01-tt.html",
+    "title": "Homework 01 Brazilian Companies Capital Stock Analysis",
     "section": "",
-    "text": "Welcome to my online portfolio for COMP/STAT112 course taken at Macalester College. Please, use the side bar on the left for navigation.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome</span>"
-    ]
-  },
-  {
-    "objectID": "pv/pv-01.html",
-    "href": "pv/pv-01.html",
-    "title": "Professional Viz",
-    "section": "",
-    "text": "Add content here",
-    "crumbs": [
-      "Prof Viz",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Professional Viz</span>"
-    ]
-  },
-  {
-    "objectID": "tt/2025-07-08.html",
-    "href": "tt/2025-07-08.html",
-    "title": "TidyTuesday Sample 1",
-    "section": "",
-    "text": "Add content here",
+    "text": "TidyTuesday Section\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>TidyTuesday Sample 1</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 01 Brazilian Companies Capital Stock Analysis</span>"
     ]
   },
   {
-    "objectID": "tt/2025-07-15.html",
-    "href": "tt/2025-07-15.html",
-    "title": "TidyTuesday Sample 2",
-    "section": "",
-    "text": "Add content here",
+    "objectID": "tt/hw01-tt.html#data-exploration",
+    "href": "tt/hw01-tt.html#data-exploration",
+    "title": "Homework 01 Brazilian Companies Capital Stock Analysis",
+    "section": "Data Exploration",
+    "text": "Data Exploration\n\nCodetuesdata &lt;- tidytuesdayR::tt_load('2026-01-27')\ntuesdata &lt;- tidytuesdayR::tt_load(2026, week = 4)\n\ncompanies &lt;- tuesdata$companies\nlegal_nature &lt;- tuesdata$legal_nature\nqualifications &lt;- tuesdata$qualifications\nsize &lt;- tuesdata$size\n\ncompanies &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv')\nlegal_nature &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/legal_nature.csv')\nqualifications &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/qualifications.csv')\nsize &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/size.csv')\n\n\n\nCodehead(companies)\n\n# A tibble: 6 × 6\n  company_id company_name         legal_nature owner_qualification capital_stock\n       &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt;        &lt;chr&gt;                       &lt;dbl&gt;\n1   41273639 MH MATERIAIS DE CON… Limited Lia… Managing Partner /…       1000000\n2   41274138 CLINICA ESTETICA CA… Limited Lia… Managing Partner /…        200000\n3   41274505 G P CONSTRUCOES E S… Limited Lia… Managing Partner /…        500000\n4   41274745 UNICREDIT BANK SAO … Limited Lia… Managing Partner /…        159600\n5   41274856 PRODUCON PRODUTOS P… Limited Lia… Managing Partner /…        200000\n6   41274914 HSG DISTRIBUIDORA D… Limited Lia… Managing Partner /…        300000\n# ℹ 1 more variable: company_size &lt;chr&gt;",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>TidyTuesday Sample 2</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 01 Brazilian Companies Capital Stock Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "tt/hw01-tt.html#research-question",
+    "href": "tt/hw01-tt.html#research-question",
+    "title": "Homework 01 Brazilian Companies Capital Stock Analysis",
+    "section": "Research Question",
+    "text": "Research Question\nWithin each company size category, which type of owner qualifications are most common in these firms have the highest capital?",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 01 Brazilian Companies Capital Stock Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "tt/hw01-tt.html#data-cleaning",
+    "href": "tt/hw01-tt.html#data-cleaning",
+    "title": "Homework 01 Brazilian Companies Capital Stock Analysis",
+    "section": "Data Cleaning",
+    "text": "Data Cleaning\n\nCodelibrary(dplyr)\nlibrary(ggplot2)\n\ntop10 &lt;- companies %&gt;%\n  group_by(company_size) %&gt;%\n  filter(capital_stock &gt;= quantile(capital_stock, 0.90, na.rm = TRUE)) %&gt;%\n  ungroup()\n\ntop10_counts &lt;- top10 %&gt;%\n  count(company_size, owner_qualification, name = \"n\") %&gt;%\n  group_by(company_size) %&gt;%\n  mutate(pct = n / sum(n)) %&gt;%\n  ungroup()\n\ntop10_top5 &lt;- top10_counts %&gt;%\n  group_by(company_size) %&gt;%\n  slice_max(order_by = pct, n = 5, with_ties = FALSE) %&gt;%\n  ungroup()\n\n\n\nCodehead(top10_top5)\n\n# A tibble: 6 × 4\n  company_size     owner_qualification                                 n     pct\n  &lt;chr&gt;            &lt;chr&gt;                                           &lt;int&gt;   &lt;dbl&gt;\n1 micro-enterprise Managing Partner / Partner-Administrator         5498 6.10e-1\n2 micro-enterprise Entrepreneur / Business Owner                    3121 3.46e-1\n3 micro-enterprise Administrator / Manager                           342 3.79e-2\n4 micro-enterprise Beneficial Owner (individual) resident or domi…    44 4.88e-3\n5 micro-enterprise Judicial Administrator (Court-appointed)            4 4.44e-4\n6 other            Administrator / Manager                          1843 4.33e-1\n\nCodesummary(top10_top5$pct)\n\n     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. \n0.0004438 0.0053971 0.0478865 0.1996720 0.3290922 0.9438368",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 01 Brazilian Companies Capital Stock Analysis</span>"
     ]
   },
   {
@@ -50,7 +51,7 @@
     "text": "R",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
@@ -61,7 +62,7 @@
     "text": "Quarto\n\n\n\nfrom qmd4sci.njtierney.com",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
@@ -72,7 +73,7 @@
     "text": "Add content here",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ICA Sample 1</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>ICA Sample 1</span>"
     ]
   },
   {
@@ -83,7 +84,7 @@
     "text": "Add content here",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>ICA Sample 2</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ICA Sample 2</span>"
     ]
   },
   {
@@ -94,7 +95,7 @@
     "text": "Exercise\nCarryout the following steps to clean and save the San Francisco Weather data. Make sure to download and add the data file to your portfolio repository as instructed.\nCodelibrary(readr)\nlibrary(tidyverse)\nweather &lt;- read_csv(\"Data/weather.csv\")\nCodeweather_clean &lt;- weather %&gt;%\n  mutate(PrecipYr = na_if(PrecipYr, 99999))\nCodeweather_clean &lt;- weather_clean %&gt;%\n  mutate(dateInYear = yday(mdy(date)))\nCodeweather %&gt;%\n  mutate(month_name = month.abb[Month]) %&gt;%\n  head()\n\n# A tibble: 6 × 19\n  Month   Day   Low  High NormalLow NormalHigh RecordLow LowYr RecordHigh HiYear\n  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;\n1    11    20    48    55        48         62        35  1964         69   2005\n2     6    16    52    68        53         70        46  1952         90   1961\n3     5     9    47    63        50         66        41  1950         88   1993\n4    10    26    47    69        52         69        39  1954         89   2003\n5     9    27    55    82        55         73        47  1955         96   2010\n6     7     6    52    70        54         71        47  1953         86   1957\n# ℹ 9 more variables: Precip &lt;dbl&gt;, RecordPrecip &lt;dbl&gt;, PrecipYr &lt;dbl&gt;,\n#   date &lt;chr&gt;, Record &lt;lgl&gt;, RecordText &lt;chr&gt;, RecordP &lt;lgl&gt;, CulmPrec &lt;dbl&gt;,\n#   month_name &lt;chr&gt;\nCodewrite_csv(weather_clean, \"data/processed/weather_clean.csv\")",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ICA: Cleaning</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA: Cleaning</span>"
     ]
   },
   {
@@ -105,7 +106,7 @@
     "text": "Read in the weather data in this file with the correct relative file path after you move it to the instructed location.\nThere is a variable that has values that don’t make sense in the data context. Figure out which variable this is and clean it up by making those values missing using na_if().\nCreate a variable called dateInYear that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).\nCreate a variable called month_name that shows the 3-letter abbreviation for each case.\nSave the wrangled data to the data/processed/ folder using write_csv(). Name this file weather_clean.csv. Look up the documentation for this function by typing ?write_csv in the Console. You’ll need to write an appropriate relative path.",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ICA: Cleaning</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA: Cleaning</span>"
     ]
   },
   {
@@ -116,7 +117,7 @@
     "text": "🧩 Learning Goals\nBy the end of this lesson, you should be able to:",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -127,7 +128,7 @@
     "text": "Navigate ggplot2 reference page to find needed functions for a desired visualization\nNavigate the different sections of a function help page to construct desired plot features, in particular,\n\nNavigate the Usage section to identify arguments that must be set\nNavigate the Arguments section to understand how arguments work\nNavigate the Aesthetics section to learn how plot appearance can be controlled\nNavigate the Examples section for some usage examples\n\n\nIdentify when to use different data arguments within ggplot() and geom_() layers",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -138,7 +139,7 @@
     "text": "Introduction 1\n\nIn this lesson, we are going to recreate NYTimes 2015 Temperature Visualization (html) using data from San Francisco (SFO) in 2011.\n\n\nScreenshot of NYTimes 2015 Temperature Visualization",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -149,7 +150,7 @@
     "text": "Reading Data\nRun the code chunk below to load the tidyverse package and read in the San Francisco weather data.\n\nCodelibrary(tidyverse)\nweather &lt;- read_csv(\"https://mac-stat.github.io/data/sfo_weather.csv\")",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -160,7 +161,7 @@
     "text": "Understanding Data\nBelow is the codebook of the data. Familiarize yourself with the meaning of each variable. Use the codebook as a reference when using the data.\n\n\nMonth: Month of the year (1-12)\n\nDay: Day within the month (1-31)\n\nLow/High: Low/high temperature this day\n\nNormalLow/NormalHigh: Typical low/high temperature for this day of the year\n\nRecordLow/RecordHigh: Record low/high temperature for this day of the year\n\nLowYr/HighYr: Year in which the record low/high was observed\n\nPrecip: Amount of precipitation (inches) this day\n\nRecordPrecip: Record amount of precipitation for this day of the year\n\nPrecipYr: Year in which the record precipitation was observed\n\ndate: The actual date in 2011 for this day in YYYY-MM-DD format\n\ndateInYear: What day of the year is it? (1-365)\n\nRecord: Logical (TRUE/FALSE) indicating whether this day had a high temperature record\n\nRecordText: Text that displays the record high for this day (\"Record high: ##\")\n\nRecordP: Logical (TRUE/FALSE) indicating whether this day had a precipitation record\n\nCulmPrec: Cumulative precipitation for the month up to this day",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -171,7 +172,7 @@
     "text": "Exercise 1\nExamine the NYTimes 2015 Temperature Visualization (html) then answer the following questions.\nData Storytelling\n\n\nRelate the intro paragraph: “Scientists declared that 2015 was Earth’s hottest year on record…” to the design of the visualization. In particular, based on the intro paragraph,\n\nWhat key message/claim does NYTimes want readers to be able to explore?\n\nThe message is to let readers to compare the normal temperature and the actual temperature difference.\n\nHow did this goal inform what information is displayed in the visualization?\n\nHaving both the highs and lows, showing the range of the normal temp range and actual temp range.\n\n\nAesthetic Mapping\n\nWhat specific variables (from the data codebook) underlie the visualization?\n\ndateInYear, Low, High, NormalLow, NormalHigh, RecordLow, RecordHigh\n\nHow do these variables map to aesthetics of the visual elements, eg, position, size, shape, and color of glyphs?\n\nx = dataInYear, Y = NormalHigh/Low, RecordHigh/Low. Color shows “record, normal, observed”",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -182,7 +183,7 @@
     "text": "Exercise 2\nNavigate the Geoms section of the ggplot2 reference page to find a geom that corresponds to the visual elements in the temperature plot. Using both the small thumbnail visuals on the right and the names of the geom’s, brainstorm some possibilities for geom’s you might use to recreate the temperature visualization.\n\n\n\n\n\n\nNoteNavigating Documentation / Reference Pages\n\n\n\nYou need to navigate the geoms further by opening up their reference pages to understand if a particular geom is suitable for our task. Let’s look at the geom_point documentation page to learn how to read a documentation page..\nThe Usage section shows all of the possible inputs (arguments) to the geom. These are all of the ways that a geom can be customized. Just looking at the argument names can help give a hint as to what arguments might fit our needs.\nThe Arguments section, on the other hand, explains in detail what each argument does and the possible values the argument can take. The mapping, data, and ... arguments will be the most commonly used by far.\n\n\nmapping is the argument that is being used when we specify which variables should link or map to the plot aesthetics (the code inside aes()).\n\ndata is the argument where we specify the dataset containing the variables that the geom is using.\n\n... is used for fixed aesthetics (ones that don’t correspond to a variable), eg, to set the color of all points, we use color = \"red\" and to set the size of all points, we use size = 3.\n\nThe Aesthetics section of a geom documentation page gives information on how the visual elements of the geom correspond to data. For example, the geom_point documentation page shows that x and y aesthetics are available. It also shows some new aesthetics like stroke.\n\n\n\n\n\n\n\n\nNotedata Argument\n\n\n\nPreviously you have used one dataset per plot by specifying that as the first argument of ggplot(). However, multiple data sets can be passed into ggplot as shown in the example below.\n\nCodedata(diamonds)\n\ndiamonds_avg_price &lt;- diamonds |&gt;\n  group_by(carat) |&gt;\n  summarize(avg_price = mean(price)) |&gt;\n  arrange(carat)\ndiamonds_avg_price &lt;- diamonds_avg_price[seq(1, nrow(diamonds_avg_price), 3), ]\n\nggplot(diamonds, aes(x = carat, y = price)) +\n  geom_point() +\n  geom_point(\n    data = diamonds_avg_price,\n    aes(x = carat, y = avg_price),\n    color = \"deepskyblue\",\n    size = 3\n  )\n\n\n\n\n\n\n\n\n\nLook at the geom_linerange documentation page and start off your temperature visualization with the record lows and highs. Your plot should look like the one below. The hex code of the used light tan color is #ECEBE3.\n\n\nSFO Weather Records in 2011\n\n\nCodeggplot(weather, aes(x = dateInYear)) +\n  geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), color = \"#ECEBE3\") +\n  theme_classic()\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipKeyboard Shortcuts\n\n\n\nAs you work on this plot, try to use some new keyboard shortcuts. Focus on the following:\n\nInsert code chunk: Ctrl+Alt+I (Windows). Option+Command+I (Mac).\nRun current code chunk: Ctrl+Shift+Enter (Windows). Command+Shift+Return (Mac).\nRun current line/currently selected lines: Ctrl+Enter (Windows). Command+Return (Mac).",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -193,7 +194,7 @@
     "text": "Exercise 3\nIn your visualization, also display the usual temperatures (NormalLow and NormalHigh) and actual 2011 temperatures (Low and High). Your plot should look like the one below. The hex code of the color used for the usual temperatures is \"#C8B8BA\" and for the color used for actual temperatures is \"#A90248\".\n\n\nSFO observed, Average, and Record Daily Temperatures in 2011\n\n\nCodeggplot(weather, aes(x = dateInYear)) +\n  geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), color = \"#ECEBE3\") +\n  geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), color = \"#C8B8BA\") +\n  geom_linerange(aes(ymin = Low, ymax = High), color = \"#A90248\") +\n  theme_classic() +\n  labs(\n    x = \"dateInYear\",\n    y = \"Temperature (°F)\"\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipFiner Control\n\n\n\nIf you’d like finer control of the width of these lines/rectangles, check out the geom_rect documentation page.",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -204,7 +205,7 @@
     "text": "Exercise 4\nRecreate the visual demarcations of the months by adding vertical lines separating the months. Brainstorm how we might draw those vertical lines. What geom might we use? What subset of the data might we use in that geom layer to draw lines only at the month divisions?\n\nCodemonth_starts &lt;- weather %&gt;%\n  group_by(Month) %&gt;%\n  summarize(start = min(dateInYear))\n\nggplot(weather, aes(x = dateInYear)) +\n  geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), color = \"#ECEBE3\") +\n  geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), color = \"#C8B8BA\") +\n  geom_linerange(aes(ymin = Low, ymax = High), color = \"#A90248\") +\n  geom_vline(data = month_starts, aes(xintercept = start), linewidth = 0.3) +\n  theme_classic()",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -215,7 +216,7 @@
     "text": "Exercise 5\nChange the x-axis labels so that the month names display in the center of each month’s slice of the plot.\n\n\n\n\n\n\nTipMonth Names\n\n\n\nR has built-in variables called month.abb and month.name that contain abbreviated and full month names.\n\n\nTry to figuring out this new challenge using search engines and LLMs:\n\nSearch Engines. Use Google to search for possible solutions using the jargon that is most likely to return the most relevant results. Record search queries and your thought process in selecting which search results to look at first.\nLLMs. Use ChatGPT or Gemini with prompts that will most efficiently get you the desired results. Record the chat prompts used and output given. Evaluate the output. Do you fully understand the code generated? How can you tell that the generated code is correct?\n\n\nCode# ChatGPT: (Screenshot of what I have for the code above) How do I Change the x-axis labels so that the month names display in the center of each month's slice of the plot. Use the R built-in variables called `month.abb` and `month.name` that contain abbreviated and full month names.\n\n# ChatGPT result:\n# month_starts you already have:\nmonth_starts &lt;- weather %&gt;%\n  group_by(Month) %&gt;%\n  summarize(start = min(dateInYear), .groups = \"drop\") %&gt;%\n  arrange(start)\n\n# compute the midpoint of each month\nmonth_labels &lt;- month_starts %&gt;%\n  mutate(\n    end = lead(start) - 1,                 # end is day before next month starts\n    end = ifelse(is.na(end), max(weather$dateInYear), end),  # last month ends at max day\n    mid = (start + end) / 2\n  )\n\nggplot(weather, aes(x = dateInYear)) +\n  geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), color = \"#ECEBE3\") +\n  geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), color = \"#C8B8BA\") +\n  geom_linerange(aes(ymin = Low, ymax = High), color = \"#A90248\") +\n  geom_vline(data = month_starts, aes(xintercept = start), linewidth = 0.3) +\n  theme_classic() +\n  labs(x = NULL, y = \"Temperature (°F)\") +\n  scale_x_continuous(\n    breaks = month_labels$mid,\n    labels = month.abb\n  )",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -226,7 +227,7 @@
     "text": "Exercise 6\nCreate a precipitation plot that looks like the following. Note that\n\nThe triangles point to precipitation records–refer to the data codebook above for the RecordP variable.\nThe numbers on the plot indicate the total precipitation for the month–search the hjust and vjust options to adjust the alignment of the numbers.\nThe blue and tan colors hex codes are \"#32a3d8\" and \"#ebeae2\", respectively.\n\n\n\nSFO Precipitation in 2011\n\n\nCodeggplot(weather, aes(x = dateInYear, y = CulmPrec)) +\n  geom_area(fill = \"#ebeae2\") +\n  geom_line(color = \"#32a3d8\", linewidth = 0.2) +\n  geom_point(data = weather %&gt;%\n               filter(RecordP == TRUE), shape = 25, size = 1, fill = \"black\") +\n  theme_classic()",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -237,7 +238,7 @@
     "text": "Done!\n\nCheck the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -248,7 +249,7 @@
     "text": "The exercise in this lesson are inspired by an assignment from the Concepts in Computing with Data course at UC Berkeley taught by Dr. Deborah Nolan.↩︎",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ICA Adv Data Viz</span>"
     ]
   },
   {
@@ -259,7 +260,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Extra Sample 1</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Extra Sample 1</span>"
     ]
   },
   {
@@ -270,7 +271,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Extra Sample 2</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Extra Sample 2</span>"
     ]
   }
 ]

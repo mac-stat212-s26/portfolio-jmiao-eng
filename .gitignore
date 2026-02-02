@@ -45,7 +45,7 @@ vignettes/*.pdf
 .Renviron
 
 # pkgdown
-docs/
+#docs/
 
 # translation temp files
 po/*~
@@ -62,11 +62,15 @@ rsconnect/
 # **/docs/
 /_site
 _freeze/
-*_files/
-/*/*_files/
-/site_libs
-*.html
+#*_files/
+#/*/*_files/
+#/site_libs
+#*.html
 *.tex
 *.log
 *.aux
 *.toc
+
+# --- Quarto / GitHub Pages: DO NOT ignore docs output ---
+!docs/
+!docs/**
