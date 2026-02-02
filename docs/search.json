@@ -223,7 +223,7 @@
     "href": "ica/03-adv-ggplot-notes.html#exercise-6",
     "title": "3 Adv Data Viz",
     "section": "Exercise 6",
-    "text": "Exercise 6\nCreate a precipitation plot that looks like the following. Note that\n\nThe triangles point to precipitation records–refer to the data codebook above for the RecordP variable.\nThe numbers on the plot indicate the total precipitation for the month–search the hjust and vjust options to adjust the alignment of the numbers.\nThe blue and tan colors hex codes are \"#32a3d8\" and \"#ebeae2\", respectively.\n\n\n\nSFO Precipitation in 2011",
+    "text": "Exercise 6\nCreate a precipitation plot that looks like the following. Note that\n\nThe triangles point to precipitation records–refer to the data codebook above for the RecordP variable.\nThe numbers on the plot indicate the total precipitation for the month–search the hjust and vjust options to adjust the alignment of the numbers.\nThe blue and tan colors hex codes are \"#32a3d8\" and \"#ebeae2\", respectively.\n\n\n\nSFO Precipitation in 2011\n\n\nCodeggplot(weather, aes(x = dateInYear, y = CulmPrec)) +\n  geom_area(fill = \"#ebeae2\") +\n  geom_line(color = \"#32a3d8\", linewidth = 0.2) +\n  geom_point(data = weather %&gt;%\n               filter(RecordP == TRUE), shape = 25, size = 1, fill = \"black\") +\n  theme_classic()",
     "crumbs": [
       "In-Class Activities",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
