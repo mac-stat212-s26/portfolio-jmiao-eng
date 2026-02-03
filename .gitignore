@@ -59,18 +59,15 @@ rsconnect/
 # quarto site
 /.quarto/
 **/*.quarto_ipynb
- **/docs/
+**/docs/
 /_site
 _freeze/
 *_files/
 /*/*_files/
 /site_libs
-*.html
+
 *.tex
 *.log
 *.aux
 *.toc
 
-# --- Quarto / GitHub Pages: DO NOT ignore docs output ---
-!docs/
-!docs/**
