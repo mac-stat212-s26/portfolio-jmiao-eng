@@ -446,9 +446,11 @@ cookieconsent.run({
    
   <ul>
 <li><a href="#tidytuesday-section" id="toc-tidytuesday-section" class="nav-link active" data-scroll-target="#tidytuesday-section">TidyTuesday Section</a></li>
-  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration">Data Exploration</a></li>
+  <li><a href="#dataset-import-from-tidytuesday" id="toc-dataset-import-from-tidytuesday" class="nav-link" data-scroll-target="#dataset-import-from-tidytuesday">Dataset Import From TidyTuesday</a></li>
   <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research Question</a></li>
   <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -468,81 +470,144 @@ cookieconsent.run({
 
 
 </header><section id="tidytuesday-section" class="level2"><h2 class="anchored" data-anchor-id="tidytuesday-section">TidyTuesday Section</h2>
-<p>Explore the week’s <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a> challenge. Develop a research question, then answer it through a short data story with <a href="{https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-01-27/readme.md}">effective visualization(s)</a>. Provide sufficient background for readers to grasp your narrative.</p>
-</section><section id="data-exploration" class="level2"><h2 class="anchored" data-anchor-id="data-exploration">Data Exploration</h2>
+<p>Explore the week’s <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a> challenge. Develop a research question, then answer it through a short data story with<a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-01-27/readme.md">effective visualization(s)</a>. Provide sufficient background for readers to grasp your narrative.</p>
+</section><section id="dataset-import-from-tidytuesday" class="level2"><h2 class="anchored" data-anchor-id="dataset-import-from-tidytuesday">Dataset Import From TidyTuesday</h2>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">'2026-01-27'</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">4</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a>companies <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>companies</span>
-<span id="cb1-5"><a href="#cb1-5"></a>legal_nature <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>legal_nature</span>
-<span id="cb1-6"><a href="#cb1-6"></a>qualifications <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>qualifications</span>
-<span id="cb1-7"><a href="#cb1-7"></a>size <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>size</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>companies <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv'</span>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a>legal_nature <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/legal_nature.csv'</span>)</span>
-<span id="cb1-11"><a href="#cb1-11"></a>qualifications <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/qualifications.csv'</span>)</span>
-<span id="cb1-12"><a href="#cb1-12"></a>size <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/size.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidytuesdayR)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">4</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>companies <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>companies</span>
+<span id="cb1-7"><a href="#cb1-7"></a>legal_nature <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>legal_nature</span>
+<span id="cb1-8"><a href="#cb1-8"></a>qualifications <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>qualifications</span>
+<span id="cb1-9"><a href="#cb1-9"></a>size <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>size</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>companies <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>legal_nature <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/legal_nature.csv'</span>)</span>
+<span id="cb1-13"><a href="#cb1-13"></a>qualifications <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/qualifications.csv'</span>)</span>
+<span id="cb1-14"><a href="#cb1-14"></a>size <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/size.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-</div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">head</span>(companies)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 6
-  company_id company_name         legal_nature owner_qualification capital_stock
-       &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt;        &lt;chr&gt;                       &lt;dbl&gt;
-1   41273639 MH MATERIAIS DE CON… Limited Lia… Managing Partner /…       1000000
-2   41274138 CLINICA ESTETICA CA… Limited Lia… Managing Partner /…        200000
-3   41274505 G P CONSTRUCOES E S… Limited Lia… Managing Partner /…        500000
-4   41274745 UNICREDIT BANK SAO … Limited Lia… Managing Partner /…        159600
-5   41274856 PRODUCON PRODUTOS P… Limited Lia… Managing Partner /…        200000
-6   41274914 HSG DISTRIBUIDORA D… Limited Lia… Managing Partner /…        300000
-# ℹ 1 more variable: company_size &lt;chr&gt;</code></pre>
-</div>
 </div>
 </section><section id="research-question" class="level2"><h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
-<p>Within each company size category, which type of owner qualifications are most common in these firms have the highest capital?</p>
+<p>Within each company size category, which type of owner qualifications are most common among firms in the top 10% of declared capital stock?</p>
+<p>##Data Exploration</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">glimpse</span>(companies)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Rows: 141,332
+Columns: 6
+$ company_id          &lt;dbl&gt; 41273639, 41274138, 41274505, 41274745, 41274856, …
+$ company_name        &lt;chr&gt; "MH MATERIAIS DE CONSTRUCAO LTDA", "CLINICA ESTETI…
+$ legal_nature        &lt;chr&gt; "Limited Liability Business Company (LLC)", "Limit…
+$ owner_qualification &lt;chr&gt; "Managing Partner / Partner-Administrator", "Manag…
+$ capital_stock       &lt;dbl&gt; 1000000, 200000, 500000, 159600, 200000, 300000, 1…
+$ company_size        &lt;chr&gt; "small-enterprise", "micro-enterprise", "small-ent…</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>companies <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="at">min_cap =</span> <span class="fu">min</span>(capital_stock, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="at">median_cap =</span> <span class="fu">median</span>(capital_stock, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">mean_cap =</span> <span class="fu">mean</span>(capital_stock, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">max_cap =</span> <span class="fu">max</span>(capital_stock, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  min_cap median_cap   mean_cap      max_cap
+    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;
+1 150000.     400000 353697048. 999999999999</code></pre>
+</div>
+</div>
+<p>The summary of the capital_stock variable data shows that the median of the capital stock value is about 400,000 BRL, and the mean is about 353,697,048 BRL, shows that there is a number of firms have large values that pulls the mean up, as the maximum value is much greater than the median means there is numbers of extreme outliers in the dataset.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(companies, <span class="fu">aes</span>(<span class="at">x =</span> capital_stock)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="at">title =</span> <span class="st">"Distribution of declared capital stock in BRL"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="at">x =</span> <span class="st">"Declared capital stock BRL (log10 scale)"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="at">y =</span> <span class="st">"Number of firms"</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="hw01-tt_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The histogram using the log 10 scale of the capital stock value in BRL proves the summary stats that the data is rightly skewed, prove the existence of extreme outliers in the dataset.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(companies, <span class="fu">aes</span>(<span class="at">x =</span> company_size, <span class="at">y =</span> capital_stock)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">title =</span> <span class="st">"Capital stock value in BRL across company sizes"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">x =</span> <span class="st">"Company size"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="at">y =</span> <span class="st">"Declared capital stock BRL(log10 scale)"</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="hw01-tt_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The boxplot by company size ere shows the comparison of the capital stock value in BRL in log 10 scale for each specific company size, and shows that every group have a rightly skewed patterns with extreme outliers. The “other” group does appear to have a higher median capital stock value compare to the “micro-enterprise” and “small-enterprise”. The distribution is very skewed so here in my analysis I will focus on the higher capital end (top 10%) within each size group.</p>
 </section><section id="data-cleaning" class="level2"><h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a>top10 <span class="ot">&lt;-</span> companies <span class="sc">%&gt;%</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">filter</span>(capital_stock <span class="sc">&gt;=</span> <span class="fu">quantile</span>(capital_stock, <span class="fl">0.90</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a>top10_counts <span class="ot">&lt;-</span> top10 <span class="sc">%&gt;%</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">count</span>(company_size, owner_qualification, <span class="at">name =</span> <span class="st">"n"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb4-14"><a href="#cb4-14"></a></span>
-<span id="cb4-15"><a href="#cb4-15"></a>top10_top5 <span class="ot">&lt;-</span> top10_counts <span class="sc">%&gt;%</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> pct, <span class="at">n =</span> <span class="dv">5</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>top10 <span class="ot">&lt;-</span> companies <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">filter</span>(capital_stock <span class="sc">&gt;=</span> <span class="fu">quantile</span>(capital_stock, <span class="fl">0.90</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a>top10_counts <span class="ot">&lt;-</span> top10 <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="fu">count</span>(company_size, owner_qualification, <span class="at">name =</span> <span class="st">"n"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb8-11"><a href="#cb8-11"></a></span>
+<span id="cb8-12"><a href="#cb8-12"></a>top10_top5 <span class="ot">&lt;-</span> top10_counts <span class="sc">%&gt;%</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> pct, <span class="at">n =</span> <span class="dv">5</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">head</span>(top10_top5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 4
-  company_size     owner_qualification                                 n     pct
-  &lt;chr&gt;            &lt;chr&gt;                                           &lt;int&gt;   &lt;dbl&gt;
-1 micro-enterprise Managing Partner / Partner-Administrator         5498 6.10e-1
-2 micro-enterprise Entrepreneur / Business Owner                    3121 3.46e-1
-3 micro-enterprise Administrator / Manager                           342 3.79e-2
-4 micro-enterprise Beneficial Owner (individual) resident or domi…    44 4.88e-3
-5 micro-enterprise Judicial Administrator (Court-appointed)            4 4.44e-4
-6 other            Administrator / Manager                          1843 4.33e-1</code></pre>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">summary</span>(top10_top5<span class="sc">$</span>pct)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">summary</span>(top10_top5<span class="sc">$</span>pct)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
 0.0004438 0.0053971 0.0478865 0.1996720 0.3290922 0.9438368 </code></pre>
 </div>
 </div>
+</section><section id="visualization" class="level2"><h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(top10_top5, <span class="fu">aes</span>(<span class="at">x =</span> pct, <span class="at">y =</span> owner_qualification)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> company_size, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="at">title =</span> <span class="st">"Owner qualifications among top 10% high-capital firms vary by company size"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="at">x =</span> <span class="st">"Share of high-capital firms (within size)"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="at">y =</span> <span class="st">"Owner qualification"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8"></a>    <span class="at">caption =</span> <span class="st">"Source: TidyTuesday (2026-01-27) Brazilian companies dataset. Author: Jerry Miao. Date: 2026-02-02."</span>) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>),</span>
+<span id="cb11-11"><a href="#cb11-11"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb11-12"><a href="#cb11-12"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb11-13"><a href="#cb11-13"></a>        <span class="at">axis.text.x  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb11-14"><a href="#cb11-14"></a>        <span class="at">axis.text.y  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="hw01-tt_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The Owner qualifications among top 10% high-capital firms vary by company size visualization shows that: -In micro-enterprise the high capital firms in the top 10% high end, the most common owner qualification is Managing Partner/Partner-Administrator, with Entrepreneur/Business Owner following. - In small-enterprise the high capital firms in the top 10% high end, Managing Partner/Partner-Administrator having a very close to 1 bar shows that the best performing firms is mostly Managing Partner/Partner-Administrator. - In other size category there is a more combined pattern across the Owner qualification. Having Administrator/Manager the best performing and following with Managing Partner/Partner-Administrator.</p>
+</section><section id="conclusion" class="level2"><h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Across company sizes, the owner qualification among the high capital firms performance in the capital market in BRL is not the same. In both the micro-enterprise and small_enterprise groups, Managing Partner/Partner-Administrator appears to be the most common owner qualification(dominates the small_enterprise firms). The other category shows a more combines patterns with Owner qualifications with the Administrator/Manager appearing most frequently but the Managing Partner Partner-Administrator still shows strong performance. Overall the high capital firms in top 10% shows a pattern of strong performance for Managing Partner/Partner-Administrator firms differ in company size group.</p>
 
 
 <!-- -->
@@ -1026,81 +1091,141 @@ cookieconsent.run({
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">---</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="an">title:</span><span class="co"> "Homework 01 Brazilian Companies Capital Stock Analysis"</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">---</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a></span>
-<span id="cb9-5"><a href="#cb9-5"></a></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="fu">## TidyTuesday Section</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>Explore the week's <span class="co">[</span><span class="ot">TidyTuesday</span><span class="co">](https://github.com/rfordatascience/tidytuesday)</span> challenge. Develop a research question, then answer it through a short data story with <span class="co">[</span><span class="ot">effective visualization(s)</span><span class="co">]({https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-01-27/readme.md})</span>.  Provide sufficient background for readers to grasp your narrative.</span>
-<span id="cb9-8"><a href="#cb9-8"></a></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="fu">## Data Exploration</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="in">```{r}</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">'2026-01-27'</span>)</span>
-<span id="cb9-15"><a href="#cb9-15"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">4</span>)</span>
-<span id="cb9-16"><a href="#cb9-16"></a></span>
-<span id="cb9-17"><a href="#cb9-17"></a>companies <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>companies</span>
-<span id="cb9-18"><a href="#cb9-18"></a>legal_nature <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>legal_nature</span>
-<span id="cb9-19"><a href="#cb9-19"></a>qualifications <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>qualifications</span>
-<span id="cb9-20"><a href="#cb9-20"></a>size <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>size</span>
-<span id="cb9-21"><a href="#cb9-21"></a></span>
-<span id="cb9-22"><a href="#cb9-22"></a>companies <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv'</span>)</span>
-<span id="cb9-23"><a href="#cb9-23"></a>legal_nature <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/legal_nature.csv'</span>)</span>
-<span id="cb9-24"><a href="#cb9-24"></a>qualifications <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/qualifications.csv'</span>)</span>
-<span id="cb9-25"><a href="#cb9-25"></a>size <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/size.csv'</span>)</span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="in">```</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a></span>
-<span id="cb9-30"><a href="#cb9-30"></a><span class="in">```{r}</span></span>
-<span id="cb9-31"><a href="#cb9-31"></a><span class="fu">head</span>(companies)</span>
-<span id="cb9-32"><a href="#cb9-32"></a><span class="in">```</span></span>
-<span id="cb9-33"><a href="#cb9-33"></a></span>
-<span id="cb9-34"><a href="#cb9-34"></a><span class="fu">## Research Question</span></span>
-<span id="cb9-35"><a href="#cb9-35"></a>Within each company size category, which type of owner qualifications are most common in these firms have the highest capital?</span>
-<span id="cb9-36"><a href="#cb9-36"></a></span>
-<span id="cb9-37"><a href="#cb9-37"></a><span class="fu">## Data Cleaning</span></span>
-<span id="cb9-40"><a href="#cb9-40"></a><span class="in">```{r}</span></span>
-<span id="cb9-41"><a href="#cb9-41"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb9-42"><a href="#cb9-42"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb9-43"><a href="#cb9-43"></a></span>
-<span id="cb9-44"><a href="#cb9-44"></a>top10 <span class="ot">&lt;-</span> companies <span class="sc">%&gt;%</span></span>
-<span id="cb9-45"><a href="#cb9-45"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
-<span id="cb9-46"><a href="#cb9-46"></a>  <span class="fu">filter</span>(capital_stock <span class="sc">&gt;=</span> <span class="fu">quantile</span>(capital_stock, <span class="fl">0.90</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb9-47"><a href="#cb9-47"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb9-48"><a href="#cb9-48"></a></span>
-<span id="cb9-49"><a href="#cb9-49"></a>top10_counts <span class="ot">&lt;-</span> top10 <span class="sc">%&gt;%</span></span>
-<span id="cb9-50"><a href="#cb9-50"></a>  <span class="fu">count</span>(company_size, owner_qualification, <span class="at">name =</span> <span class="st">"n"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-51"><a href="#cb9-51"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
-<span id="cb9-52"><a href="#cb9-52"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb9-53"><a href="#cb9-53"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb9-54"><a href="#cb9-54"></a></span>
-<span id="cb9-55"><a href="#cb9-55"></a>top10_top5 <span class="ot">&lt;-</span> top10_counts <span class="sc">%&gt;%</span></span>
-<span id="cb9-56"><a href="#cb9-56"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
-<span id="cb9-57"><a href="#cb9-57"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> pct, <span class="at">n =</span> <span class="dv">5</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-58"><a href="#cb9-58"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb9-59"><a href="#cb9-59"></a></span>
-<span id="cb9-60"><a href="#cb9-60"></a><span class="in">```</span></span>
-<span id="cb9-61"><a href="#cb9-61"></a></span>
-<span id="cb9-64"><a href="#cb9-64"></a><span class="in">```{r}</span></span>
-<span id="cb9-65"><a href="#cb9-65"></a><span class="fu">head</span>(top10_top5)</span>
-<span id="cb9-66"><a href="#cb9-66"></a><span class="fu">summary</span>(top10_top5<span class="sc">$</span>pct)</span>
-<span id="cb9-67"><a href="#cb9-67"></a><span class="in">```</span></span>
-<span id="cb9-68"><a href="#cb9-68"></a></span>
-<span id="cb9-69"><a href="#cb9-69"></a></span>
-<span id="cb9-70"><a href="#cb9-70"></a></span>
-<span id="cb9-71"><a href="#cb9-71"></a></span>
-<span id="cb9-72"><a href="#cb9-72"></a></span>
-<span id="cb9-73"><a href="#cb9-73"></a></span>
-<span id="cb9-74"><a href="#cb9-74"></a></span>
-<span id="cb9-75"><a href="#cb9-75"></a></span>
-<span id="cb9-76"><a href="#cb9-76"></a></span>
-<span id="cb9-77"><a href="#cb9-77"></a></span>
-<span id="cb9-78"><a href="#cb9-78"></a></span>
-<span id="cb9-79"><a href="#cb9-79"></a></span>
-<span id="cb9-80"><a href="#cb9-80"></a></span>
-<span id="cb9-81"><a href="#cb9-81"></a></span>
-<span id="cb9-82"><a href="#cb9-82"></a></span>
-<span id="cb9-83"><a href="#cb9-83"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="an">title:</span><span class="co"> "Homework 01 Brazilian Companies Capital Stock Analysis"</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">---</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="fu">## TidyTuesday Section</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>Explore the week's <span class="co">[</span><span class="ot">TidyTuesday</span><span class="co">](https://github.com/rfordatascience/tidytuesday)</span> challenge. Develop a research question, then answer it through a short data story with<span class="co">[</span><span class="ot">effective visualization(s)</span><span class="co">](https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-01-27/readme.md)</span>. Provide sufficient background for readers to grasp your narrative.</span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="fu">## Dataset Import From TidyTuesday</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="in">```{r}</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="fu">library</span>(tidytuesdayR)</span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-17"><a href="#cb12-17"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">4</span>)</span>
+<span id="cb12-18"><a href="#cb12-18"></a></span>
+<span id="cb12-19"><a href="#cb12-19"></a>companies <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>companies</span>
+<span id="cb12-20"><a href="#cb12-20"></a>legal_nature <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>legal_nature</span>
+<span id="cb12-21"><a href="#cb12-21"></a>qualifications <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>qualifications</span>
+<span id="cb12-22"><a href="#cb12-22"></a>size <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>size</span>
+<span id="cb12-23"><a href="#cb12-23"></a></span>
+<span id="cb12-24"><a href="#cb12-24"></a>companies <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv'</span>)</span>
+<span id="cb12-25"><a href="#cb12-25"></a>legal_nature <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/legal_nature.csv'</span>)</span>
+<span id="cb12-26"><a href="#cb12-26"></a>qualifications <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/qualifications.csv'</span>)</span>
+<span id="cb12-27"><a href="#cb12-27"></a>size <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/size.csv'</span>)</span>
+<span id="cb12-28"><a href="#cb12-28"></a><span class="in">```</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a><span class="fu">## Research Question</span></span>
+<span id="cb12-30"><a href="#cb12-30"></a>Within each company size category, which type of owner qualifications are most common among firms in the top 10% of declared capital stock?</span>
+<span id="cb12-31"><a href="#cb12-31"></a></span>
+<span id="cb12-32"><a href="#cb12-32"></a>##Data Exploration</span>
+<span id="cb12-33"><a href="#cb12-33"></a></span>
+<span id="cb12-36"><a href="#cb12-36"></a><span class="in">```{r}</span></span>
+<span id="cb12-37"><a href="#cb12-37"></a><span class="fu">glimpse</span>(companies)</span>
+<span id="cb12-38"><a href="#cb12-38"></a><span class="in">```</span></span>
+<span id="cb12-39"><a href="#cb12-39"></a></span>
+<span id="cb12-42"><a href="#cb12-42"></a><span class="in">```{r}</span></span>
+<span id="cb12-43"><a href="#cb12-43"></a>companies <span class="sc">%&gt;%</span></span>
+<span id="cb12-44"><a href="#cb12-44"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-45"><a href="#cb12-45"></a>    <span class="at">min_cap =</span> <span class="fu">min</span>(capital_stock, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-46"><a href="#cb12-46"></a>    <span class="at">median_cap =</span> <span class="fu">median</span>(capital_stock, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-47"><a href="#cb12-47"></a>    <span class="at">mean_cap =</span> <span class="fu">mean</span>(capital_stock, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-48"><a href="#cb12-48"></a>    <span class="at">max_cap =</span> <span class="fu">max</span>(capital_stock, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-49"><a href="#cb12-49"></a>    )</span>
+<span id="cb12-50"><a href="#cb12-50"></a></span>
+<span id="cb12-51"><a href="#cb12-51"></a><span class="in">```</span></span>
+<span id="cb12-52"><a href="#cb12-52"></a></span>
+<span id="cb12-53"><a href="#cb12-53"></a>The summary of the capital_stock variable data shows that the median of the capital stock value is about 400,000 BRL, and the mean is about 353,697,048 BRL, shows that there is a number of firms have large values that pulls the mean up, as the maximum value is much greater than the median means there is numbers of extreme outliers in the dataset.</span>
+<span id="cb12-54"><a href="#cb12-54"></a></span>
+<span id="cb12-57"><a href="#cb12-57"></a><span class="in">```{r}</span></span>
+<span id="cb12-58"><a href="#cb12-58"></a><span class="fu">ggplot</span>(companies, <span class="fu">aes</span>(<span class="at">x =</span> capital_stock)) <span class="sc">+</span></span>
+<span id="cb12-59"><a href="#cb12-59"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb12-60"><a href="#cb12-60"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb12-61"><a href="#cb12-61"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-62"><a href="#cb12-62"></a>    <span class="at">title =</span> <span class="st">"Distribution of declared capital stock in BRL"</span>,</span>
+<span id="cb12-63"><a href="#cb12-63"></a>    <span class="at">x =</span> <span class="st">"Declared capital stock BRL (log10 scale)"</span>,</span>
+<span id="cb12-64"><a href="#cb12-64"></a>    <span class="at">y =</span> <span class="st">"Number of firms"</span>) <span class="sc">+</span></span>
+<span id="cb12-65"><a href="#cb12-65"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb12-66"><a href="#cb12-66"></a><span class="in">```</span></span>
+<span id="cb12-67"><a href="#cb12-67"></a>The histogram using the log 10 scale of the capital stock value in BRL proves the summary stats that the data is rightly skewed, prove the existence of extreme outliers in the dataset.</span>
+<span id="cb12-68"><a href="#cb12-68"></a></span>
+<span id="cb12-71"><a href="#cb12-71"></a><span class="in">```{r}</span></span>
+<span id="cb12-72"><a href="#cb12-72"></a><span class="fu">ggplot</span>(companies, <span class="fu">aes</span>(<span class="at">x =</span> company_size, <span class="at">y =</span> capital_stock)) <span class="sc">+</span></span>
+<span id="cb12-73"><a href="#cb12-73"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb12-74"><a href="#cb12-74"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb12-75"><a href="#cb12-75"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-76"><a href="#cb12-76"></a>    <span class="at">title =</span> <span class="st">"Capital stock value in BRL across company sizes"</span>,</span>
+<span id="cb12-77"><a href="#cb12-77"></a>    <span class="at">x =</span> <span class="st">"Company size"</span>,</span>
+<span id="cb12-78"><a href="#cb12-78"></a>    <span class="at">y =</span> <span class="st">"Declared capital stock BRL(log10 scale)"</span></span>
+<span id="cb12-79"><a href="#cb12-79"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-80"><a href="#cb12-80"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb12-81"><a href="#cb12-81"></a></span>
+<span id="cb12-82"><a href="#cb12-82"></a><span class="in">```</span></span>
+<span id="cb12-83"><a href="#cb12-83"></a>The boxplot by company size ere shows the comparison of the capital stock value in BRL in log 10 scale for each specific company size, and shows that every group have a rightly skewed patterns with extreme outliers. The "other" group does appear to have a higher median capital stock value compare to the "micro-enterprise" and "small-enterprise". The distribution is very skewed so here in my analysis I will focus on the higher capital end (top 10%) within each size group.</span>
+<span id="cb12-84"><a href="#cb12-84"></a></span>
+<span id="cb12-85"><a href="#cb12-85"></a><span class="fu">## Data Cleaning</span></span>
+<span id="cb12-88"><a href="#cb12-88"></a><span class="in">```{r}</span></span>
+<span id="cb12-89"><a href="#cb12-89"></a>top10 <span class="ot">&lt;-</span> companies <span class="sc">%&gt;%</span></span>
+<span id="cb12-90"><a href="#cb12-90"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
+<span id="cb12-91"><a href="#cb12-91"></a>  <span class="fu">filter</span>(capital_stock <span class="sc">&gt;=</span> <span class="fu">quantile</span>(capital_stock, <span class="fl">0.90</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-92"><a href="#cb12-92"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-93"><a href="#cb12-93"></a></span>
+<span id="cb12-94"><a href="#cb12-94"></a>top10_counts <span class="ot">&lt;-</span> top10 <span class="sc">%&gt;%</span></span>
+<span id="cb12-95"><a href="#cb12-95"></a>  <span class="fu">count</span>(company_size, owner_qualification, <span class="at">name =</span> <span class="st">"n"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-96"><a href="#cb12-96"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
+<span id="cb12-97"><a href="#cb12-97"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-98"><a href="#cb12-98"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-99"><a href="#cb12-99"></a></span>
+<span id="cb12-100"><a href="#cb12-100"></a>top10_top5 <span class="ot">&lt;-</span> top10_counts <span class="sc">%&gt;%</span></span>
+<span id="cb12-101"><a href="#cb12-101"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">%&gt;%</span></span>
+<span id="cb12-102"><a href="#cb12-102"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> pct, <span class="at">n =</span> <span class="dv">5</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-103"><a href="#cb12-103"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-104"><a href="#cb12-104"></a></span>
+<span id="cb12-105"><a href="#cb12-105"></a><span class="in">```</span></span>
+<span id="cb12-106"><a href="#cb12-106"></a></span>
+<span id="cb12-109"><a href="#cb12-109"></a><span class="in">```{r}</span></span>
+<span id="cb12-110"><a href="#cb12-110"></a><span class="fu">summary</span>(top10_top5<span class="sc">$</span>pct)</span>
+<span id="cb12-111"><a href="#cb12-111"></a><span class="in">```</span></span>
+<span id="cb12-112"><a href="#cb12-112"></a></span>
+<span id="cb12-113"><a href="#cb12-113"></a><span class="fu">## Visualization</span></span>
+<span id="cb12-114"><a href="#cb12-114"></a><span class="in">```{r fig.width=12, fig.height=10}</span></span>
+<span id="cb12-115"><a href="#cb12-115"></a><span class="fu">ggplot</span>(top10_top5, <span class="fu">aes</span>(<span class="at">x =</span> pct, <span class="at">y =</span> owner_qualification)) <span class="sc">+</span></span>
+<span id="cb12-116"><a href="#cb12-116"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb12-117"><a href="#cb12-117"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> company_size, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-118"><a href="#cb12-118"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-119"><a href="#cb12-119"></a>    <span class="at">title =</span> <span class="st">"Owner qualifications among top 10% high-capital firms vary by company size"</span>,</span>
+<span id="cb12-120"><a href="#cb12-120"></a>    <span class="at">x =</span> <span class="st">"Share of high-capital firms (within size)"</span>,</span>
+<span id="cb12-121"><a href="#cb12-121"></a>    <span class="at">y =</span> <span class="st">"Owner qualification"</span>,</span>
+<span id="cb12-122"><a href="#cb12-122"></a>    <span class="at">caption =</span> <span class="st">"Source: TidyTuesday (2026-01-27) Brazilian companies dataset. Author: Jerry Miao. Date: 2026-02-02."</span>) <span class="sc">+</span></span>
+<span id="cb12-123"><a href="#cb12-123"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-124"><a href="#cb12-124"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>),</span>
+<span id="cb12-125"><a href="#cb12-125"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb12-126"><a href="#cb12-126"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb12-127"><a href="#cb12-127"></a>        <span class="at">axis.text.x  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb12-128"><a href="#cb12-128"></a>        <span class="at">axis.text.y  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>)) </span>
+<span id="cb12-129"><a href="#cb12-129"></a><span class="in">```</span></span>
+<span id="cb12-130"><a href="#cb12-130"></a></span>
+<span id="cb12-131"><a href="#cb12-131"></a>The Owner qualifications among top 10% high-capital firms vary by company size visualization shows that:</span>
+<span id="cb12-132"><a href="#cb12-132"></a>-In micro-enterprise the high capital firms in the top 10% high end, the most common owner qualification is Managing Partner/Partner-Administrator, with Entrepreneur/Business Owner following.</span>
+<span id="cb12-133"><a href="#cb12-133"></a><span class="ss">- </span>In small-enterprise the high capital firms in the top 10% high end, Managing Partner/Partner-Administrator having a very close to 1 bar shows that the best performing firms is mostly Managing Partner/Partner-Administrator.</span>
+<span id="cb12-134"><a href="#cb12-134"></a><span class="ss">- </span>In other size category there is a more combined pattern across the Owner qualification. Having Administrator/Manager the best performing and following with Managing Partner/Partner-Administrator.</span>
+<span id="cb12-135"><a href="#cb12-135"></a></span>
+<span id="cb12-136"><a href="#cb12-136"></a><span class="fu">## Conclusion</span></span>
+<span id="cb12-137"><a href="#cb12-137"></a>Across company sizes, the owner qualification among the high capital firms performance in the capital market in BRL is not the same. In both the micro-enterprise and small_enterprise groups, Managing Partner/Partner-Administrator appears to be the most common owner qualification(dominates the small_enterprise firms). The other category shows a more combines patterns with Owner qualifications with the Administrator/Manager appearing most frequently but the Managing Partner Partner-Administrator still shows strong performance. Overall the high capital firms in top 10% shows a pattern of strong performance for Managing Partner/Partner-Administrator firms differ in company size group.</span>
+<span id="cb12-138"><a href="#cb12-138"></a></span>
+<span id="cb12-139"><a href="#cb12-139"></a></span>
+<span id="cb12-140"><a href="#cb12-140"></a></span>
+<span id="cb12-141"><a href="#cb12-141"></a></span>
+<span id="cb12-142"><a href="#cb12-142"></a></span>
+<span id="cb12-143"><a href="#cb12-143"></a></span>
+<span id="cb12-144"><a href="#cb12-144"></a></span>
+<span id="cb12-145"><a href="#cb12-145"></a></span>
+<span id="cb12-146"><a href="#cb12-146"></a></span>
+<span id="cb12-147"><a href="#cb12-147"></a></span>
+<span id="cb12-148"><a href="#cb12-148"></a></span>
+<span id="cb12-149"><a href="#cb12-149"></a></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

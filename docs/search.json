@@ -47,18 +47,18 @@
     "href": "tt/hw01-tt.html",
     "title": "Homework 01 Brazilian Companies Capital Stock Analysis",
     "section": "",
-    "text": "TidyTuesday Section\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.",
+    "text": "TidyTuesday Section\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story witheffective visualization(s). Provide sufficient background for readers to grasp your narrative.",
     "crumbs": [
       "TidyTuesday",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 01 Brazilian Companies Capital Stock Analysis</span>"
     ]
   },
   {
-    "objectID": "tt/hw01-tt.html#data-exploration",
-    "href": "tt/hw01-tt.html#data-exploration",
+    "objectID": "tt/hw01-tt.html#dataset-import-from-tidytuesday",
+    "href": "tt/hw01-tt.html#dataset-import-from-tidytuesday",
     "title": "Homework 01 Brazilian Companies Capital Stock Analysis",
-    "section": "Data Exploration",
-    "text": "Data Exploration\n\nCodetuesdata &lt;- tidytuesdayR::tt_load('2026-01-27')\ntuesdata &lt;- tidytuesdayR::tt_load(2026, week = 4)\n\ncompanies &lt;- tuesdata$companies\nlegal_nature &lt;- tuesdata$legal_nature\nqualifications &lt;- tuesdata$qualifications\nsize &lt;- tuesdata$size\n\ncompanies &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv')\nlegal_nature &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/legal_nature.csv')\nqualifications &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/qualifications.csv')\nsize &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/size.csv')\n\n\n\nCodehead(companies)\n\n# A tibble: 6 × 6\n  company_id company_name         legal_nature owner_qualification capital_stock\n       &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt;        &lt;chr&gt;                       &lt;dbl&gt;\n1   41273639 MH MATERIAIS DE CON… Limited Lia… Managing Partner /…       1000000\n2   41274138 CLINICA ESTETICA CA… Limited Lia… Managing Partner /…        200000\n3   41274505 G P CONSTRUCOES E S… Limited Lia… Managing Partner /…        500000\n4   41274745 UNICREDIT BANK SAO … Limited Lia… Managing Partner /…        159600\n5   41274856 PRODUCON PRODUTOS P… Limited Lia… Managing Partner /…        200000\n6   41274914 HSG DISTRIBUIDORA D… Limited Lia… Managing Partner /…        300000\n# ℹ 1 more variable: company_size &lt;chr&gt;",
+    "section": "Dataset Import From TidyTuesday",
+    "text": "Dataset Import From TidyTuesday\n\nCodelibrary(tidytuesdayR)\nlibrary(dplyr)\nlibrary(ggplot2)\ntuesdata &lt;- tidytuesdayR::tt_load(2026, week = 4)\n\ncompanies &lt;- tuesdata$companies\nlegal_nature &lt;- tuesdata$legal_nature\nqualifications &lt;- tuesdata$qualifications\nsize &lt;- tuesdata$size\n\ncompanies &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv')\nlegal_nature &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/legal_nature.csv')\nqualifications &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/qualifications.csv')\nsize &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/size.csv')",
     "crumbs": [
       "TidyTuesday",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 01 Brazilian Companies Capital Stock Analysis</span>"
@@ -69,7 +69,7 @@
     "href": "tt/hw01-tt.html#research-question",
     "title": "Homework 01 Brazilian Companies Capital Stock Analysis",
     "section": "Research Question",
-    "text": "Research Question\nWithin each company size category, which type of owner qualifications are most common in these firms have the highest capital?",
+    "text": "Research Question\nWithin each company size category, which type of owner qualifications are most common among firms in the top 10% of declared capital stock?\n##Data Exploration\n\nCodeglimpse(companies)\n\nRows: 141,332\nColumns: 6\n$ company_id          &lt;dbl&gt; 41273639, 41274138, 41274505, 41274745, 41274856, …\n$ company_name        &lt;chr&gt; \"MH MATERIAIS DE CONSTRUCAO LTDA\", \"CLINICA ESTETI…\n$ legal_nature        &lt;chr&gt; \"Limited Liability Business Company (LLC)\", \"Limit…\n$ owner_qualification &lt;chr&gt; \"Managing Partner / Partner-Administrator\", \"Manag…\n$ capital_stock       &lt;dbl&gt; 1000000, 200000, 500000, 159600, 200000, 300000, 1…\n$ company_size        &lt;chr&gt; \"small-enterprise\", \"micro-enterprise\", \"small-ent…\n\n\n\nCodecompanies %&gt;%\n  summarise(\n    min_cap = min(capital_stock, na.rm = TRUE),\n    median_cap = median(capital_stock, na.rm = TRUE),\n    mean_cap = mean(capital_stock, na.rm = TRUE),\n    max_cap = max(capital_stock, na.rm = TRUE)\n    )\n\n# A tibble: 1 × 4\n  min_cap median_cap   mean_cap      max_cap\n    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;\n1 150000.     400000 353697048. 999999999999\n\n\nThe summary of the capital_stock variable data shows that the median of the capital stock value is about 400,000 BRL, and the mean is about 353,697,048 BRL, shows that there is a number of firms have large values that pulls the mean up, as the maximum value is much greater than the median means there is numbers of extreme outliers in the dataset.\n\nCodeggplot(companies, aes(x = capital_stock)) +\n  geom_histogram(bins = 50, fill = \"blue\") +\n  scale_x_log10() +\n  labs(\n    title = \"Distribution of declared capital stock in BRL\",\n    x = \"Declared capital stock BRL (log10 scale)\",\n    y = \"Number of firms\") +\n  theme_minimal()\n\n\n\n\n\n\n\nThe histogram using the log 10 scale of the capital stock value in BRL proves the summary stats that the data is rightly skewed, prove the existence of extreme outliers in the dataset.\n\nCodeggplot(companies, aes(x = company_size, y = capital_stock)) +\n  geom_boxplot(outlier.alpha = 0.1) +\n  scale_y_log10() +\n  labs(\n    title = \"Capital stock value in BRL across company sizes\",\n    x = \"Company size\",\n    y = \"Declared capital stock BRL(log10 scale)\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\nThe boxplot by company size ere shows the comparison of the capital stock value in BRL in log 10 scale for each specific company size, and shows that every group have a rightly skewed patterns with extreme outliers. The “other” group does appear to have a higher median capital stock value compare to the “micro-enterprise” and “small-enterprise”. The distribution is very skewed so here in my analysis I will focus on the higher capital end (top 10%) within each size group.",
     "crumbs": [
       "TidyTuesday",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 01 Brazilian Companies Capital Stock Analysis</span>"
@@ -80,7 +80,29 @@
     "href": "tt/hw01-tt.html#data-cleaning",
     "title": "Homework 01 Brazilian Companies Capital Stock Analysis",
     "section": "Data Cleaning",
-    "text": "Data Cleaning\n\nCodelibrary(dplyr)\nlibrary(ggplot2)\n\ntop10 &lt;- companies %&gt;%\n  group_by(company_size) %&gt;%\n  filter(capital_stock &gt;= quantile(capital_stock, 0.90, na.rm = TRUE)) %&gt;%\n  ungroup()\n\ntop10_counts &lt;- top10 %&gt;%\n  count(company_size, owner_qualification, name = \"n\") %&gt;%\n  group_by(company_size) %&gt;%\n  mutate(pct = n / sum(n)) %&gt;%\n  ungroup()\n\ntop10_top5 &lt;- top10_counts %&gt;%\n  group_by(company_size) %&gt;%\n  slice_max(order_by = pct, n = 5, with_ties = FALSE) %&gt;%\n  ungroup()\n\n\n\nCodehead(top10_top5)\n\n# A tibble: 6 × 4\n  company_size     owner_qualification                                 n     pct\n  &lt;chr&gt;            &lt;chr&gt;                                           &lt;int&gt;   &lt;dbl&gt;\n1 micro-enterprise Managing Partner / Partner-Administrator         5498 6.10e-1\n2 micro-enterprise Entrepreneur / Business Owner                    3121 3.46e-1\n3 micro-enterprise Administrator / Manager                           342 3.79e-2\n4 micro-enterprise Beneficial Owner (individual) resident or domi…    44 4.88e-3\n5 micro-enterprise Judicial Administrator (Court-appointed)            4 4.44e-4\n6 other            Administrator / Manager                          1843 4.33e-1\n\nCodesummary(top10_top5$pct)\n\n     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. \n0.0004438 0.0053971 0.0478865 0.1996720 0.3290922 0.9438368",
+    "text": "Data Cleaning\n\nCodetop10 &lt;- companies %&gt;%\n  group_by(company_size) %&gt;%\n  filter(capital_stock &gt;= quantile(capital_stock, 0.90, na.rm = TRUE)) %&gt;%\n  ungroup()\n\ntop10_counts &lt;- top10 %&gt;%\n  count(company_size, owner_qualification, name = \"n\") %&gt;%\n  group_by(company_size) %&gt;%\n  mutate(pct = n / sum(n)) %&gt;%\n  ungroup()\n\ntop10_top5 &lt;- top10_counts %&gt;%\n  group_by(company_size) %&gt;%\n  slice_max(order_by = pct, n = 5, with_ties = FALSE) %&gt;%\n  ungroup()\n\n\n\nCodesummary(top10_top5$pct)\n\n     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. \n0.0004438 0.0053971 0.0478865 0.1996720 0.3290922 0.9438368",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 01 Brazilian Companies Capital Stock Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "tt/hw01-tt.html#visualization",
+    "href": "tt/hw01-tt.html#visualization",
+    "title": "Homework 01 Brazilian Companies Capital Stock Analysis",
+    "section": "Visualization",
+    "text": "Visualization\n\nCodeggplot(top10_top5, aes(x = pct, y = owner_qualification)) +\n  geom_col() +\n  facet_wrap(~ company_size, ncol = 1) +\n  labs(\n    title = \"Owner qualifications among top 10% high-capital firms vary by company size\",\n    x = \"Share of high-capital firms (within size)\",\n    y = \"Owner qualification\",\n    caption = \"Source: TidyTuesday (2026-01-27) Brazilian companies dataset. Author: Jerry Miao. Date: 2026-02-02.\") +\n  theme_minimal() +\n  theme(plot.title = element_text(size = 16),\n        axis.title.x = element_text(size = 14),\n        axis.title.y = element_text(size = 14),\n        axis.text.x  = element_text(size = 11),\n        axis.text.y  = element_text(size = 11)) \n\n\n\n\n\n\n\nThe Owner qualifications among top 10% high-capital firms vary by company size visualization shows that: -In micro-enterprise the high capital firms in the top 10% high end, the most common owner qualification is Managing Partner/Partner-Administrator, with Entrepreneur/Business Owner following. - In small-enterprise the high capital firms in the top 10% high end, Managing Partner/Partner-Administrator having a very close to 1 bar shows that the best performing firms is mostly Managing Partner/Partner-Administrator. - In other size category there is a more combined pattern across the Owner qualification. Having Administrator/Manager the best performing and following with Managing Partner/Partner-Administrator.",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 01 Brazilian Companies Capital Stock Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "tt/hw01-tt.html#conclusion",
+    "href": "tt/hw01-tt.html#conclusion",
+    "title": "Homework 01 Brazilian Companies Capital Stock Analysis",
+    "section": "Conclusion",
+    "text": "Conclusion\nAcross company sizes, the owner qualification among the high capital firms performance in the capital market in BRL is not the same. In both the micro-enterprise and small_enterprise groups, Managing Partner/Partner-Administrator appears to be the most common owner qualification(dominates the small_enterprise firms). The other category shows a more combines patterns with Owner qualifications with the Administrator/Manager appearing most frequently but the Managing Partner Partner-Administrator still shows strong performance. Overall the high capital firms in top 10% shows a pattern of strong performance for Managing Partner/Partner-Administrator firms differ in company size group.",
     "crumbs": [
       "TidyTuesday",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 01 Brazilian Companies Capital Stock Analysis</span>"
