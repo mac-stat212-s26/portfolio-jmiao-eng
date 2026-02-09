@@ -45,7 +45,7 @@ vignettes/*.pdf
 .Renviron
 
 # pkgdown
-docs/
+#docs/
 
 # translation temp files
 po/*~
@@ -59,12 +59,8 @@ rsconnect/
 # quarto site
 /.quarto/
 **/*.quarto_ipynb
-**/docs/
-/_site
-_freeze/
-*_files/
-/*/*_files/
-/site_libs
+!docs/
+!docs/**
 
 *.tex
 *.log
