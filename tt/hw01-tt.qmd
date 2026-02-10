@@ -118,9 +118,9 @@ The Owner qualifications among top 10% high-capital firms vary by company size v
 
 -In micro-enterprise the high capital firms in the top 10% high end, the most common owner qualification is Managing Partner/Partner-Administrator, with Entrepreneur/Business Owner following.
 
-- In small-enterprise the high capital firms in the top 10% high end, Managing Partner/Partner-Administrator having a very close to 1 bar shows that the best performing firms is mostly Managing Partner/Partner-Administrator.
+-In small-enterprise the high capital firms in the top 10% high end, Managing Partner/Partner-Administrator having a very close to 1 bar shows that the best performing firms is mostly Managing Partner/Partner-Administrator.
 
-- In other size category there is a more combined pattern across the Owner qualification. Having Administrator/Manager the best performing and following with Managing Partner/Partner-Administrator.
+-In other size category there is a more combined pattern across the Owner qualification. Having Administrator/Manager the best performing and following with Managing Partner/Partner-Administrator.
 
 ## Conclusion
 Across company sizes, the owner qualification among the high capital firms performance in the capital market in BRL is not the same. In both the micro-enterprise and small_enterprise groups, Managing Partner/Partner-Administrator appears to be the most common owner qualification(dominates the small_enterprise firms). The other category shows a more combines patterns with Owner qualifications with the Administrator/Manager appearing most frequently but the Managing Partner Partner-Administrator still shows strong performance. Overall the high capital firms in top 10% shows a pattern of strong performance for Managing Partner/Partner-Administrator firms differ in company size group.

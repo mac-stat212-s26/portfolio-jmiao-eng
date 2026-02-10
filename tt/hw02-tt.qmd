@@ -17,3 +17,22 @@ You can count work on this week's TidyTuesday toward the exceptional work requir
 
 Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.
 
+## Dataset Import From TidyTuesday
+
+```{r}
+library(tidyverse)
+library(tidytuesdayR)
+
+tuesdata <- tidytuesdayR::tt_load(2026, week = 5)
+edible_plants <- tuesdata$edible_plants
+```
+
+##Data Exploration
+
+## Research Question
+
+## Data Cleaning
+
+## Visualization
+
+## Conclusion

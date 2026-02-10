@@ -9,3 +9,8 @@ title: "Pre-Class Learning Summaries"
 ## Quarto
 
 ![from qmd4sci.njtierney.com](0810-quarto.jpeg)
+## Preclass learning 3 Adv Data Viz
+
+## Preclass learning 4 Adv Spatial Viz
+
+## Preclass learning 6 Adv Data wrangling I
