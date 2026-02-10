@@ -115,8 +115,11 @@ ggplot(top10_top5, aes(x = pct, y = owner_qualification)) +
 ```
 
 The Owner qualifications among top 10% high-capital firms vary by company size visualization shows that:
+
 -In micro-enterprise the high capital firms in the top 10% high end, the most common owner qualification is Managing Partner/Partner-Administrator, with Entrepreneur/Business Owner following.
+
 - In small-enterprise the high capital firms in the top 10% high end, Managing Partner/Partner-Administrator having a very close to 1 bar shows that the best performing firms is mostly Managing Partner/Partner-Administrator.
+
 - In other size category there is a more combined pattern across the Owner qualification. Having Administrator/Manager the best performing and following with Managing Partner/Partner-Administrator.
 
 ## Conclusion

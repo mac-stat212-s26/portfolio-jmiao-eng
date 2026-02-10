@@ -752,10 +752,7 @@ cookieconsent.run({
 <span id="cb6-22"><a href="#cb6-22"></a>  <span class="fu">geom_vline</span>(<span class="at">data =</span> month_starts, <span class="fu">aes</span>(<span class="at">xintercept =</span> start), <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
 <span id="cb6-23"><a href="#cb6-23"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb6-24"><a href="#cb6-24"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Temperature (°F)"</span>) <span class="sc">+</span></span>
-<span id="cb6-25"><a href="#cb6-25"></a>  <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb6-26"><a href="#cb6-26"></a>    <span class="at">breaks =</span> month_labels<span class="sc">$</span>mid,</span>
-<span id="cb6-27"><a href="#cb6-27"></a>    <span class="at">labels =</span> month.abb</span>
-<span id="cb6-28"><a href="#cb6-28"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-25"><a href="#cb6-25"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> month_labels<span class="sc">$</span>mid, <span class="at">labels =</span> month.abb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="03-adv-ggplot-notes_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
@@ -775,12 +772,27 @@ cookieconsent.run({
 <figcaption>SFO Precipitation in 2011</figcaption></figure>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">y =</span> CulmPrec)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_area</span>(<span class="at">fill =</span> <span class="st">"#ebeae2"</span>) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#32a3d8"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> weather <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>               <span class="fu">filter</span>(RecordP <span class="sc">==</span> <span class="cn">TRUE</span>), <span class="at">shape =</span> <span class="dv">25</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>month_starts <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">group_by</span>(Month) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">summarize</span>(<span class="at">start =</span> <span class="fu">min</span>(dateInYear), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a>month_end_prec <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">group_by</span>(Month) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">filter</span>(dateInYear <span class="sc">==</span> <span class="fu">max</span>(dateInYear)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a>month_end_prec <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  <span class="fu">group_by</span>(Month) <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>  <span class="fu">filter</span>(dateInYear <span class="sc">==</span> <span class="fu">max</span>(dateInYear)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb7-14"><a href="#cb7-14"></a></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">y =</span> CulmPrec)) <span class="sc">+</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>  <span class="fu">geom_area</span>(<span class="at">fill =</span> <span class="st">"#ebeae2"</span>) <span class="sc">+</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#32a3d8"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a>               <span class="fu">filter</span>(RecordP <span class="sc">==</span> <span class="cn">TRUE</span>), <span class="at">shape =</span> <span class="dv">25</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> month_end_prec, <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(CulmPrec, <span class="dv">2</span>)), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="03-adv-ggplot-notes_files/figure-html/weather_plot_precip-1.png" class="img-fluid figure-img" width="672"></p>
@@ -1519,35 +1531,47 @@ cookieconsent.run({
 <span id="cb8-241"><a href="#cb8-241"></a>  <span class="fu">geom_vline</span>(<span class="at">data =</span> month_starts, <span class="fu">aes</span>(<span class="at">xintercept =</span> start), <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
 <span id="cb8-242"><a href="#cb8-242"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb8-243"><a href="#cb8-243"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Temperature (°F)"</span>) <span class="sc">+</span></span>
-<span id="cb8-244"><a href="#cb8-244"></a>  <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb8-245"><a href="#cb8-245"></a>    <span class="at">breaks =</span> month_labels<span class="sc">$</span>mid,</span>
-<span id="cb8-246"><a href="#cb8-246"></a>    <span class="at">labels =</span> month.abb</span>
-<span id="cb8-247"><a href="#cb8-247"></a>  )</span>
-<span id="cb8-248"><a href="#cb8-248"></a><span class="in">```</span></span>
+<span id="cb8-244"><a href="#cb8-244"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> month_labels<span class="sc">$</span>mid, <span class="at">labels =</span> month.abb)</span>
+<span id="cb8-245"><a href="#cb8-245"></a><span class="in">```</span></span>
+<span id="cb8-246"><a href="#cb8-246"></a></span>
+<span id="cb8-247"><a href="#cb8-247"></a></span>
+<span id="cb8-248"><a href="#cb8-248"></a><span class="fu">## Exercise 6 </span></span>
 <span id="cb8-249"><a href="#cb8-249"></a></span>
-<span id="cb8-250"><a href="#cb8-250"></a></span>
-<span id="cb8-251"><a href="#cb8-251"></a><span class="fu">## Exercise 6 </span></span>
-<span id="cb8-252"><a href="#cb8-252"></a></span>
-<span id="cb8-253"><a href="#cb8-253"></a>Create a precipitation plot that looks like the following.  Note that </span>
-<span id="cb8-254"><a href="#cb8-254"></a></span>
-<span id="cb8-255"><a href="#cb8-255"></a><span class="ss">- </span>The triangles point to precipitation records--refer to the data codebook above for the <span class="in">`RecordP`</span> variable.</span>
-<span id="cb8-256"><a href="#cb8-256"></a><span class="ss">- </span>The numbers on the plot indicate the total precipitation for the month--search the <span class="in">`hjust`</span> and <span class="in">`vjust`</span> options to adjust the alignment of the numbers.</span>
-<span id="cb8-257"><a href="#cb8-257"></a><span class="ss">- </span>The blue and tan colors hex codes are <span class="in">`"#32a3d8"`</span> and <span class="in">`"#ebeae2"`</span>, respectively.</span>
+<span id="cb8-250"><a href="#cb8-250"></a>Create a precipitation plot that looks like the following.  Note that </span>
+<span id="cb8-251"><a href="#cb8-251"></a></span>
+<span id="cb8-252"><a href="#cb8-252"></a><span class="ss">- </span>The triangles point to precipitation records--refer to the data codebook above for the <span class="in">`RecordP`</span> variable.</span>
+<span id="cb8-253"><a href="#cb8-253"></a><span class="ss">- </span>The numbers on the plot indicate the total precipitation for the month--search the <span class="in">`hjust`</span> and <span class="in">`vjust`</span> options to adjust the alignment of the numbers.</span>
+<span id="cb8-254"><a href="#cb8-254"></a><span class="ss">- </span>The blue and tan colors hex codes are <span class="in">`"#32a3d8"`</span> and <span class="in">`"#ebeae2"`</span>, respectively.</span>
+<span id="cb8-255"><a href="#cb8-255"></a></span>
+<span id="cb8-256"><a href="#cb8-256"></a><span class="al">![SFO Precipitation in 2011](https://hash-mac.github.io/stat212site-sp26/images/sfo_third_graph.png)</span></span>
+<span id="cb8-257"><a href="#cb8-257"></a></span>
 <span id="cb8-258"><a href="#cb8-258"></a></span>
-<span id="cb8-259"><a href="#cb8-259"></a><span class="al">![SFO Precipitation in 2011](https://hash-mac.github.io/stat212site-sp26/images/sfo_third_graph.png)</span></span>
-<span id="cb8-260"><a href="#cb8-260"></a></span>
-<span id="cb8-261"><a href="#cb8-261"></a></span>
-<span id="cb8-262"><a href="#cb8-262"></a><span class="in">```{r weather_plot_precip}</span></span>
-<span id="cb8-263"><a href="#cb8-263"></a><span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">y =</span> CulmPrec)) <span class="sc">+</span></span>
-<span id="cb8-264"><a href="#cb8-264"></a>  <span class="fu">geom_area</span>(<span class="at">fill =</span> <span class="st">"#ebeae2"</span>) <span class="sc">+</span></span>
-<span id="cb8-265"><a href="#cb8-265"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#32a3d8"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb8-266"><a href="#cb8-266"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> weather <span class="sc">%&gt;%</span></span>
-<span id="cb8-267"><a href="#cb8-267"></a>               <span class="fu">filter</span>(RecordP <span class="sc">==</span> <span class="cn">TRUE</span>), <span class="at">shape =</span> <span class="dv">25</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb8-268"><a href="#cb8-268"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb8-269"><a href="#cb8-269"></a><span class="in">```</span></span>
-<span id="cb8-270"><a href="#cb8-270"></a><span class="fu">## Done!</span></span>
-<span id="cb8-271"><a href="#cb8-271"></a></span>
-<span id="cb8-272"><a href="#cb8-272"></a><span class="ss">- </span>Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website</span>
+<span id="cb8-259"><a href="#cb8-259"></a><span class="in">```{r weather_plot_precip}</span></span>
+<span id="cb8-260"><a href="#cb8-260"></a>month_starts <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb8-261"><a href="#cb8-261"></a>  <span class="fu">group_by</span>(Month) <span class="sc">%&gt;%</span></span>
+<span id="cb8-262"><a href="#cb8-262"></a>  <span class="fu">summarize</span>(<span class="at">start =</span> <span class="fu">min</span>(dateInYear), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb8-263"><a href="#cb8-263"></a></span>
+<span id="cb8-264"><a href="#cb8-264"></a>month_end_prec <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb8-265"><a href="#cb8-265"></a>  <span class="fu">group_by</span>(Month) <span class="sc">%&gt;%</span></span>
+<span id="cb8-266"><a href="#cb8-266"></a>  <span class="fu">filter</span>(dateInYear <span class="sc">==</span> <span class="fu">max</span>(dateInYear)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-267"><a href="#cb8-267"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb8-268"><a href="#cb8-268"></a></span>
+<span id="cb8-269"><a href="#cb8-269"></a>month_end_prec <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb8-270"><a href="#cb8-270"></a>  <span class="fu">group_by</span>(Month) <span class="sc">%&gt;%</span></span>
+<span id="cb8-271"><a href="#cb8-271"></a>  <span class="fu">filter</span>(dateInYear <span class="sc">==</span> <span class="fu">max</span>(dateInYear)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-272"><a href="#cb8-272"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb8-273"><a href="#cb8-273"></a></span>
+<span id="cb8-274"><a href="#cb8-274"></a><span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">y =</span> CulmPrec)) <span class="sc">+</span></span>
+<span id="cb8-275"><a href="#cb8-275"></a>  <span class="fu">geom_area</span>(<span class="at">fill =</span> <span class="st">"#ebeae2"</span>) <span class="sc">+</span></span>
+<span id="cb8-276"><a href="#cb8-276"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#32a3d8"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb8-277"><a href="#cb8-277"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb8-278"><a href="#cb8-278"></a>               <span class="fu">filter</span>(RecordP <span class="sc">==</span> <span class="cn">TRUE</span>), <span class="at">shape =</span> <span class="dv">25</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb8-279"><a href="#cb8-279"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> month_end_prec, <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(CulmPrec, <span class="dv">2</span>)), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb8-280"><a href="#cb8-280"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb8-281"><a href="#cb8-281"></a><span class="in">```</span></span>
+<span id="cb8-282"><a href="#cb8-282"></a><span class="fu">## Done!</span></span>
+<span id="cb8-283"><a href="#cb8-283"></a></span>
+<span id="cb8-284"><a href="#cb8-284"></a><span class="ss">- </span>Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

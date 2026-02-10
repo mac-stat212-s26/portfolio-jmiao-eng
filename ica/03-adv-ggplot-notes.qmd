@@ -239,10 +239,7 @@ ggplot(weather, aes(x = dateInYear)) +
   geom_vline(data = month_starts, aes(xintercept = start), linewidth = 0.3) +
   theme_classic() +
   labs(x = NULL, y = "Temperature (°F)") +
-  scale_x_continuous(
-    breaks = month_labels$mid,
-    labels = month.abb
-  )
+  scale_x_continuous(breaks = month_labels$mid, labels = month.abb)
 ```
 
 
@@ -258,11 +255,26 @@ Create a precipitation plot that looks like the following.  Note that
 
 
 ```{r weather_plot_precip}
+month_starts <- weather %>%
+  group_by(Month) %>%
+  summarize(start = min(dateInYear), .groups = "drop")
+
+month_end_prec <- weather %>%
+  group_by(Month) %>%
+  filter(dateInYear == max(dateInYear)) %>%
+  ungroup()
+
+month_end_prec <- weather %>%
+  group_by(Month) %>%
+  filter(dateInYear == max(dateInYear)) %>%
+  ungroup()
+
 ggplot(weather, aes(x = dateInYear, y = CulmPrec)) +
   geom_area(fill = "#ebeae2") +
   geom_line(color = "#32a3d8", linewidth = 0.2) +
   geom_point(data = weather %>%
                filter(RecordP == TRUE), shape = 25, size = 1, fill = "black") +
+  geom_text(data = month_end_prec, aes(label = round(CulmPrec, 2)), vjust = -0.5, size = 3) +
   theme_classic()
 ```
 ## Done!
