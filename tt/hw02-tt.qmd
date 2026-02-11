@@ -69,10 +69,11 @@ ggplot(plants, aes(x = water, y = ph_mid)) +
   geom_boxplot(alpha = 0.7) +
   geom_jitter(width = 0.12, alpha = 0.4) +
   labs(
-    title = "Preferred soil pH midpoints are similar across water requirement groups",
+    title = "Preferred soil pH midpoints across water requirement groups",
     subtitle = "Midpoint computed from preferred pH lower and upper limits",
     x = "Water requirement",
-    y = "Preferred soil pH (midpoint)") +
+    y = "Preferred soil pH (midpoint)", 
+    caption = "Source: Edible Plant Database (TidyTuesday 2026-02-03).") +
   theme_minimal()
 ```
 
