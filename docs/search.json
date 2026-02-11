@@ -91,7 +91,7 @@
     "href": "tt/hw02-tt.html",
     "title": "Homework 02 Edible Plants Analysis",
     "section": "",
-    "text": "TidyTuesday Section (optional)\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.",
+    "text": "TidyTuesday Section (optional)\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.",
     "crumbs": [
       "TidyTuesday",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 02 Edible Plants Analysis</span>"
@@ -101,8 +101,8 @@
     "objectID": "tt/hw02-tt.html#tidytuesday-section-optional",
     "href": "tt/hw02-tt.html#tidytuesday-section-optional",
     "title": "Homework 02 Edible Plants Analysis",
-    "section": "TidyTuesday Section (optional)",
-    "text": "TidyTuesday Section (optional)\n\n\n\n\n\n\nImportantInstructions\n\n\n\nYou can count work on this week’s TidyTuesday toward the exceptional work required for an A in the Homework component.",
+    "section": "",
+    "text": "ImportantInstructions\n\n\n\nYou can count work on this week’s TidyTuesday toward the exceptional work required for an A in the Homework component.",
     "crumbs": [
       "TidyTuesday",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 02 Edible Plants Analysis</span>"
@@ -113,7 +113,7 @@
     "href": "tt/hw02-tt.html#dataset-import-from-tidytuesday",
     "title": "Homework 02 Edible Plants Analysis",
     "section": "Dataset Import From TidyTuesday",
-    "text": "Dataset Import From TidyTuesday\n\nCode\nlibrary(tidyverse)\nlibrary(tidytuesdayR)\n\ntuesdata &lt;- tidytuesdayR::tt_load(2026, week = 5)\nedible_plants &lt;- tuesdata$edible_plants",
+    "text": "Dataset Import From TidyTuesday\n\nCodelibrary(tidyverse)\nlibrary(tidytuesdayR)\n\ntuesdata &lt;- tidytuesdayR::tt_load(2026, week = 5)\nedible_plants &lt;- tuesdata$edible_plants",
     "crumbs": [
       "TidyTuesday",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 02 Edible Plants Analysis</span>"
@@ -124,7 +124,7 @@
     "href": "tt/hw02-tt.html#data-exploration",
     "title": "Homework 02 Edible Plants Analysis",
     "section": "Data Exploration",
-    "text": "Data Exploration\n\nCode\nsum(is.na(edible_plants$preferred_ph_lower))\n\n\n\n[1] 0\n\nCode\nsum(is.na(edible_plants$preferred_ph_upper))\n\n\n\n[1] 0\n\n\n\nCode\ntable(edible_plants$water)\n\n\n\n\n     high      High       Low    Medium very high Very High  Very low  Very Low \n        1        24        18        93         1         1         1         1 \n\n\n\nCode\nsummary(edible_plants$preferred_ph_lower)\n\n\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  4.500   5.500   6.000   5.832   6.000   7.000 \n\nCode\nsummary(edible_plants$preferred_ph_upper)\n\n\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  6.000   7.000   7.000   7.114   7.500   8.500 \n\n\nIn this dataset, each row represents an edible plant species with recommended growing requirements. For my analysis I will focus more on water and two variables, preferred_ph_lower and preferred_ph_upper, which provides the preferred soil pH range. The distribution of the water categories does spread out, with few outliers Very High/Very low appear appears, which will not be account in the analysis. The summary table shows the lower bound ranges from 4.5 to 7.0 (median 6.0) and the upper bound ranges from 6.0 to 8.5 (median 7.0).",
+    "text": "Data Exploration\n\nCodesum(is.na(edible_plants$preferred_ph_lower))\n\n[1] 0\n\nCodesum(is.na(edible_plants$preferred_ph_upper))\n\n[1] 0\n\n\n\nCodetable(edible_plants$water)\n\n\n     high      High       Low    Medium very high Very High  Very low  Very Low \n        1        24        18        93         1         1         1         1 \n\n\n\nCodesummary(edible_plants$preferred_ph_lower)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  4.500   5.500   6.000   5.832   6.000   7.000 \n\nCodesummary(edible_plants$preferred_ph_upper)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  6.000   7.000   7.000   7.114   7.500   8.500 \n\n\nIn this dataset, each row represents an edible plant species with recommended growing requirements. For my analysis I will focus more on water and two variables, preferred_ph_lower and preferred_ph_upper, which provides the preferred soil pH range. The distribution of the water categories does spread out, with few outliers Very High/Very low appear appears, which will not be account in the analysis. The summary table shows the lower bound ranges from 4.5 to 7.0 (median 6.0) and the upper bound ranges from 6.0 to 8.5 (median 7.0).",
     "crumbs": [
       "TidyTuesday",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 02 Edible Plants Analysis</span>"
@@ -146,7 +146,7 @@
     "href": "tt/hw02-tt.html#data-cleaning",
     "title": "Homework 02 Edible Plants Analysis",
     "section": "Data Cleaning",
-    "text": "Data Cleaning\n\nCode\nlibrary(dplyr)\n\nplants &lt;- edible_plants %&gt;%\n  select(water, preferred_ph_lower, preferred_ph_upper) %&gt;%\n  filter(!is.na(water), !is.na(preferred_ph_lower), !is.na(preferred_ph_upper)) %&gt;%\n  mutate(\n    ph_mid = (preferred_ph_lower + preferred_ph_upper) / 2,\n    ph_range = preferred_ph_upper - preferred_ph_lower,\n    water = factor(water, levels = c(\"Low\", \"Medium\", \"High\"))) %&gt;%\n  filter(!is.na(water))",
+    "text": "Data Cleaning\n\nCodelibrary(dplyr)\n\nplants &lt;- edible_plants %&gt;%\n  select(water, preferred_ph_lower, preferred_ph_upper) %&gt;%\n  filter(!is.na(water), !is.na(preferred_ph_lower), !is.na(preferred_ph_upper)) %&gt;%\n  mutate(\n    ph_mid = (preferred_ph_lower + preferred_ph_upper) / 2,\n    ph_range = preferred_ph_upper - preferred_ph_lower,\n    water = factor(water, levels = c(\"Low\", \"Medium\", \"High\"))) %&gt;%\n  filter(!is.na(water))",
     "crumbs": [
       "TidyTuesday",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 02 Edible Plants Analysis</span>"
@@ -157,7 +157,7 @@
     "href": "tt/hw02-tt.html#visualization",
     "title": "Homework 02 Edible Plants Analysis",
     "section": "Visualization",
-    "text": "Visualization\n\nCode\nggplot(plants, aes(x = water, y = ph_mid)) +\n  geom_boxplot(alpha = 0.7) +\n  geom_jitter(width = 0.12, alpha = 0.4) +\n  labs(\n    title = \"Preferred soil pH midpoints across water requirement groups\",\n    subtitle = \"Midpoint computed from preferred pH lower and upper limits\",\n    x = \"Water requirement\",\n    y = \"Preferred soil pH (midpoint)\", \n    caption = \"Source: Edible Plant Database (TidyTuesday 2026-02-03).\") +\n  theme_minimal()",
+    "text": "Visualization\n\nCodeggplot(plants, aes(x = water, y = ph_mid)) +\n  geom_boxplot(alpha = 0.7) +\n  geom_jitter(width = 0.12, alpha = 0.4) +\n  labs(\n    title = \"Preferred soil pH midpoints across water requirement groups\",\n    subtitle = \"Midpoint computed from preferred pH lower and upper limits\",\n    x = \"Water requirement\",\n    y = \"Preferred soil pH (midpoint)\", \n    caption = \"Source: Edible Plant Database (TidyTuesday 2026-02-03).\") +\n  theme_minimal()",
     "crumbs": [
       "TidyTuesday",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 02 Edible Plants Analysis</span>"
