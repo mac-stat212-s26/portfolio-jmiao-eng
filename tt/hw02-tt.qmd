@@ -1,5 +1,5 @@
 ---
-title: "Homework 02"
+title: "Homework 02 Edible Plants Analysis"
 format: 
   html: 
     embed-resources: true
@@ -27,12 +27,55 @@ tuesdata <- tidytuesdayR::tt_load(2026, week = 5)
 edible_plants <- tuesdata$edible_plants
 ```
 
-##Data Exploration
+## Data Exploration
+
+```{r}
+sum(is.na(edible_plants$preferred_ph_lower))
+sum(is.na(edible_plants$preferred_ph_upper))
+```
+```{r}
+table(edible_plants$water)
+```
+```{r}
+summary(edible_plants$preferred_ph_lower)
+summary(edible_plants$preferred_ph_upper)
+```
+In this dataset, each row represents an edible plant species with recommended growing requirements. For my analysis I will focus more on water and two variables, preferred_ph_lower and preferred_ph_upper, which provides the preferred soil pH range. The distribution of the water categories does spread out, with few outliers Very High/Very low appear appears, which will not be account in the analysis. The summary table shows the lower bound ranges from 4.5 to 7.0 (median 6.0) and the upper bound ranges from 6.0 to 8.5 (median 7.0).
 
 ## Research Question
 
+Do plants that require more water tend to prefer a different soil pH range?
+
 ## Data Cleaning
+
+```{r}
+library(dplyr)
+
+plants <- edible_plants %>%
+  select(water, preferred_ph_lower, preferred_ph_upper) %>%
+  filter(!is.na(water), !is.na(preferred_ph_lower), !is.na(preferred_ph_upper)) %>%
+  mutate(
+    ph_mid = (preferred_ph_lower + preferred_ph_upper) / 2,
+    ph_range = preferred_ph_upper - preferred_ph_lower,
+    water = factor(water, levels = c("Low", "Medium", "High"))) %>%
+  filter(!is.na(water))
+```
+
 
 ## Visualization
 
+```{r}
+ggplot(plants, aes(x = water, y = ph_mid)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(width = 0.12, alpha = 0.4) +
+  labs(
+    title = "Preferred soil pH midpoints are similar across water requirement groups",
+    subtitle = "Midpoint computed from preferred pH lower and upper limits",
+    x = "Water requirement",
+    y = "Preferred soil pH (midpoint)") +
+  theme_minimal()
+```
+
 ## Conclusion
+
+The box plot here suggest that preferred soil pH midpoints are similar across water requirement groups. For the medians for all Low, Median, and High water categories around 6.5 midpoint value, and the distributions does overlap a lot. There is some variation with in each group. As the data points does spread out in a wide range. Overall the visualization supports the interpretation that plants with different water needs tend to share similar preferred soil pH levels.
