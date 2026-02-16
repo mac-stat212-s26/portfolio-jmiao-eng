@@ -537,8 +537,8 @@ gss_cat |>
 1. Create a factor version of the following data with the levels in a sensible order.
 
 ```{r}
-ratings_fct <- fct(ratings, levels = c("Low", "Medium", "High"))
-ratings_fct
+###ratings_fct <- fct(ratings, levels = c("Low", "Medium", "High"))
+###ratings_fct
 ```
 
 
