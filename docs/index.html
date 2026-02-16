@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.25">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Homework 02 Edible Plants Analysis – COMP/STAT212 Portfolio</title>
+<meta name="author" content="Jerry Miao">
+<title>COMP/STAT212 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -54,31 +55,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../pcl/pcl.html" rel="next">
-<link href="../tt/hw01-tt.html" rel="prev">
-<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
-<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-447330ed7f5b14f08626394f08367e28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-b1525fc7443f827935229f0f56e36607.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-447330ed7f5b14f08626394f08367e28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./pv/pv-01.html" rel="next">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-447330ed7f5b14f08626394f08367e28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b1525fc7443f827935229f0f56e36607.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-447330ed7f5b14f08626394f08367e28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -120,7 +120,9 @@ cookieconsent.run({
   });
 });
 </script><style>html{ scroll-behavior: smooth; }</style>
-<link rel="stylesheet" href="../style/custom.css">
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="site_libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet">
+<script src="site_libs/wordcloud2-0.0.1/wordcloud2-all.js"></script><script src="site_libs/wordcloud2-0.0.1/hover.js"></script><script src="site_libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script><link rel="stylesheet" href="style/custom.css">
 </head>
 <body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
@@ -291,7 +293,7 @@ cookieconsent.run({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tt/hw01-tt.html">TidyTuesday</a></li><li class="breadcrumb-item"><a href="../tt/hw02-tt.html"><span class="chapter-title">Homework 02 Edible Plants Analysis</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-title">Welcome</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -301,10 +303,10 @@ cookieconsent.run({
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../index.html" class="sidebar-logo-link">
-      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="./assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Jerry Miao</a> 
+      <a href="./">Jerry Miao</a> 
         <div class="sidebar-tools-main">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -324,7 +326,7 @@ cookieconsent.run({
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -338,7 +340,7 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pv/pv-01.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Professional Viz</span></a>
+  <a href="./pv/pv-01.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Professional Viz</span></a>
   </div>
 </li>
       </ul>
@@ -354,12 +356,12 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tt/hw01-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Homework 01 Brazilian Companies Capital Stock Analysis</span></a>
+  <a href="./tt/hw01-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Homework 01 Brazilian Companies Capital Stock Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tt/hw02-tt.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Homework 02 Edible Plants Analysis</span></a>
+  <a href="./tt/hw02-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Homework 02 Edible Plants Analysis</span></a>
   </div>
 </li>
       </ul>
@@ -375,7 +377,7 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pcl/pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Pre-Class Learning Summaries</span></a>
+  <a href="./pcl/pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Pre-Class Learning Summaries</span></a>
   </div>
 </li>
       </ul>
@@ -391,22 +393,22 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ica/cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">ICA: Cleaning</span></a>
+  <a href="./ica/cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">ICA: Cleaning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ica/03-adv-ggplot-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">ICA Adv Data Viz</span></a>
+  <a href="./ica/03-adv-ggplot-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">ICA Adv Data Viz</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ica/04-adv-maps-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4 Adv Spatial Viz P1</span></a>
+  <a href="./ica/04-adv-maps-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4 Adv Spatial Viz P1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ica/06-wrangling-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6 Adv Data wrangling I</span></a>
+  <a href="./ica/06-wrangling-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6 Adv Data wrangling I</span></a>
   </div>
 </li>
       </ul>
@@ -422,12 +424,12 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../extra/extra-sample1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extra Sample 1</span></a>
+  <a href="./extra/extra-sample1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extra Sample 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../extra/extra-sample2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extra Sample 2</span></a>
+  <a href="./extra/extra-sample2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extra Sample 2</span></a>
   </div>
 </li>
       </ul>
@@ -436,133 +438,50 @@ cookieconsent.run({
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-<li><a href="#tidytuesday-section-optional" id="toc-tidytuesday-section-optional" class="nav-link active" data-scroll-target="#tidytuesday-section-optional">TidyTuesday Section (optional)</a></li>
-  <li><a href="#dataset-import-from-tidytuesday" id="toc-dataset-import-from-tidytuesday" class="nav-link" data-scroll-target="#dataset-import-from-tidytuesday">Dataset Import From TidyTuesday</a></li>
-  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration">Data Exploration</a></li>
-  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research Question</a></li>
-  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a></li>
-  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tt/hw01-tt.html">TidyTuesday</a></li><li class="breadcrumb-item"><a href="../tt/hw02-tt.html"><span class="chapter-title">Homework 02 Edible Plants Analysis</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Homework 02 Edible Plants Analysis</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<main class="content column-page-right" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">COMP/STAT212 Portfolio</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
 
-<div class="quarto-title-meta column-body">
+<div class="quarto-title-meta column-page-right">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jerry Miao </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Sunday, February 15, 2026</p>
+    </div>
+  </div>
   
     
   </div>
   
 
 
-</header><section id="tidytuesday-section-optional" class="level2"><h2 class="anchored" data-anchor-id="tidytuesday-section-optional">TidyTuesday Section (optional)</h2>
-<div class="callout callout-style-default callout-important callout-titled" title="Instructions">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Instructions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You can count work on this week’s TidyTuesday toward the exceptional work required for an A in the Homework component.</p>
-</div>
-</div>
-<p>Explore the week’s <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a> challenge. Develop a research question, then answer it through a short data story with <a href="?var:effective-viz-url">effective visualization(s)</a>. Provide sufficient background for readers to grasp your narrative.</p>
-</section><section id="dataset-import-from-tidytuesday" class="level2"><h2 class="anchored" data-anchor-id="dataset-import-from-tidytuesday">Dataset Import From TidyTuesday</h2>
+</header><p>Welcome to my online portfolio for COMP/STAT112 course taken at <a href="https://www.macalester.edu/">Macalester College</a>. Please, use the side bar on the left for navigation.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidytuesdayR)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">5</span>)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>edible_plants <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>edible_plants</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-</section><section id="data-exploration" class="level2"><h2 class="anchored" data-anchor-id="data-exploration">Data Exploration</h2>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(edible_plants<span class="sc">$</span>preferred_ph_lower))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(edible_plants<span class="sc">$</span>preferred_ph_upper))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
+<div class="cell-output-display">
+<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-89144c77e4248c1a9e5f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-89144c77e4248c1a9e5f">{"x":{"word":["welcome","to","comp","stat","212","mac","st paul"],"freq":[10,2,8,8,8,6,6],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":18,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"cardioid","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
 </div>
 </div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">table</span>(edible_plants<span class="sc">$</span>water)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>
-     high      High       Low    Medium very high Very High  Very low  Very Low 
-        1        24        18        93         1         1         1         1 </code></pre>
-</div>
-</div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">summary</span>(edible_plants<span class="sc">$</span>preferred_ph_lower)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  4.500   5.500   6.000   5.832   6.000   7.000 </code></pre>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">summary</span>(edible_plants<span class="sc">$</span>preferred_ph_upper)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  6.000   7.000   7.000   7.114   7.500   8.500 </code></pre>
-</div>
-</div>
-<p>In this dataset, each row represents an edible plant species with recommended growing requirements. For my analysis I will focus more on water and two variables, preferred_ph_lower and preferred_ph_upper, which provides the preferred soil pH range. The distribution of the water categories does spread out, with few outliers Very High/Very low appear appears, which will not be account in the analysis. The summary table shows the lower bound ranges from 4.5 to 7.0 (median 6.0) and the upper bound ranges from 6.0 to 8.5 (median 7.0).</p>
-</section><section id="research-question" class="level2"><h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
-<p>Do plants that require more water tend to prefer a different soil pH range?</p>
-</section><section id="data-cleaning" class="level2"><h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb12-2"><a href="#cb12-2"></a></span>
-<span id="cb12-3"><a href="#cb12-3"></a>plants <span class="ot">&lt;-</span> edible_plants <span class="sc">%&gt;%</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">select</span>(water, preferred_ph_lower, preferred_ph_upper) <span class="sc">%&gt;%</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(water), <span class="sc">!</span><span class="fu">is.na</span>(preferred_ph_lower), <span class="sc">!</span><span class="fu">is.na</span>(preferred_ph_upper)) <span class="sc">%&gt;%</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb12-7"><a href="#cb12-7"></a>    <span class="at">ph_mid =</span> (preferred_ph_lower <span class="sc">+</span> preferred_ph_upper) <span class="sc">/</span> <span class="dv">2</span>,</span>
-<span id="cb12-8"><a href="#cb12-8"></a>    <span class="at">ph_range =</span> preferred_ph_upper <span class="sc">-</span> preferred_ph_lower,</span>
-<span id="cb12-9"><a href="#cb12-9"></a>    <span class="at">water =</span> <span class="fu">factor</span>(water, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(water))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-</section><section id="visualization" class="level2"><h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(plants, <span class="fu">aes</span>(<span class="at">x =</span> water, <span class="at">y =</span> ph_mid)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.12</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">labs</span>(</span>
-<span id="cb13-5"><a href="#cb13-5"></a>    <span class="at">title =</span> <span class="st">"Preferred soil pH midpoints across water requirement groups"</span>,</span>
-<span id="cb13-6"><a href="#cb13-6"></a>    <span class="at">subtitle =</span> <span class="st">"Midpoint computed from preferred pH lower and upper limits"</span>,</span>
-<span id="cb13-7"><a href="#cb13-7"></a>    <span class="at">x =</span> <span class="st">"Water requirement"</span>,</span>
-<span id="cb13-8"><a href="#cb13-8"></a>    <span class="at">y =</span> <span class="st">"Preferred soil pH (midpoint)"</span>, </span>
-<span id="cb13-9"><a href="#cb13-9"></a>    <span class="at">caption =</span> <span class="st">"Source: Edible Plant Database (TidyTuesday 2026-02-03)."</span>) <span class="sc">+</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="hw02-tt_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="conclusion" class="level2"><h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>The box plot here suggest that preferred soil pH midpoints are similar across water requirement groups. For the medians for all Low, Median, and High water categories around 6.5 midpoint value, and the distributions does overlap a lot. There is some variation with in each group. As the data points does spread out in a wide range. Overall the visualization supports the interpretation that plants with different water needs tend to share similar preferred soil pH levels.</p>
 
 
 <!-- -->
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+
+</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1030,99 +949,55 @@ cookieconsent.run({
       }
     }
   });
-  </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
-      <a href="../tt/hw01-tt.html" class="pagination-link" aria-label="Homework 01 Brazilian Companies Capital Stock Analysis">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Homework 01 Brazilian Companies Capital Stock Analysis</span></span>
-      </a>          
+  </script><nav class="page-navigation column-page-right"><div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../pcl/pcl.html" class="pagination-link" aria-label="Pre-Class Learning Summaries">
-        <span class="nav-page-text"><span class="chapter-title">Pre-Class Learning Summaries</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./pv/pv-01.html" class="pagination-link" aria-label="Professional Viz">
+        <span class="nav-page-text"><span class="chapter-title">Professional Viz</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">---</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="an">title:</span><span class="co"> "Homework 02 Edible Plants Analysis"</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="co">  html: </span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="co">    embed-resources: true</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="co">---</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a></span>
-<span id="cb14-8"><a href="#cb14-8"></a></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="fu">## TidyTuesday Section (optional)</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a></span>
-<span id="cb14-11"><a href="#cb14-11"></a>::: {.callout-important title="Instructions"}</span>
-<span id="cb14-12"><a href="#cb14-12"></a></span>
-<span id="cb14-13"><a href="#cb14-13"></a>You can count work on this week's TidyTuesday toward the exceptional work required for an A in the Homework component.</span>
-<span id="cb14-14"><a href="#cb14-14"></a></span>
-<span id="cb14-15"><a href="#cb14-15"></a>:::</span>
-<span id="cb14-16"><a href="#cb14-16"></a></span>
-<span id="cb14-17"><a href="#cb14-17"></a></span>
-<span id="cb14-18"><a href="#cb14-18"></a>Explore the week's <span class="co">[</span><span class="ot">TidyTuesday</span><span class="co">](https://github.com/rfordatascience/tidytuesday)</span> challenge. Develop a research question, then answer it through a short data story with <span class="co">[</span><span class="ot">effective visualization(s)</span><span class="co">]({{&lt; var effective-viz-url &gt;}})</span>.  Provide sufficient background for readers to grasp your narrative.</span>
-<span id="cb14-19"><a href="#cb14-19"></a></span>
-<span id="cb14-20"><a href="#cb14-20"></a><span class="fu">## Dataset Import From TidyTuesday</span></span>
-<span id="cb14-21"><a href="#cb14-21"></a></span>
-<span id="cb14-24"><a href="#cb14-24"></a><span class="in">```{r}</span></span>
-<span id="cb14-25"><a href="#cb14-25"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb14-26"><a href="#cb14-26"></a><span class="fu">library</span>(tidytuesdayR)</span>
-<span id="cb14-27"><a href="#cb14-27"></a></span>
-<span id="cb14-28"><a href="#cb14-28"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">5</span>)</span>
-<span id="cb14-29"><a href="#cb14-29"></a>edible_plants <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>edible_plants</span>
-<span id="cb14-30"><a href="#cb14-30"></a><span class="in">```</span></span>
-<span id="cb14-31"><a href="#cb14-31"></a></span>
-<span id="cb14-32"><a href="#cb14-32"></a><span class="fu">## Data Exploration</span></span>
-<span id="cb14-33"><a href="#cb14-33"></a></span>
-<span id="cb14-36"><a href="#cb14-36"></a><span class="in">```{r}</span></span>
-<span id="cb14-37"><a href="#cb14-37"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(edible_plants<span class="sc">$</span>preferred_ph_lower))</span>
-<span id="cb14-38"><a href="#cb14-38"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(edible_plants<span class="sc">$</span>preferred_ph_upper))</span>
-<span id="cb14-39"><a href="#cb14-39"></a><span class="in">```</span></span>
-<span id="cb14-42"><a href="#cb14-42"></a><span class="in">```{r}</span></span>
-<span id="cb14-43"><a href="#cb14-43"></a><span class="fu">table</span>(edible_plants<span class="sc">$</span>water)</span>
-<span id="cb14-44"><a href="#cb14-44"></a><span class="in">```</span></span>
-<span id="cb14-47"><a href="#cb14-47"></a><span class="in">```{r}</span></span>
-<span id="cb14-48"><a href="#cb14-48"></a><span class="fu">summary</span>(edible_plants<span class="sc">$</span>preferred_ph_lower)</span>
-<span id="cb14-49"><a href="#cb14-49"></a><span class="fu">summary</span>(edible_plants<span class="sc">$</span>preferred_ph_upper)</span>
-<span id="cb14-50"><a href="#cb14-50"></a><span class="in">```</span></span>
-<span id="cb14-51"><a href="#cb14-51"></a>In this dataset, each row represents an edible plant species with recommended growing requirements. For my analysis I will focus more on water and two variables, preferred_ph_lower and preferred_ph_upper, which provides the preferred soil pH range. The distribution of the water categories does spread out, with few outliers Very High/Very low appear appears, which will not be account in the analysis. The summary table shows the lower bound ranges from 4.5 to 7.0 (median 6.0) and the upper bound ranges from 6.0 to 8.5 (median 7.0).</span>
-<span id="cb14-52"><a href="#cb14-52"></a></span>
-<span id="cb14-53"><a href="#cb14-53"></a><span class="fu">## Research Question</span></span>
-<span id="cb14-54"><a href="#cb14-54"></a></span>
-<span id="cb14-55"><a href="#cb14-55"></a>Do plants that require more water tend to prefer a different soil pH range?</span>
-<span id="cb14-56"><a href="#cb14-56"></a></span>
-<span id="cb14-57"><a href="#cb14-57"></a><span class="fu">## Data Cleaning</span></span>
-<span id="cb14-58"><a href="#cb14-58"></a></span>
-<span id="cb14-61"><a href="#cb14-61"></a><span class="in">```{r}</span></span>
-<span id="cb14-62"><a href="#cb14-62"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb14-63"><a href="#cb14-63"></a></span>
-<span id="cb14-64"><a href="#cb14-64"></a>plants <span class="ot">&lt;-</span> edible_plants <span class="sc">%&gt;%</span></span>
-<span id="cb14-65"><a href="#cb14-65"></a>  <span class="fu">select</span>(water, preferred_ph_lower, preferred_ph_upper) <span class="sc">%&gt;%</span></span>
-<span id="cb14-66"><a href="#cb14-66"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(water), <span class="sc">!</span><span class="fu">is.na</span>(preferred_ph_lower), <span class="sc">!</span><span class="fu">is.na</span>(preferred_ph_upper)) <span class="sc">%&gt;%</span></span>
-<span id="cb14-67"><a href="#cb14-67"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb14-68"><a href="#cb14-68"></a>    <span class="at">ph_mid =</span> (preferred_ph_lower <span class="sc">+</span> preferred_ph_upper) <span class="sc">/</span> <span class="dv">2</span>,</span>
-<span id="cb14-69"><a href="#cb14-69"></a>    <span class="at">ph_range =</span> preferred_ph_upper <span class="sc">-</span> preferred_ph_lower,</span>
-<span id="cb14-70"><a href="#cb14-70"></a>    <span class="at">water =</span> <span class="fu">factor</span>(water, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb14-71"><a href="#cb14-71"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(water))</span>
-<span id="cb14-72"><a href="#cb14-72"></a><span class="in">```</span></span>
-<span id="cb14-73"><a href="#cb14-73"></a></span>
-<span id="cb14-74"><a href="#cb14-74"></a></span>
-<span id="cb14-75"><a href="#cb14-75"></a><span class="fu">## Visualization</span></span>
-<span id="cb14-76"><a href="#cb14-76"></a></span>
-<span id="cb14-79"><a href="#cb14-79"></a><span class="in">```{r}</span></span>
-<span id="cb14-80"><a href="#cb14-80"></a><span class="fu">ggplot</span>(plants, <span class="fu">aes</span>(<span class="at">x =</span> water, <span class="at">y =</span> ph_mid)) <span class="sc">+</span></span>
-<span id="cb14-81"><a href="#cb14-81"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb14-82"><a href="#cb14-82"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.12</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb14-83"><a href="#cb14-83"></a>  <span class="fu">labs</span>(</span>
-<span id="cb14-84"><a href="#cb14-84"></a>    <span class="at">title =</span> <span class="st">"Preferred soil pH midpoints across water requirement groups"</span>,</span>
-<span id="cb14-85"><a href="#cb14-85"></a>    <span class="at">subtitle =</span> <span class="st">"Midpoint computed from preferred pH lower and upper limits"</span>,</span>
-<span id="cb14-86"><a href="#cb14-86"></a>    <span class="at">x =</span> <span class="st">"Water requirement"</span>,</span>
-<span id="cb14-87"><a href="#cb14-87"></a>    <span class="at">y =</span> <span class="st">"Preferred soil pH (midpoint)"</span>, </span>
-<span id="cb14-88"><a href="#cb14-88"></a>    <span class="at">caption =</span> <span class="st">"Source: Edible Plant Database (TidyTuesday 2026-02-03)."</span>) <span class="sc">+</span></span>
-<span id="cb14-89"><a href="#cb14-89"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb14-90"><a href="#cb14-90"></a><span class="in">```</span></span>
-<span id="cb14-91"><a href="#cb14-91"></a></span>
-<span id="cb14-92"><a href="#cb14-92"></a><span class="fu">## Conclusion</span></span>
-<span id="cb14-93"><a href="#cb14-93"></a></span>
-<span id="cb14-94"><a href="#cb14-94"></a>The box plot here suggest that preferred soil pH midpoints are similar across water requirement groups. For the medians for all Low, Median, and High water categories around 6.5 midpoint value, and the distributions does overlap a lot. There is some variation with in each group. As the data points does spread out in a wide range. Overall the visualization supports the interpretation that plants with different water needs tend to share similar preferred soil pH levels.</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "Welcome"</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">---</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>Welcome to my online portfolio for COMP/STAT112 course taken at <span class="co">[</span><span class="ot">Macalester College</span><span class="co">](https://www.macalester.edu/)</span>.  Please, use the side bar on the left for navigation.</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="in">```{r}</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#| output: false</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#| echo: false</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"wordcloud2"</span>, <span class="st">"here"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="in">```</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="in">```{r}</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="co">#| output: false</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="co">#| echo: false</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a></span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="fu">install.packages</span>(<span class="fu">setdiff</span>(packages, <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())), <span class="at">repos =</span> <span class="st">"http://cran.us.r-project.org"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="in">```</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="in">```{r}</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="co">#| output: false</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="co">#| echo: false</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="co">#| message: false</span></span>
+<span id="cb1-32"><a href="#cb1-32"></a></span>
+<span id="cb1-33"><a href="#cb1-33"></a><span class="fu">lapply</span>(packages, require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-34"><a href="#cb1-34"></a><span class="in">```</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a></span>
+<span id="cb1-38"><a href="#cb1-38"></a><span class="in">```{r}</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a><span class="co">#| output: false</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a><span class="co">#| echo: false</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a></span>
+<span id="cb1-42"><a href="#cb1-42"></a>ds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"assets"</span>, <span class="st">"msg.csv"</span>))</span>
+<span id="cb1-43"><a href="#cb1-43"></a><span class="in">```</span></span>
+<span id="cb1-44"><a href="#cb1-44"></a></span>
+<span id="cb1-47"><a href="#cb1-47"></a><span class="in">```{r}</span></span>
+<span id="cb1-48"><a href="#cb1-48"></a><span class="co">#| echo: false</span></span>
+<span id="cb1-49"><a href="#cb1-49"></a></span>
+<span id="cb1-50"><a href="#cb1-50"></a><span class="fu">wordcloud2</span>(<span class="at">data =</span> ds, <span class="at">shape =</span> <span class="st">"cardioid"</span>)</span>
+<span id="cb1-51"><a href="#cb1-51"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
@@ -1140,5 +1015,5 @@ cookieconsent.run({
 </footer>
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
