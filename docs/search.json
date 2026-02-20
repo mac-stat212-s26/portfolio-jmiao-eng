@@ -69,7 +69,7 @@
     "href": "tt/hw01-tt.html#visualization",
     "title": "Homework 01 Brazilian Companies Capital Stock Analysis",
     "section": "Visualization",
-    "text": "Visualization\n\nCodeggplot(top10_top5, aes(x = pct, y = owner_qualification)) +\n  geom_col() +\n  facet_wrap(~ company_size, ncol = 1) +\n  labs(\n    title = \"Owner qualifications among top 10% high-capital firms vary by company size\",\n    x = \"Share of high-capital firms (within size)\",\n    y = \"Owner qualification\",\n    caption = \"Source: TidyTuesday (2026-01-27) Brazilian companies dataset. Author: Jerry Miao. Date: 2026-02-02.\") +\n  theme_minimal() +\n  theme(plot.title = element_text(size = 16),\n        axis.title.x = element_text(size = 14),\n        axis.title.y = element_text(size = 14),\n        axis.text.x  = element_text(size = 11),\n        axis.text.y  = element_text(size = 11)) \n\n\n\n\n\n\n\nThe Owner qualifications among top 10% high-capital firms vary by company size visualization shows that:\n-In micro-enterprise the high capital firms in the top 10% high end, the most common owner qualification is Managing Partner/Partner-Administrator, with Entrepreneur/Business Owner following.\n-In small-enterprise the high capital firms in the top 10% high end, Managing Partner/Partner-Administrator having a very close to 1 bar shows that the best performing firms is mostly Managing Partner/Partner-Administrator.\n-In other size category there is a more combined pattern across the Owner qualification. Having Administrator/Manager the best performing and following with Managing Partner/Partner-Administrator.",
+    "text": "Visualization\n\nCodelibrary(dplyr)\nlibrary(ggplot2)\nlibrary(tidytext)   \nlibrary(scales)\nlibrary(forcats)\n\ntop10_top5_fixed &lt;- top10_top5 %&gt;%\n  mutate(company_size = recode(company_size, \"micro-enterprise\" = \"Micro enterprise\", \"small-enterprise\" = \"Small enterprise\", \"other\" = \"Other\")) %&gt;%\n  group_by(company_size) %&gt;%\n  mutate(owner_qualification_sorted = fct_reorder(owner_qualification, pct, .desc = TRUE)) %&gt;%\n  ungroup()\n\n\nggplot(top10_top5_fixed, aes(x = pct, y = owner_qualification_sorted)) +\n  geom_col() +\n  facet_wrap(~ company_size, ncol = 1) +\n  scale_x_continuous(labels = scales::percent_format(accuracy = 1), breaks = c(0, 0.25, 0.5, 0.75, 1), limits = c(0, 1)) +\n  labs(\n    title = \"Owner qualifications among top 10% high-capital firms vary by company size\",\n    x = \"Share of high-capital firms (within size)\",\n    y = \"Owner Qualification\",\n    caption = \"Source: TidyTuesday (2026-01-27) Brazilian companies dataset. Author: Jerry Miao. Date: 2026-02-02.\") +\n  theme_minimal() +\n  theme(plot.title = element_text(size = 16),\n        axis.title.x = element_text(size = 14),\n        axis.title.y = element_text(size = 14),\n        axis.text.x  = element_text(size = 11),\n        axis.text.y  = element_text(size = 11)) \n\n\n\n\n\n\n\nThe Owner qualifications among top 10% high-capital firms vary by company size visualization shows that:\n-In micro-enterprise the high capital firms in the top 10% high end, the most common owner qualification is Managing Partner/Partner-Administrator, with Entrepreneur/Business Owner following.\n-In small-enterprise the high capital firms in the top 10% high end, Managing Partner/Partner-Administrator having a very close to 1 bar shows that the best performing firms is mostly Managing Partner/Partner-Administrator.\n-In other size category there is a more combined pattern across the Owner qualification. Having Administrator/Manager the best performing and following with Managing Partner/Partner-Administrator.",
     "crumbs": [
       "TidyTuesday",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 01 Brazilian Companies Capital Stock Analysis</span>"
@@ -80,7 +80,7 @@
     "href": "tt/hw01-tt.html#conclusion",
     "title": "Homework 01 Brazilian Companies Capital Stock Analysis",
     "section": "Conclusion",
-    "text": "Conclusion\nAcross company sizes, the owner qualification among the high capital firms performance in the capital market in BRL is not the same. In both the micro-enterprise and small_enterprise groups, Managing Partner/Partner-Administrator appears to be the most common owner qualification(dominates the small_enterprise firms). The other category shows a more combines patterns with Owner qualifications with the Administrator/Manager appearing most frequently but the Managing Partner Partner-Administrator still shows strong performance. Overall the high capital firms in top 10% shows a pattern of strong performance for Managing Partner/Partner-Administrator firms differ in company size group.",
+    "text": "Conclusion\nAcross company sizes, the owner qualification among the high capital firms performance in the capital market in BRL is not the same. In both the micro-enterprise and small_enterprise groups, Managing Partner/Partner-Administrator appears to be the most common owner qualification(dominates the small_enterprise firms). The other category shows a more combines patterns with Owner qualifications with the Administrator/Manager appearing most frequently but the Managing Partner Partner-Administrator still shows strong performance. Overall the high capital firms in top 10% shows a pattern of strong performance for Managing Partner/Partner-Administrator firms differ in company size group.\n\nCodetop10_top5 %&gt;%\n  count(company_size, owner_qualification) %&gt;%\n  filter(n &gt; 1) %&gt;%\n  arrange(desc(n))\n\n# A tibble: 0 × 3\n# ℹ 3 variables: company_size &lt;chr&gt;, owner_qualification &lt;chr&gt;, n &lt;int&gt;",
     "crumbs": [
       "TidyTuesday",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 01 Brazilian Companies Capital Stock Analysis</span>"
@@ -190,7 +190,62 @@
     "href": "pcl/pcl.html#quarto",
     "title": "Pre-Class Learning Summaries",
     "section": "Quarto",
-    "text": "Quarto\n ## Preclass learning 3 Adv Data Viz  ## Preclass learning 4 Adv Spatial Viz  ## Preclass learning 6 Adv Data wrangling I  ## Preclass learning 7 Adv Data wrangling I",
+    "text": "Quarto\n\n\n\nfrom qmd4sci.njtierney.com",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/pcl.html#preclass-learning-3-adv-data-viz",
+    "href": "pcl/pcl.html#preclass-learning-3-adv-data-viz",
+    "title": "Pre-Class Learning Summaries",
+    "section": "Preclass learning 3 Adv Data Viz",
+    "text": "Preclass learning 3 Adv Data Viz",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/pcl.html#preclass-learning-4-adv-spatial-viz",
+    "href": "pcl/pcl.html#preclass-learning-4-adv-spatial-viz",
+    "title": "Pre-Class Learning Summaries",
+    "section": "Preclass learning 4 Adv Spatial Viz",
+    "text": "Preclass learning 4 Adv Spatial Viz",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/pcl.html#preclass-learning-6-adv-data-wrangling-i",
+    "href": "pcl/pcl.html#preclass-learning-6-adv-data-wrangling-i",
+    "title": "Pre-Class Learning Summaries",
+    "section": "Preclass learning 6 Adv Data wrangling I",
+    "text": "Preclass learning 6 Adv Data wrangling I",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/pcl.html#preclass-learning-7-adv-data-wrangling-i",
+    "href": "pcl/pcl.html#preclass-learning-7-adv-data-wrangling-i",
+    "title": "Pre-Class Learning Summaries",
+    "section": "Preclass learning 7 Adv Data wrangling I",
+    "text": "Preclass learning 7 Adv Data wrangling I",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/pcl.html#preclass-learning-8-missing-data",
+    "href": "pcl/pcl.html#preclass-learning-8-missing-data",
+    "title": "Pre-Class Learning Summaries",
+    "section": "Preclass learning 8 Missing Data",
+    "text": "Preclass learning 8 Missing Data",
     "crumbs": [
       "Pre-Class Learnings",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
@@ -549,6 +604,116 @@
     ]
   },
   {
+    "objectID": "ica/07-wrangling-2-notes.html",
+    "href": "ica/07-wrangling-2-notes.html",
+    "title": "7 Adv Data wrangling II",
+    "section": "",
+    "text": "🧩 Learning Goals\nBy the end of this lesson, you should be able to:",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>7 Adv Data wrangling II</span>"
+    ]
+  },
+  {
+    "objectID": "ica/07-wrangling-2-notes.html#learning-goals",
+    "href": "ica/07-wrangling-2-notes.html#learning-goals",
+    "title": "7 Adv Data wrangling II",
+    "section": "",
+    "text": "Manipulate and explore strings using the stringr package\nConstruct regular expressions to find patterns in strings",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>7 Adv Data wrangling II</span>"
+    ]
+  },
+  {
+    "objectID": "ica/07-wrangling-2-notes.html#helpful-cheatsheets",
+    "href": "ica/07-wrangling-2-notes.html#helpful-cheatsheets",
+    "title": "7 Adv Data wrangling II",
+    "section": "Helpful Cheatsheets",
+    "text": "Helpful Cheatsheets\nThe stringr cheatsheet (HTML, PDF) will be useful to have open and reference.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>7 Adv Data wrangling II</span>"
+    ]
+  },
+  {
+    "objectID": "ica/07-wrangling-2-notes.html#motivation-30-years-of-american-anxieties",
+    "href": "ica/07-wrangling-2-notes.html#motivation-30-years-of-american-anxieties",
+    "title": "7 Adv Data wrangling II",
+    "section": "Motivation: 30 Years of American Anxieties",
+    "text": "Motivation: 30 Years of American Anxieties\nIn 2018 the data journalism organization The Pudding featured a story called 30 Years of American Anxieties about themes in 30 years of posts to the Dear Abby column (an American advice column).\nOne way to understand themes in text data is to conduct a qualitative analysis, a methodology in which multiple readers read through instances of text several times to reach a consensus about themes.\nAnother way to understand themes in text data is computational text analysis.\n\nThis is what we will explore today.\n\nBoth qualitative analysis and computational tools can be used in tandem. Often, using computational tools can help focus a close reading of select texts, which parallels the spirit of a qualitative analysis.\nTo prepare ourselves for a computational analysis, let’s learn about strings.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>7 Adv Data wrangling II</span>"
+    ]
+  },
+  {
+    "objectID": "ica/07-wrangling-2-notes.html#strings",
+    "href": "ica/07-wrangling-2-notes.html#strings",
+    "title": "7 Adv Data wrangling II",
+    "section": "Strings",
+    "text": "Strings\nStrings are objects of the character class (abbreviated as &lt;chr&gt; in tibbles).\nWhen you print out strings, they display with double quotes:\n\nCodesome_string &lt;- \"banana\"\nsome_string\n\n[1] \"banana\"\n\n\nWorking with strings generally will involve the use of regular expressions, a tool for finding patterns in strings.\nRegular expressions (regex, for short) look like the following:\n\"^the\" (Strings that start with \"the\")\n\"end$\" (Strings that end with \"end\")\nBefore getting to regular expressions, let’s go over some fundamentals about working with strings. The stringr package (available within tidyverse) is great for working with strings.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>7 Adv Data wrangling II</span>"
+    ]
+  },
+  {
+    "objectID": "ica/07-wrangling-2-notes.html#creating-strings",
+    "href": "ica/07-wrangling-2-notes.html#creating-strings",
+    "title": "7 Adv Data wrangling II",
+    "section": "Creating strings",
+    "text": "Creating strings\nCreating strings by hand is useful for testing out regular expressions.\nTo create a string, type any text in either double quotes (\") or single quotes '. Using double or single quotes doesn’t matter unless your string itself has single or double quotes.\n\nCodestring1 &lt;- \"This is a string\"\nstring2 &lt;- 'If I want to include a \"quote\" inside a string, I use single quotes'\nstring3 &lt;- c(string1, string2) # string / character vector (of greater than length 1)\n\n\nclass(string1)\n\n[1] \"character\"\n\nCodeclass(string2)\n\n[1] \"character\"\n\nCodeclass(string3)\n\n[1] \"character\"\n\nCodelength(string1)\n\n[1] 1\n\nCodelength(string2)\n\n[1] 1\n\nCodelength(string3)\n\n[1] 2\n\n\nWe can view these strings “naturally” (without the opening and closing quotes) with str_view():\n\nCodestr_view(string1)\n\n[1] │ This is a string\n\nCodestr_view(string2)\n\n[1] │ If I want to include a \"quote\" inside a string, I use single quotes\n\nCodestr_view(string3)\n\n[1] │ This is a string\n[2] │ If I want to include a \"quote\" inside a string, I use single quotes\n\n\nExercise: Create the string It's Thursday. What happens if you put the string inside single quotes? Double quotes?\n\nCode# Your code\n\n\nBecause \" and ' are special characters in the creation of strings, R offers another way to put them inside a string. We can escape these special characters by putting a \\ in front of them:\n\nCodestring1 &lt;- \"This is a string with \\\"double quotes\\\"\"\nstring2 &lt;- \"This is a string with \\'single quotes\\'\"\nstr_view(string1)\n\n[1] │ This is a string with \"double quotes\"\n\nCodestr_view(string2)\n\n[1] │ This is a string with 'single quotes'\n\n\nGiven that \\ is a special character, how can we put the \\ character in strings? We have to escape it with \\\\.\nExercise: Create the string C:\\Users. What happens when you don’t escape the \\?\n\nCode# Your code\n\n\nOther special characters include:\n\n\n\\t (Creates a tab)\n\n\\n (Creates a newline)\n\nBoth can be useful in plots to more neatly arrange text.\n\nCodestring1 &lt;- \"Record temp:\\t102\"\nstring2 &lt;- \"Record temp:\\n102\"\n\nstr_view(string1)\n\n[1] │ Record temp:{\\t}102\n\nCodestr_view(string2)\n\n[1] │ Record temp:\n    │ 102\n\n\nCan we get str_view() to show the tab instead of {\\t}? We can use the html argument to have the string displayed as if on a webpage:\n\nCodestr_view(string1, html = TRUE)\n\n\nOften we will want to create new strings within data frames. We can use str_c() or str_glue(), both of which are vectorized functions (meaning they take vectors as inputs and provide vectors as outputs - can be used within mutate()):\n\nWith str_c() the strings to be combined are all separate arguments separated by commas.\nWith str_glue() the desired string is written as a template with variable names inside curly braces {}.\n\n\nCodedf &lt;- tibble(\n    first_name = c(\"Arya\", \"Olenna\", \"Tyrion\", \"Melisandre\"),\n    last_name = c(\"Stark\", \"Tyrell\", \"Lannister\", NA)\n)\ndf\n\n# A tibble: 4 × 2\n  first_name last_name\n  &lt;chr&gt;      &lt;chr&gt;    \n1 Arya       Stark    \n2 Olenna     Tyrell   \n3 Tyrion     Lannister\n4 Melisandre &lt;NA&gt;     \n\nCodedf |&gt;\n    mutate(\n        full_name1 = str_c(first_name, \" \", last_name),\n        full_name2 = str_glue(\"{first_name} {last_name}\")\n    )\n\n# A tibble: 4 × 4\n  first_name last_name full_name1       full_name2      \n  &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;            &lt;glue&gt;          \n1 Arya       Stark     Arya Stark       Arya Stark      \n2 Olenna     Tyrell    Olenna Tyrell    Olenna Tyrell   \n3 Tyrion     Lannister Tyrion Lannister Tyrion Lannister\n4 Melisandre &lt;NA&gt;      &lt;NA&gt;             Melisandre NA   \n\n\nExercise: In the following data frame, create a full date string in month-day-year format using both str_c() and str_glue().\n\nCodedf_dates &lt;- tibble(\n    year = c(2000, 2001, 2002),\n    month = c(\"Jan\", \"Feb\", \"Mar\"),\n    day = c(3, 4, 5)\n)",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>7 Adv Data wrangling II</span>"
+    ]
+  },
+  {
+    "objectID": "ica/07-wrangling-2-notes.html#extracting-information-from-strings",
+    "href": "ica/07-wrangling-2-notes.html#extracting-information-from-strings",
+    "title": "7 Adv Data wrangling II",
+    "section": "Extracting information from strings",
+    "text": "Extracting information from strings\nThe str_length() counts the number of characters in a string.\n\nCodecomments &lt;- tibble(\n    name = c(\"Alice\", \"Bob\"),\n    comment = c(\"The essay was well organized around the core message and had good transitions.\", \"Good job!\")\n)\n\ncomments |&gt;\n    mutate(\n        comment_length = str_length(comment)\n    )\n\n# A tibble: 2 × 3\n  name  comment                                                   comment_length\n  &lt;chr&gt; &lt;chr&gt;                                                              &lt;int&gt;\n1 Alice The essay was well organized around the core message and…             78\n2 Bob   Good job!                                                              9\n\n\nThe str_sub() function gets a substring of a string. The 2nd and 3rd arguments indicate the beginning and ending position to extract.\n\nNegative positions indicate the position from the end of the word. (e.g., -3 indicates “3rd letter from the end”)\nSpecifying a position that goes beyond the word won’t result in an error. str_sub() will just go as far as possible.\n\n\nCodex &lt;- c(\"Apple\", \"Banana\", \"Pear\")\n\nstr_sub(x, start = 1, end = 3)\n\n[1] \"App\" \"Ban\" \"Pea\"\n\nCodestr_sub(x, start = -3, end = -1)\n\n[1] \"ple\" \"ana\" \"ear\"\n\nCodestr_sub(x, start = 2, end = -1)\n\n[1] \"pple\"  \"anana\" \"ear\"  \n\nCodestr_sub(\"a\", start = 1, end = 15)\n\n[1] \"a\"\n\n\nExercise: Using str_sub(), create a new variable with only the middle letter of each word in the data frame below. (Challenge: How would you handle words with an even number of letters?)\n\nCodedf &lt;- tibble(\n    word_id = 1:3,\n    word = c(\"replace\", \"match\", \"pattern\")\n)",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>7 Adv Data wrangling II</span>"
+    ]
+  },
+  {
+    "objectID": "ica/07-wrangling-2-notes.html#finding-patterns-in-strings-with-regular-expressions",
+    "href": "ica/07-wrangling-2-notes.html#finding-patterns-in-strings-with-regular-expressions",
+    "title": "7 Adv Data wrangling II",
+    "section": "Finding patterns in strings with regular expressions",
+    "text": "Finding patterns in strings with regular expressions\nSuppose that you’re exploring text data looking for places where people describe happiness. There are many ways to search. We could search for the word “happy” but that excludes “happiness” so we might search for “happi”.\nRegular expressions (regex) are a powerful language for describing patterns within strings.\n. . .\n\nCodedata(fruit)\ndata(words)\ndata(sentences)\n\n\nWe can use str_view() with the pattern argument to see what parts of a string match the regex supplied in the pattern argument. (Matches are enclosed in &lt;&gt;.)\n\nCodestr_view(fruit, \"berry\")\n\n [6] │ bil&lt;berry&gt;\n [7] │ black&lt;berry&gt;\n[10] │ blue&lt;berry&gt;\n[11] │ boysen&lt;berry&gt;\n[19] │ cloud&lt;berry&gt;\n[21] │ cran&lt;berry&gt;\n[29] │ elder&lt;berry&gt;\n[32] │ goji &lt;berry&gt;\n[33] │ goose&lt;berry&gt;\n[38] │ huckle&lt;berry&gt;\n[50] │ mul&lt;berry&gt;\n[70] │ rasp&lt;berry&gt;\n[73] │ salal &lt;berry&gt;\n[76] │ straw&lt;berry&gt;\n\n\nEssentials of forming a regex\n\nLetters and numbers in a regex are matched exactly and are called literal characters.\nMost punctuation characters, like ., +, *, [, ], and ?, have special meanings and are called metacharacters.\n\nQuantifiers come after a regex and control how many times a pattern can match:\n\n\n?: match the preceding pattern 0 or 1 times\n\n+: match the preceding pattern at least once\n\n*: match the preceding pattern at least 0 times (any number of times)\n\n\n\n. . .\nExercise: Before running the code below, predict what matches will be made. Run the code to check your guesses. Note that in all regex’s below the ?, +, * applies to the b only (not the a).\n\nCodestr_view(c(\"a\", \"ab\", \"abb\"), \"ab?\")\nstr_view(c(\"a\", \"ab\", \"abb\"), \"ab+\")\nstr_view(c(\"a\", \"ab\", \"abb\"), \"ab*\")\n\n\n\nWe can match any of a set of characters with [] (called a character class), e.g., [abcd] matches “a”, “b”, “c”, or “d”.\n\nWe can invert the match by starting with ^: [^abcd] matches anything except “a”, “b”, “c”, or “d”.\n\n\n\n\nCode# Match words that have vowel-x-vowel\nstr_view(words, \"[aeiou]x[aeiou]\")\n\n[284] │ &lt;exa&gt;ct\n[285] │ &lt;exa&gt;mple\n[288] │ &lt;exe&gt;rcise\n[289] │ &lt;exi&gt;st\n\nCode# Match words that have not_vowel-y-not_vowel\nstr_view(words, \"[^aeiou]y[^aeiou]\")\n\n[836] │ &lt;sys&gt;tem\n[901] │ &lt;typ&gt;e\n\n\nExercise Using the words data, find words that have two vowels in a row followed by an “m”.\n\nCode# Your code\n\n\n\nThe alternation operator | can be read just like the logical operator | (“OR”) to pick between one or more alternative patterns. e.g., apple|banana searches for “apple” or “banana”.\n\n\nCodestr_view(fruit, \"apple|melon|nut\")\n\n [1] │ &lt;apple&gt;\n[13] │ canary &lt;melon&gt;\n[20] │ coco&lt;nut&gt;\n[52] │ &lt;nut&gt;\n[62] │ pine&lt;apple&gt;\n[72] │ rock &lt;melon&gt;\n[80] │ water&lt;melon&gt;\n\n\nExercise: Using the fruit data, find fruits that have a repeated vowel (“aa”, “ee”, “ii”, “oo”, or “uu”.)\n\nCode# Your code\n\n\n\nThe ^ operator indicates the beginning of a string, and the $ operator indicates the end of a string. e.g., ^a matches strings that start with “a”, and a$ matches words that end with “a”.\nParentheses group together parts of a regular expression that should be taken as a bundle. (Much like parentheses in arithmetic statements.)\n\ne.g., ab+ is a little confusing. Does it match “ab” one or more times? Or does it match “a” first, then just “b” one or more times? (The latter, as we saw in an earlier example.) We can be very explicit and use a(b)+.\n\n\n\nExercise: Using the words data, find (1) words that start with “y” and (2) words that don’t start with “y”.\n\nCode# Your code",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>7 Adv Data wrangling II</span>"
+    ]
+  },
+  {
+    "objectID": "ica/07-wrangling-2-notes.html#exploring-stringr-functions",
+    "href": "ica/07-wrangling-2-notes.html#exploring-stringr-functions",
+    "title": "7 Adv Data wrangling II",
+    "section": "Exploring stringr functions",
+    "text": "Exploring stringr functions\nRead in the “Dear Abby” data underlying The Pudding’s 30 Years of American Anxieties article.\n\nCodeposts &lt;- read_csv(\"https://raw.githubusercontent.com/the-pudding/data/master/dearabby/raw_da_qs.csv\")\n\n\nTake a couple minutes to scroll through the 30 Years of American Anxieties article to get ideas for themes that you might want to search for using regular expressions.\n\nThe following are core stringr functions that use regular expressions:\n\n\nstr_view() - View the first occurrence in a string that matches the regex\n\nstr_count() - Count the number of times a regex matches within a string\n\nstr_detect() - Determine if (TRUE/FALSE) the regex is found within string\n\nstr_subset() - Return subset of strings that match the regex\n\nstr_extract(), str_extract_all() - Return portion of each string that matches the regex. str_extract() extracts the first instance of the match. str_extract_all() extracts all matches.\n\nstr_replace(), str_replace_all() - Replace portion of string that matches the regex with something else. str_replace() replaces the first instance of the match. str_replace_all() replaces all instances of the match.\n\nstr_remove(), str_remove_all() - Removes the portion of the string that matches the pattern. Equivalent to str_replace(x, \"THE REGEX PATTERN\", \"\")\n\n\nExercise: Starting from str_count(), explore each of these functions by pulling up the function documentation page and reading through the arguments. Try out each function using the posts data.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>7 Adv Data wrangling II</span>"
+    ]
+  },
+  {
+    "objectID": "ica/07-wrangling-2-notes.html#done",
+    "href": "ica/07-wrangling-2-notes.html#done",
+    "title": "7 Adv Data wrangling II",
+    "section": "Done!",
+    "text": "Done!\n\nCheck the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>7 Adv Data wrangling II</span>"
+    ]
+  },
+  {
     "objectID": "extra/extra-sample1.html",
     "href": "extra/extra-sample1.html",
     "title": "Extra Sample 1",
@@ -556,7 +721,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Extra Sample 1</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Extra Sample 1</span>"
     ]
   },
   {
@@ -567,7 +732,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Extra Sample 2</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Extra Sample 2</span>"
     ]
   }
 ]

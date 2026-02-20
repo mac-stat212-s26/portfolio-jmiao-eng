@@ -98,13 +98,27 @@ summary(top10_top5$pct)
 
 ## Visualization
 ```{r fig.width=12, fig.height=10}
-ggplot(top10_top5, aes(x = pct, y = owner_qualification)) +
+library(dplyr)
+library(ggplot2)
+library(tidytext)   
+library(scales)
+library(forcats)
+
+top10_top5_fixed <- top10_top5 %>%
+  mutate(company_size = recode(company_size, "micro-enterprise" = "Micro enterprise", "small-enterprise" = "Small enterprise", "other" = "Other")) %>%
+  group_by(company_size) %>%
+  mutate(owner_qualification_sorted = fct_reorder(owner_qualification, pct, .desc = TRUE)) %>%
+  ungroup()
+
+
+ggplot(top10_top5_fixed, aes(x = pct, y = owner_qualification_sorted)) +
   geom_col() +
   facet_wrap(~ company_size, ncol = 1) +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1), breaks = c(0, 0.25, 0.5, 0.75, 1), limits = c(0, 1)) +
   labs(
     title = "Owner qualifications among top 10% high-capital firms vary by company size",
     x = "Share of high-capital firms (within size)",
-    y = "Owner qualification",
+    y = "Owner Qualification",
     caption = "Source: TidyTuesday (2026-01-27) Brazilian companies dataset. Author: Jerry Miao. Date: 2026-02-02.") +
   theme_minimal() +
   theme(plot.title = element_text(size = 16),
@@ -126,13 +140,12 @@ The Owner qualifications among top 10% high-capital firms vary by company size v
 Across company sizes, the owner qualification among the high capital firms performance in the capital market in BRL is not the same. In both the micro-enterprise and small_enterprise groups, Managing Partner/Partner-Administrator appears to be the most common owner qualification(dominates the small_enterprise firms). The other category shows a more combines patterns with Owner qualifications with the Administrator/Manager appearing most frequently but the Managing Partner Partner-Administrator still shows strong performance. Overall the high capital firms in top 10% shows a pattern of strong performance for Managing Partner/Partner-Administrator firms differ in company size group.
 
 
-
-
-
-
-
-
-
+```{r}
+top10_top5 %>%
+  count(company_size, owner_qualification) %>%
+  filter(n > 1) %>%
+  arrange(desc(n))
+```
 
 
 
