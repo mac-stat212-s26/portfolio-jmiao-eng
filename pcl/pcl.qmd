@@ -2,15 +2,6 @@
 title: "Pre-Class Learning Summaries"
 ---
 
-## R
-
-![](0808-r.png)
-
-## Quarto
-
-![from qmd4sci.njtierney.com](0810-quarto.jpeg)
-
-
 ## Preclass learning 3 Adv Data Viz
 ![](IMG_6753.png)
 
@@ -29,3 +20,26 @@ title: "Pre-Class Learning Summaries"
 
 ## Preclass learning 8 Missing Data
 ![](IMG_6797.png)
+
+
+## Preclass learning 9 Functions
+![](IMG_6835.png)
+
+
+## Preclass learning 10 Base R
+![](IMG_6890.png)
+
+## Preclass learning 11 Loops + Iter I
+![](IMG_6891.png)
+
+## Preclass learning 12 Loops + Iter II
+
+## Preclass learning 13 APIs I
+![](IMG_7336.png)
+
+
+## Preclass learning 14 APIs II
+![](IMG_7335.png)
+
+## Preclass learning 15 Web Scaping
+![](IMG_7334.png)
