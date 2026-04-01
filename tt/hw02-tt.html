@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.25">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Homework 06 - TidyTuesday (Pi Digits) – COMP/STAT212 Portfolio</title>
+<title>Homework 02 Edible Plants Analysis – COMP/STAT212 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,8 +60,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../pcl/pcl.html" rel="next">
-<link href="../tt/hw02-tt.html" rel="prev">
+<link href="../tt/hw06-tt.html" rel="next">
+<link href="../tt/hw01-tt.html" rel="prev">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -291,7 +291,7 @@ cookieconsent.run({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tt/hw01-tt.html">TidyTuesday</a></li><li class="breadcrumb-item"><a href="../tt/hw06-tt.html"><span class="chapter-title">Homework 06 - TidyTuesday (Pi Digits)</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tt/hw01-tt.html">TidyTuesday</a></li><li class="breadcrumb-item"><a href="../tt/hw02-tt.html"><span class="chapter-title">Homework 02 Edible Plants Analysis</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -359,12 +359,12 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tt/hw02-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Homework 02 Edible Plants Analysis</span></a>
+  <a href="../tt/hw02-tt.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Homework 02 Edible Plants Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tt/hw06-tt.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Homework 06 - TidyTuesday (Pi Digits)</span></a>
+  <a href="../tt/hw06-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Homework 06 - TidyTuesday (Pi Digits)</span></a>
   </div>
 </li>
       </ul>
@@ -470,16 +470,18 @@ cookieconsent.run({
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#dataset-import-from-tidytuesday" id="toc-dataset-import-from-tidytuesday" class="nav-link active" data-scroll-target="#dataset-import-from-tidytuesday">Dataset Import From TidyTuesday</a></li>
-  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research Question</a></li>
+<li><a href="#tidytuesday-section-optional" id="toc-tidytuesday-section-optional" class="nav-link active" data-scroll-target="#tidytuesday-section-optional">TidyTuesday Section (optional)</a></li>
+  <li><a href="#dataset-import-from-tidytuesday" id="toc-dataset-import-from-tidytuesday" class="nav-link" data-scroll-target="#dataset-import-from-tidytuesday">Dataset Import From TidyTuesday</a></li>
   <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration">Data Exploration</a></li>
-  <li><a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations">Visualizations</a></li>
+  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research Question</a></li>
+  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tt/hw01-tt.html">TidyTuesday</a></li><li class="breadcrumb-item"><a href="../tt/hw06-tt.html"><span class="chapter-title">Homework 06 - TidyTuesday (Pi Digits)</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Homework 06 - TidyTuesday (Pi Digits)</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tt/hw01-tt.html">TidyTuesday</a></li><li class="breadcrumb-item"><a href="../tt/hw02-tt.html"><span class="chapter-title">Homework 02 Edible Plants Analysis</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Homework 02 Edible Plants Analysis</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -493,151 +495,99 @@ cookieconsent.run({
   
 
 
-</header><section id="dataset-import-from-tidytuesday" class="level2"><h2 class="anchored" data-anchor-id="dataset-import-from-tidytuesday">Dataset Import From TidyTuesday</h2>
+</header><section id="tidytuesday-section-optional" class="level2"><h2 class="anchored" data-anchor-id="tidytuesday-section-optional">TidyTuesday Section (optional)</h2>
+<div class="callout callout-style-default callout-important callout-titled" title="Instructions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Instructions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can count work on this week’s TidyTuesday toward the exceptional work required for an A in the Homework component.</p>
+</div>
+</div>
+<p>Explore the week’s <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a> challenge. Develop a research question, then answer it through a short data story with <a href="?var:effective-viz-url">effective visualization(s)</a>. Provide sufficient background for readers to grasp your narrative.</p>
+</section><section id="dataset-import-from-tidytuesday" class="level2"><h2 class="anchored" data-anchor-id="dataset-import-from-tidytuesday">Dataset Import From TidyTuesday</h2>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidytuesdayR)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidytuesdayR)</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">12</span>)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>pi_digits <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>pi_digits</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">5</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>edible_plants <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>edible_plants</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-</section><section id="research-question" class="level2"><h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
-<p>Are the digits of π evenly distributed across 0–9, and does the distribution become more uniform as we include more digits?</p>
 </section><section id="data-exploration" class="level2"><h2 class="anchored" data-anchor-id="data-exploration">Data Exploration</h2>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">glimpse</span>(pi_digits)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(edible_plants<span class="sc">$</span>preferred_ph_lower))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>Rows: 1,000,001
-Columns: 2
-$ digit_position &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, …
-$ digit          &lt;dbl&gt; 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8…</code></pre>
+<pre><code>[1] 0</code></pre>
 </div>
-</div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>digit_freq <span class="ot">&lt;-</span> pi_digits <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">count</span>(digit) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a>digit_freq</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(edible_plants<span class="sc">$</span>preferred_ph_upper))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 3
-   digit      n   prop
-   &lt;dbl&gt;  &lt;int&gt;  &lt;dbl&gt;
- 1     0  99959 0.1000
- 2     1  99758 0.0998
- 3     2 100026 0.100 
- 4     3 100230 0.100 
- 5     4 100230 0.100 
- 6     5 100359 0.100 
- 7     6  99548 0.0995
- 8     7  99800 0.0998
- 9     8  99985 0.1000
-10     9 100106 0.100 </code></pre>
+<pre><code>[1] 0</code></pre>
 </div>
 </div>
-</section><section id="visualizations" class="level2"><h2 class="anchored" data-anchor-id="visualizations">Visualizations</h2>
-<section id="visualization-1-overall-digit-distribution" class="level4"><h4 class="anchored" data-anchor-id="visualization-1-overall-digit-distribution">Visualization 1: Overall Digit Distribution</h4>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(digit_freq, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(digit), <span class="at">y =</span> prop)) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">labs</span>(</span>
-<span id="cb6-5"><a href="#cb6-5"></a>    <span class="at">title =</span> <span class="st">"Digits of π distribution"</span>,</span>
-<span id="cb6-6"><a href="#cb6-6"></a>    <span class="at">x =</span> <span class="st">"Digit"</span>,</span>
-<span id="cb6-7"><a href="#cb6-7"></a>    <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
-<span id="cb6-8"><a href="#cb6-8"></a>    <span class="at">caption =</span> <span class="st">"Red dashed line represents perfect uniform distribution (10%)"</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">table</span>(edible_plants<span class="sc">$</span>water)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+     high      High       Low    Medium very high Very High  Very low  Very Low 
+        1        24        18        93         1         1         1         1 </code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">summary</span>(edible_plants<span class="sc">$</span>preferred_ph_lower)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  4.500   5.500   6.000   5.832   6.000   7.000 </code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">summary</span>(edible_plants<span class="sc">$</span>preferred_ph_upper)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  6.000   7.000   7.000   7.114   7.500   8.500 </code></pre>
+</div>
+</div>
+<p>In this dataset, each row represents an edible plant species with recommended growing requirements. For my analysis I will focus more on water and two variables, preferred_ph_lower and preferred_ph_upper, which provides the preferred soil pH range. The distribution of the water categories does spread out, with few outliers Very High/Very low appear appears, which will not be account in the analysis. The summary table shows the lower bound ranges from 4.5 to 7.0 (median 6.0) and the upper bound ranges from 6.0 to 8.5 (median 7.0).</p>
+</section><section id="research-question" class="level2"><h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
+<p>Do plants that require more water tend to prefer a different soil pH range?</p>
+</section><section id="data-cleaning" class="level2"><h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a>plants <span class="ot">&lt;-</span> edible_plants <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">select</span>(water, preferred_ph_lower, preferred_ph_upper) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(water), <span class="sc">!</span><span class="fu">is.na</span>(preferred_ph_lower), <span class="sc">!</span><span class="fu">is.na</span>(preferred_ph_upper)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-7"><a href="#cb12-7"></a>    <span class="at">ph_mid =</span> (preferred_ph_lower <span class="sc">+</span> preferred_ph_upper) <span class="sc">/</span> <span class="dv">2</span>,</span>
+<span id="cb12-8"><a href="#cb12-8"></a>    <span class="at">ph_range =</span> preferred_ph_upper <span class="sc">-</span> preferred_ph_lower,</span>
+<span id="cb12-9"><a href="#cb12-9"></a>    <span class="at">water =</span> <span class="fu">factor</span>(water, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(water))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="visualization" class="level2"><h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(plants, <span class="fu">aes</span>(<span class="at">x =</span> water, <span class="at">y =</span> ph_mid)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.12</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="at">title =</span> <span class="st">"Distribution of Soil pH Across Water Requirement Groups"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="at">subtitle =</span> <span class="st">"Preferred pH lower and upper limits(midpoint)"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="at">x =</span> <span class="st">"Water Requirement"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8"></a>    <span class="at">y =</span> <span class="st">"Preferred Soil pH (midpoint)"</span>, </span>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="at">caption =</span> <span class="st">"Source: Edible Plant Database (TidyTuesday 2026-02-03). Author: Jerry Miao. Date: 2026-02-10."</span>) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="hw06-tt_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="hw02-tt_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>All digits appear with roughly equal proportions near 10%, suggesting that π’s digits are uniformly distributed.</p>
-</section><section id="visualization-2-does-distribution-stabilize-over-time" class="level4"><h4 class="anchored" data-anchor-id="visualization-2-does-distribution-stabilize-over-time">Visualization 2: Does Distribution Stabilize Over Time?</h4>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>pi_cumulative <span class="ot">&lt;-</span> pi_digits <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">mutate</span>(<span class="at">index =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">group_by</span>(digit) <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">mutate</span>(<span class="at">cum_count =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">group_by</span>(digit) <span class="sc">%&gt;%</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">mutate</span>(<span class="at">cum_prop =</span> cum_count <span class="sc">/</span> index) <span class="sc">%&gt;%</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb7-9"><a href="#cb7-9"></a></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="fu">ggplot</span>(pi_cumulative, <span class="fu">aes</span>(<span class="at">x =</span> index, <span class="at">y =</span> cum_prop, <span class="at">color =</span> <span class="fu">factor</span>(digit))) <span class="sc">+</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-14"><a href="#cb7-14"></a>    <span class="at">title =</span> <span class="st">"Digit frequencies converge toward 10%"</span>,</span>
-<span id="cb7-15"><a href="#cb7-15"></a>    <span class="at">x =</span> <span class="st">"Digit Position"</span>,</span>
-<span id="cb7-16"><a href="#cb7-16"></a>    <span class="at">y =</span> <span class="st">"Cumulative Proportion"</span>,</span>
-<span id="cb7-17"><a href="#cb7-17"></a>    <span class="at">color =</span> <span class="st">"Digit"</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="hw06-tt_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Although proportions fluctuate early, they quickly stabilize near 10%, demonstrating convergence toward a uniform distribution.</p>
-</section><section id="visualization-3-runs-of-repeated-digits" class="level4"><h4 class="anchored" data-anchor-id="visualization-3-runs-of-repeated-digits">Visualization 3: Runs of Repeated Digits</h4>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>pi_runs <span class="ot">&lt;-</span> pi_digits <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">mutate</span>(<span class="at">run =</span> <span class="fu">cumsum</span>(digit <span class="sc">!=</span> <span class="fu">lag</span>(digit, <span class="at">default =</span> <span class="fu">first</span>(digit)))) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">group_by</span>(run, digit) <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">summarize</span>(<span class="at">length =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="fu">ggplot</span>(pi_runs, <span class="fu">aes</span>(<span class="at">x =</span> length)) <span class="sc">+</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"darkorange"</span>) <span class="sc">+</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-9"><a href="#cb8-9"></a>    <span class="at">title =</span> <span class="st">"Most repeated digit runs are short"</span>,</span>
-<span id="cb8-10"><a href="#cb8-10"></a>    <span class="at">subtitle =</span> <span class="st">"Long runs exist but are rare"</span>,</span>
-<span id="cb8-11"><a href="#cb8-11"></a>    <span class="at">x =</span> <span class="st">"Run Length"</span>,</span>
-<span id="cb8-12"><a href="#cb8-12"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="hw06-tt_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>pi_cumulative <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">filter</span>(index <span class="sc">&lt;=</span> <span class="dv">50000</span>) <span class="sc">%&gt;%</span>  </span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> index, <span class="at">y =</span> cum_prop, <span class="at">color =</span> <span class="fu">factor</span>(digit))) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-7"><a href="#cb9-7"></a>    <span class="at">title =</span> <span class="st">"Randomness emerges quickly in the digits of π"</span>,</span>
-<span id="cb9-8"><a href="#cb9-8"></a>    <span class="at">subtitle =</span> <span class="st">"Each line represents one digit (0–9). The dashed line indicates 10%."</span>,</span>
-<span id="cb9-9"><a href="#cb9-9"></a>    <span class="at">caption =</span> <span class="st">"Source: TidyTuesday (2026-03-24) One Million Digits of Pi Author: Jerry Miao."</span>,</span>
-<span id="cb9-10"><a href="#cb9-10"></a>    <span class="at">x =</span> <span class="st">"Digit Position (First 50,000 digits)"</span>,</span>
-<span id="cb9-11"><a href="#cb9-11"></a>    <span class="at">y =</span> <span class="st">"Cumulative Proportion"</span>,</span>
-<span id="cb9-12"><a href="#cb9-12"></a>    <span class="at">color =</span> <span class="st">"Digit"</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a>  <span class="fu">theme</span>(</span>
-<span id="cb9-16"><a href="#cb9-16"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb9-17"><a href="#cb9-17"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb9-18"><a href="#cb9-18"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="hw06-tt_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section></section><section id="conclusion" class="level2"><h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>Although the distribution of digits in π appears uneven at the beginning, this is largely due to small sample size effects. As more digits are observed, the proportions of each digit quickly stabilize around 10%. This pattern demonstrates a clear convergence toward a uniform distribution, suggesting that the digits of π behave like a random sequence in the long run. Overall, the visualization highlights how apparent randomness emerges as the dataset grows.</p>
+</section><section id="conclusion" class="level2"><h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The box plot here suggest that preferred soil pH midpoints are similar across water requirement groups. For the medians for all Low, Median, and High water categories around 6.5 midpoint value, and the distributions does overlap a lot. There is some variation with in each group. As the data points does spread out in a wide range. Overall the visualization supports the interpretation that plants with different water needs tend to share similar preferred soil pH levels.</p>
 
 
 <!-- -->
@@ -1111,133 +1061,98 @@ $ digit          &lt;dbl&gt; 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 
     }
   });
   </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
-      <a href="../tt/hw02-tt.html" class="pagination-link" aria-label="Homework 02 Edible Plants Analysis">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Homework 02 Edible Plants Analysis</span></span>
+      <a href="../tt/hw01-tt.html" class="pagination-link" aria-label="Homework 01 Brazilian Companies Capital Stock Analysis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Homework 01 Brazilian Companies Capital Stock Analysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../pcl/pcl.html" class="pagination-link" aria-label="Pre-Class Learning Summaries">
-        <span class="nav-page-text"><span class="chapter-title">Pre-Class Learning Summaries</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../tt/hw06-tt.html" class="pagination-link" aria-label="Homework 06 - TidyTuesday (Pi Digits)">
+        <span class="nav-page-text"><span class="chapter-title">Homework 06 - TidyTuesday (Pi Digits)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">---</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="an">title:</span><span class="co"> "Homework 06 - TidyTuesday (Pi Digits) "</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">  html: </span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co">    embed-resources: true</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co">---</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="fu">## Dataset Import From TidyTuesday</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="in">```{r}</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="fu">library</span>(tidytuesdayR)</span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb10-14"><a href="#cb10-14"></a></span>
-<span id="cb10-15"><a href="#cb10-15"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">12</span>)</span>
-<span id="cb10-16"><a href="#cb10-16"></a>pi_digits <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>pi_digits</span>
-<span id="cb10-17"><a href="#cb10-17"></a><span class="in">```</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a></span>
-<span id="cb10-19"><a href="#cb10-19"></a></span>
-<span id="cb10-20"><a href="#cb10-20"></a><span class="fu">## Research Question</span></span>
-<span id="cb10-21"><a href="#cb10-21"></a>Are the digits of π evenly distributed across 0–9, and does the distribution become more uniform as we include more digits?</span>
-<span id="cb10-22"><a href="#cb10-22"></a></span>
-<span id="cb10-23"><a href="#cb10-23"></a><span class="fu">## Data Exploration</span></span>
-<span id="cb10-26"><a href="#cb10-26"></a><span class="in">```{r}</span></span>
-<span id="cb10-27"><a href="#cb10-27"></a><span class="fu">glimpse</span>(pi_digits)</span>
-<span id="cb10-28"><a href="#cb10-28"></a><span class="in">```</span></span>
-<span id="cb10-31"><a href="#cb10-31"></a><span class="in">```{r}</span></span>
-<span id="cb10-32"><a href="#cb10-32"></a>digit_freq <span class="ot">&lt;-</span> pi_digits <span class="sc">%&gt;%</span></span>
-<span id="cb10-33"><a href="#cb10-33"></a>  <span class="fu">count</span>(digit) <span class="sc">%&gt;%</span></span>
-<span id="cb10-34"><a href="#cb10-34"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
-<span id="cb10-35"><a href="#cb10-35"></a></span>
-<span id="cb10-36"><a href="#cb10-36"></a>digit_freq</span>
-<span id="cb10-37"><a href="#cb10-37"></a><span class="in">```</span></span>
-<span id="cb10-38"><a href="#cb10-38"></a></span>
-<span id="cb10-39"><a href="#cb10-39"></a><span class="fu">## Visualizations</span></span>
-<span id="cb10-40"><a href="#cb10-40"></a></span>
-<span id="cb10-41"><a href="#cb10-41"></a><span class="fu">#### Visualization 1: Overall Digit Distribution</span></span>
-<span id="cb10-44"><a href="#cb10-44"></a><span class="in">```{r}</span></span>
-<span id="cb10-45"><a href="#cb10-45"></a><span class="fu">ggplot</span>(digit_freq, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(digit), <span class="at">y =</span> prop)) <span class="sc">+</span></span>
-<span id="cb10-46"><a href="#cb10-46"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb10-47"><a href="#cb10-47"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb10-48"><a href="#cb10-48"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-49"><a href="#cb10-49"></a>    <span class="at">title =</span> <span class="st">"Digits of π distribution"</span>,</span>
-<span id="cb10-50"><a href="#cb10-50"></a>    <span class="at">x =</span> <span class="st">"Digit"</span>,</span>
-<span id="cb10-51"><a href="#cb10-51"></a>    <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
-<span id="cb10-52"><a href="#cb10-52"></a>    <span class="at">caption =</span> <span class="st">"Red dashed line represents perfect uniform distribution (10%)"</span></span>
-<span id="cb10-53"><a href="#cb10-53"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-54"><a href="#cb10-54"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb10-55"><a href="#cb10-55"></a><span class="in">```</span></span>
-<span id="cb10-56"><a href="#cb10-56"></a></span>
-<span id="cb10-57"><a href="#cb10-57"></a>All digits appear with roughly equal proportions near 10%, suggesting that π’s digits are uniformly distributed.</span>
-<span id="cb10-58"><a href="#cb10-58"></a></span>
-<span id="cb10-59"><a href="#cb10-59"></a><span class="fu">#### Visualization 2: Does Distribution Stabilize Over Time?</span></span>
-<span id="cb10-62"><a href="#cb10-62"></a><span class="in">```{r}</span></span>
-<span id="cb10-63"><a href="#cb10-63"></a>pi_cumulative <span class="ot">&lt;-</span> pi_digits <span class="sc">%&gt;%</span></span>
-<span id="cb10-64"><a href="#cb10-64"></a>  <span class="fu">mutate</span>(<span class="at">index =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb10-65"><a href="#cb10-65"></a>  <span class="fu">group_by</span>(digit) <span class="sc">%&gt;%</span></span>
-<span id="cb10-66"><a href="#cb10-66"></a>  <span class="fu">mutate</span>(<span class="at">cum_count =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb10-67"><a href="#cb10-67"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb10-68"><a href="#cb10-68"></a>  <span class="fu">group_by</span>(digit) <span class="sc">%&gt;%</span></span>
-<span id="cb10-69"><a href="#cb10-69"></a>  <span class="fu">mutate</span>(<span class="at">cum_prop =</span> cum_count <span class="sc">/</span> index) <span class="sc">%&gt;%</span></span>
-<span id="cb10-70"><a href="#cb10-70"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb10-71"><a href="#cb10-71"></a></span>
-<span id="cb10-72"><a href="#cb10-72"></a><span class="fu">ggplot</span>(pi_cumulative, <span class="fu">aes</span>(<span class="at">x =</span> index, <span class="at">y =</span> cum_prop, <span class="at">color =</span> <span class="fu">factor</span>(digit))) <span class="sc">+</span></span>
-<span id="cb10-73"><a href="#cb10-73"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb10-74"><a href="#cb10-74"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb10-75"><a href="#cb10-75"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-76"><a href="#cb10-76"></a>    <span class="at">title =</span> <span class="st">"Digit frequencies converge toward 10%"</span>,</span>
-<span id="cb10-77"><a href="#cb10-77"></a>    <span class="at">x =</span> <span class="st">"Digit Position"</span>,</span>
-<span id="cb10-78"><a href="#cb10-78"></a>    <span class="at">y =</span> <span class="st">"Cumulative Proportion"</span>,</span>
-<span id="cb10-79"><a href="#cb10-79"></a>    <span class="at">color =</span> <span class="st">"Digit"</span></span>
-<span id="cb10-80"><a href="#cb10-80"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-81"><a href="#cb10-81"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb10-82"><a href="#cb10-82"></a><span class="in">```</span></span>
-<span id="cb10-83"><a href="#cb10-83"></a>Although proportions fluctuate early, they quickly stabilize near 10%, demonstrating convergence toward a uniform distribution.</span>
-<span id="cb10-84"><a href="#cb10-84"></a></span>
-<span id="cb10-85"><a href="#cb10-85"></a></span>
-<span id="cb10-86"><a href="#cb10-86"></a><span class="fu">#### Visualization 3: Runs of Repeated Digits</span></span>
-<span id="cb10-89"><a href="#cb10-89"></a><span class="in">```{r}</span></span>
-<span id="cb10-90"><a href="#cb10-90"></a>pi_runs <span class="ot">&lt;-</span> pi_digits <span class="sc">%&gt;%</span></span>
-<span id="cb10-91"><a href="#cb10-91"></a>  <span class="fu">mutate</span>(<span class="at">run =</span> <span class="fu">cumsum</span>(digit <span class="sc">!=</span> <span class="fu">lag</span>(digit, <span class="at">default =</span> <span class="fu">first</span>(digit)))) <span class="sc">%&gt;%</span></span>
-<span id="cb10-92"><a href="#cb10-92"></a>  <span class="fu">group_by</span>(run, digit) <span class="sc">%&gt;%</span></span>
-<span id="cb10-93"><a href="#cb10-93"></a>  <span class="fu">summarize</span>(<span class="at">length =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb10-94"><a href="#cb10-94"></a></span>
-<span id="cb10-95"><a href="#cb10-95"></a><span class="fu">ggplot</span>(pi_runs, <span class="fu">aes</span>(<span class="at">x =</span> length)) <span class="sc">+</span></span>
-<span id="cb10-96"><a href="#cb10-96"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"darkorange"</span>) <span class="sc">+</span></span>
-<span id="cb10-97"><a href="#cb10-97"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-98"><a href="#cb10-98"></a>    <span class="at">title =</span> <span class="st">"Most repeated digit runs are short"</span>,</span>
-<span id="cb10-99"><a href="#cb10-99"></a>    <span class="at">subtitle =</span> <span class="st">"Long runs exist but are rare"</span>,</span>
-<span id="cb10-100"><a href="#cb10-100"></a>    <span class="at">x =</span> <span class="st">"Run Length"</span>,</span>
-<span id="cb10-101"><a href="#cb10-101"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb10-102"><a href="#cb10-102"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-103"><a href="#cb10-103"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb10-104"><a href="#cb10-104"></a><span class="in">```</span></span>
-<span id="cb10-105"><a href="#cb10-105"></a></span>
-<span id="cb10-108"><a href="#cb10-108"></a><span class="in">```{r}</span></span>
-<span id="cb10-109"><a href="#cb10-109"></a>pi_cumulative <span class="sc">%&gt;%</span></span>
-<span id="cb10-110"><a href="#cb10-110"></a>  <span class="fu">filter</span>(index <span class="sc">&lt;=</span> <span class="dv">50000</span>) <span class="sc">%&gt;%</span>  </span>
-<span id="cb10-111"><a href="#cb10-111"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> index, <span class="at">y =</span> cum_prop, <span class="at">color =</span> <span class="fu">factor</span>(digit))) <span class="sc">+</span></span>
-<span id="cb10-112"><a href="#cb10-112"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb10-113"><a href="#cb10-113"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb10-114"><a href="#cb10-114"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-115"><a href="#cb10-115"></a>    <span class="at">title =</span> <span class="st">"Randomness emerges quickly in the digits of π"</span>,</span>
-<span id="cb10-116"><a href="#cb10-116"></a>    <span class="at">subtitle =</span> <span class="st">"Each line represents one digit (0–9). The dashed line indicates 10%."</span>,</span>
-<span id="cb10-117"><a href="#cb10-117"></a>    <span class="at">caption =</span> <span class="st">"Source: TidyTuesday (2026-03-24) One Million Digits of Pi Author: Jerry Miao."</span>,</span>
-<span id="cb10-118"><a href="#cb10-118"></a>    <span class="at">x =</span> <span class="st">"Digit Position (First 50,000 digits)"</span>,</span>
-<span id="cb10-119"><a href="#cb10-119"></a>    <span class="at">y =</span> <span class="st">"Cumulative Proportion"</span>,</span>
-<span id="cb10-120"><a href="#cb10-120"></a>    <span class="at">color =</span> <span class="st">"Digit"</span></span>
-<span id="cb10-121"><a href="#cb10-121"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-122"><a href="#cb10-122"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
-<span id="cb10-123"><a href="#cb10-123"></a>  <span class="fu">theme</span>(</span>
-<span id="cb10-124"><a href="#cb10-124"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb10-125"><a href="#cb10-125"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb10-126"><a href="#cb10-126"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span></span>
-<span id="cb10-127"><a href="#cb10-127"></a>  )</span>
-<span id="cb10-128"><a href="#cb10-128"></a><span class="in">```</span></span>
-<span id="cb10-129"><a href="#cb10-129"></a></span>
-<span id="cb10-130"><a href="#cb10-130"></a><span class="fu">## Conclusion</span></span>
-<span id="cb10-131"><a href="#cb10-131"></a>Although the distribution of digits in π appears uneven at the beginning, this is largely due to small sample size effects. As more digits are observed, the proportions of each digit quickly stabilize around 10%. This pattern demonstrates a clear convergence toward a uniform distribution, suggesting that the digits of π behave like a random sequence in the long run. Overall, the visualization highlights how apparent randomness emerges as the dataset grows.</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">---</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="an">title:</span><span class="co"> "Homework 02 Edible Plants Analysis"</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">  html: </span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">    embed-resources: true</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">---</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a></span>
+<span id="cb14-8"><a href="#cb14-8"></a></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="fu">## TidyTuesday Section (optional)</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a></span>
+<span id="cb14-11"><a href="#cb14-11"></a>::: {.callout-important title="Instructions"}</span>
+<span id="cb14-12"><a href="#cb14-12"></a></span>
+<span id="cb14-13"><a href="#cb14-13"></a>You can count work on this week's TidyTuesday toward the exceptional work required for an A in the Homework component.</span>
+<span id="cb14-14"><a href="#cb14-14"></a></span>
+<span id="cb14-15"><a href="#cb14-15"></a>:::</span>
+<span id="cb14-16"><a href="#cb14-16"></a></span>
+<span id="cb14-17"><a href="#cb14-17"></a></span>
+<span id="cb14-18"><a href="#cb14-18"></a>Explore the week's <span class="co">[</span><span class="ot">TidyTuesday</span><span class="co">](https://github.com/rfordatascience/tidytuesday)</span> challenge. Develop a research question, then answer it through a short data story with <span class="co">[</span><span class="ot">effective visualization(s)</span><span class="co">]({{&lt; var effective-viz-url &gt;}})</span>.  Provide sufficient background for readers to grasp your narrative.</span>
+<span id="cb14-19"><a href="#cb14-19"></a></span>
+<span id="cb14-20"><a href="#cb14-20"></a><span class="fu">## Dataset Import From TidyTuesday</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a></span>
+<span id="cb14-24"><a href="#cb14-24"></a><span class="in">```{r}</span></span>
+<span id="cb14-25"><a href="#cb14-25"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb14-26"><a href="#cb14-26"></a><span class="fu">library</span>(tidytuesdayR)</span>
+<span id="cb14-27"><a href="#cb14-27"></a></span>
+<span id="cb14-28"><a href="#cb14-28"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">5</span>)</span>
+<span id="cb14-29"><a href="#cb14-29"></a>edible_plants <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>edible_plants</span>
+<span id="cb14-30"><a href="#cb14-30"></a><span class="in">```</span></span>
+<span id="cb14-31"><a href="#cb14-31"></a></span>
+<span id="cb14-32"><a href="#cb14-32"></a><span class="fu">## Data Exploration</span></span>
+<span id="cb14-33"><a href="#cb14-33"></a></span>
+<span id="cb14-36"><a href="#cb14-36"></a><span class="in">```{r}</span></span>
+<span id="cb14-37"><a href="#cb14-37"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(edible_plants<span class="sc">$</span>preferred_ph_lower))</span>
+<span id="cb14-38"><a href="#cb14-38"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(edible_plants<span class="sc">$</span>preferred_ph_upper))</span>
+<span id="cb14-39"><a href="#cb14-39"></a><span class="in">```</span></span>
+<span id="cb14-42"><a href="#cb14-42"></a><span class="in">```{r}</span></span>
+<span id="cb14-43"><a href="#cb14-43"></a><span class="fu">table</span>(edible_plants<span class="sc">$</span>water)</span>
+<span id="cb14-44"><a href="#cb14-44"></a><span class="in">```</span></span>
+<span id="cb14-47"><a href="#cb14-47"></a><span class="in">```{r}</span></span>
+<span id="cb14-48"><a href="#cb14-48"></a><span class="fu">summary</span>(edible_plants<span class="sc">$</span>preferred_ph_lower)</span>
+<span id="cb14-49"><a href="#cb14-49"></a><span class="fu">summary</span>(edible_plants<span class="sc">$</span>preferred_ph_upper)</span>
+<span id="cb14-50"><a href="#cb14-50"></a><span class="in">```</span></span>
+<span id="cb14-51"><a href="#cb14-51"></a>In this dataset, each row represents an edible plant species with recommended growing requirements. For my analysis I will focus more on water and two variables, preferred_ph_lower and preferred_ph_upper, which provides the preferred soil pH range. The distribution of the water categories does spread out, with few outliers Very High/Very low appear appears, which will not be account in the analysis. The summary table shows the lower bound ranges from 4.5 to 7.0 (median 6.0) and the upper bound ranges from 6.0 to 8.5 (median 7.0).</span>
+<span id="cb14-52"><a href="#cb14-52"></a></span>
+<span id="cb14-53"><a href="#cb14-53"></a><span class="fu">## Research Question</span></span>
+<span id="cb14-54"><a href="#cb14-54"></a></span>
+<span id="cb14-55"><a href="#cb14-55"></a>Do plants that require more water tend to prefer a different soil pH range?</span>
+<span id="cb14-56"><a href="#cb14-56"></a></span>
+<span id="cb14-57"><a href="#cb14-57"></a><span class="fu">## Data Cleaning</span></span>
+<span id="cb14-58"><a href="#cb14-58"></a></span>
+<span id="cb14-61"><a href="#cb14-61"></a><span class="in">```{r}</span></span>
+<span id="cb14-62"><a href="#cb14-62"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb14-63"><a href="#cb14-63"></a></span>
+<span id="cb14-64"><a href="#cb14-64"></a>plants <span class="ot">&lt;-</span> edible_plants <span class="sc">%&gt;%</span></span>
+<span id="cb14-65"><a href="#cb14-65"></a>  <span class="fu">select</span>(water, preferred_ph_lower, preferred_ph_upper) <span class="sc">%&gt;%</span></span>
+<span id="cb14-66"><a href="#cb14-66"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(water), <span class="sc">!</span><span class="fu">is.na</span>(preferred_ph_lower), <span class="sc">!</span><span class="fu">is.na</span>(preferred_ph_upper)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-67"><a href="#cb14-67"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-68"><a href="#cb14-68"></a>    <span class="at">ph_mid =</span> (preferred_ph_lower <span class="sc">+</span> preferred_ph_upper) <span class="sc">/</span> <span class="dv">2</span>,</span>
+<span id="cb14-69"><a href="#cb14-69"></a>    <span class="at">ph_range =</span> preferred_ph_upper <span class="sc">-</span> preferred_ph_lower,</span>
+<span id="cb14-70"><a href="#cb14-70"></a>    <span class="at">water =</span> <span class="fu">factor</span>(water, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb14-71"><a href="#cb14-71"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(water))</span>
+<span id="cb14-72"><a href="#cb14-72"></a><span class="in">```</span></span>
+<span id="cb14-73"><a href="#cb14-73"></a></span>
+<span id="cb14-74"><a href="#cb14-74"></a></span>
+<span id="cb14-75"><a href="#cb14-75"></a><span class="fu">## Visualization</span></span>
+<span id="cb14-76"><a href="#cb14-76"></a></span>
+<span id="cb14-79"><a href="#cb14-79"></a><span class="in">```{r}</span></span>
+<span id="cb14-80"><a href="#cb14-80"></a><span class="fu">ggplot</span>(plants, <span class="fu">aes</span>(<span class="at">x =</span> water, <span class="at">y =</span> ph_mid)) <span class="sc">+</span></span>
+<span id="cb14-81"><a href="#cb14-81"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb14-82"><a href="#cb14-82"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.12</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb14-83"><a href="#cb14-83"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-84"><a href="#cb14-84"></a>    <span class="at">title =</span> <span class="st">"Distribution of Soil pH Across Water Requirement Groups"</span>,</span>
+<span id="cb14-85"><a href="#cb14-85"></a>    <span class="at">subtitle =</span> <span class="st">"Preferred pH lower and upper limits(midpoint)"</span>,</span>
+<span id="cb14-86"><a href="#cb14-86"></a>    <span class="at">x =</span> <span class="st">"Water Requirement"</span>,</span>
+<span id="cb14-87"><a href="#cb14-87"></a>    <span class="at">y =</span> <span class="st">"Preferred Soil pH (midpoint)"</span>, </span>
+<span id="cb14-88"><a href="#cb14-88"></a>    <span class="at">caption =</span> <span class="st">"Source: Edible Plant Database (TidyTuesday 2026-02-03). Author: Jerry Miao. Date: 2026-02-10."</span>) <span class="sc">+</span></span>
+<span id="cb14-89"><a href="#cb14-89"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb14-90"><a href="#cb14-90"></a><span class="in">```</span></span>
+<span id="cb14-91"><a href="#cb14-91"></a></span>
+<span id="cb14-92"><a href="#cb14-92"></a><span class="fu">## Conclusion</span></span>
+<span id="cb14-93"><a href="#cb14-93"></a></span>
+<span id="cb14-94"><a href="#cb14-94"></a>The box plot here suggest that preferred soil pH midpoints are similar across water requirement groups. For the medians for all Low, Median, and High water categories around 6.5 midpoint value, and the distributions does overlap a lot. There is some variation with in each group. As the data points does spread out in a wide range. Overall the visualization supports the interpretation that plants with different water needs tend to share similar preferred soil pH levels.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
