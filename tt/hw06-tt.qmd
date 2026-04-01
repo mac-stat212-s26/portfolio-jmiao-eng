@@ -1,19 +1,117 @@
 ---
-title: "Homework 06"
+title: "Homework 06 - TidyTuesday (Pi Digits) "
 format: 
   html: 
     embed-resources: true
 ---
 
+## Dataset Import From TidyTuesday
+```{r}
+library(tidytuesdayR)
+library(tidyverse)
 
-## TidyTuesday Section (optional)
-
-::: {.callout-important title="Instructions"}
-
-You can count work on this week's TidyTuesday toward the exceptional work required for an A in the Homework component.
-
-:::
+tuesdata <- tidytuesdayR::tt_load(2026, week = 12)
+pi_digits <- tuesdata$pi_digits
+```
 
 
-Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.
+## Research Question
+Are the digits of π evenly distributed across 0–9, and does the distribution become more uniform as we include more digits?
 
+## Data Exploration
+```{r}
+glimpse(pi_digits)
+```
+```{r}
+digit_freq <- pi_digits %>%
+  count(digit) %>%
+  mutate(prop = n / sum(n))
+
+digit_freq
+```
+
+## Visualizations
+
+#### Visualization 1: Overall Digit Distribution
+```{r}
+ggplot(digit_freq, aes(x = factor(digit), y = prop)) +
+  geom_col(fill = "steelblue") +
+  geom_hline(yintercept = 0.1, linetype = "dashed", color = "red") +
+  labs(
+    title = "Digits of π distribution",
+    x = "Digit",
+    y = "Proportion",
+    caption = "Red dashed line represents perfect uniform distribution (10%)"
+  ) +
+  theme_minimal()
+```
+
+All digits appear with roughly equal proportions near 10%, suggesting that π’s digits are uniformly distributed.
+
+#### Visualization 2: Does Distribution Stabilize Over Time?
+```{r}
+pi_cumulative <- pi_digits %>%
+  mutate(index = row_number()) %>%
+  group_by(digit) %>%
+  mutate(cum_count = row_number()) %>%
+  ungroup() %>%
+  group_by(digit) %>%
+  mutate(cum_prop = cum_count / index) %>%
+  ungroup()
+
+ggplot(pi_cumulative, aes(x = index, y = cum_prop, color = factor(digit))) +
+  geom_line(alpha = 0.7) +
+  geom_hline(yintercept = 0.1, linetype = "dashed") +
+  labs(
+    title = "Digit frequencies converge toward 10%",
+    x = "Digit Position",
+    y = "Cumulative Proportion",
+    color = "Digit"
+  ) +
+  theme_minimal()
+```
+Although proportions fluctuate early, they quickly stabilize near 10%, demonstrating convergence toward a uniform distribution.
+
+
+#### Visualization 3: Runs of Repeated Digits
+```{r}
+pi_runs <- pi_digits %>%
+  mutate(run = cumsum(digit != lag(digit, default = first(digit)))) %>%
+  group_by(run, digit) %>%
+  summarize(length = n(), .groups = "drop")
+
+ggplot(pi_runs, aes(x = length)) +
+  geom_histogram(binwidth = 1, fill = "darkorange") +
+  labs(
+    title = "Most repeated digit runs are short",
+    subtitle = "Long runs exist but are rare",
+    x = "Run Length",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+pi_cumulative %>%
+  filter(index <= 50000) %>%  
+  ggplot(aes(x = index, y = cum_prop, color = factor(digit))) +
+  geom_line(linewidth = 1, alpha = 0.8) +
+  geom_hline(yintercept = 0.1, linetype = "dashed", color = "black") +
+  labs(
+    title = "Randomness emerges quickly in the digits of π",
+    subtitle = "Each line represents one digit (0–9). The dashed line indicates 10%.",
+    caption = "Source: TidyTuesday (2026-03-24) One Million Digits of Pi Author: Jerry Miao.",
+    x = "Digit Position (First 50,000 digits)",
+    y = "Cumulative Proportion",
+    color = "Digit"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.title.position = "plot",
+    legend.position = "right"
+  )
+```
+
+## Conclusion
+Although the distribution of digits in π appears uneven at the beginning, this is largely due to small sample size effects. As more digits are observed, the proportions of each digit quickly stabilize around 10%. This pattern demonstrates a clear convergence toward a uniform distribution, suggesting that the digits of π behave like a random sequence in the long run. Overall, the visualization highlights how apparent randomness emerges as the dataset grows.
