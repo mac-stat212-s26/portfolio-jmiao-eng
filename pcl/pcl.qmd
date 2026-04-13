@@ -33,7 +33,7 @@ title: "Pre-Class Learning Summaries"
 ![](IMG_6891.png)
 
 ## Preclass learning 12 Loops + Iter II
-
+![](IMG_7356.png)
 ## Preclass learning 13 APIs I
 ![](IMG_7336.png)
 
@@ -43,3 +43,13 @@ title: "Pre-Class Learning Summaries"
 
 ## Preclass learning 15 Web Scaping
 ![](IMG_7334.png)
+## Preclass learning 16 Databases
+![](IMG_7433.png)
+
+## Preclass learning 17 Effective Viz
+![](IMG_7434.png)
+
+## Preclass learning 18 Interactive Viz
+![](IMG_7468.png)
+
+## Preclass learning 19 Quality Control 
