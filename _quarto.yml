@@ -69,6 +69,7 @@ book:
       - tt/hw01-tt.qmd
       - tt/hw02-tt.qmd
       - tt/hw06-tt.qmd
+      - tt/hw08-tt.qmd
 
     - part: "Pre-Class Learnings"
       chapters:
@@ -85,6 +86,8 @@ book:
       - ica/09-functions-notes.qmd
       - ica/10-base-r-notes.qmd
       - ica/11-iteration-1-notes.qmd
+      - ica/16-databases-notes.qmd
+      - ica/18-interactive-viz-notes.qmd
 
     - part: "Extras"
       chapters:

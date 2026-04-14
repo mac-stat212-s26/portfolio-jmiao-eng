@@ -12,7 +12,12 @@ By the end of this lesson, you should be able to:
 
 ```{r setup_18, echo=FALSE, message=FALSE}
 library(tidyverse)
+library(plotly)
+library(babynames)
+library(gapminder)
 ```
+
+
 
 
 ## Background

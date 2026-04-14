@@ -128,23 +128,37 @@ ggplot(
   ) +
   labs(
     title = "Repair success rates among the 10 most common product categories",
-    subtitle = "Only categories with at least 100 repair attempts are included",
+    subtitle = "Categories with at least 100 repair attempts are included",
     x = "Repair success rate",
     y = "Product category",
     caption = "Source: TidyTuesday (2026-04-07) Repair Cafes Worldwide dataset. Author: Jerry Miao. Date: 2026-04-14."
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(size = 16),
-    plot.subtitle = element_text(size = 12),
-    axis.title.x = element_text(size = 13),
-    axis.title.y = element_text(size = 13),
+    plot.title = element_text(size = 11),
+    plot.subtitle = element_text(size = 8),
+    axis.title.x = element_text(size = 10),
+    axis.title.y = element_text(size = 10),
     axis.text.x = element_text(size = 11),
-    axis.text.y = element_text(size = 11)
+    axis.text.y = element_text(size = 8)
   )
 ```
 
+## Conclusion
+```{r}
+best_category <- top_categories %>%
+  arrange(desc(repair_rate)) %>%
+  slice(1)
 
+most_common_category <- top_categories %>%
+  arrange(desc(total_repairs)) %>%
+  slice(1)
+
+best_category
+most_common_category
+```
+
+The graph shows that repair success rates vary a lot across product categories. Among the 10 most common categories, **Textile** has the highest repair success rate at about **92.2%**, making it the most successfully repaired category in this analysis. However, the most common category is **Household appliances electric**, with **70,983 repair attempts**, and its repair success rate is only about **55.3%**. This suggests that the most frequently repaired items are not always the easiest to fix. In general, categories like textiles, bicycles, and non-electric tools seem to be repaired more successfully, while equipment involving electronics appears to be more difficult to repair.
 
 
 
