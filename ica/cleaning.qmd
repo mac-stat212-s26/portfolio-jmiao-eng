@@ -37,6 +37,7 @@ library(readr)
 library(tidyverse)
 weather <- read_csv("Data/weather.csv")
 ```
+
 ```{r}
 weather_clean <- weather %>%
   mutate(PrecipYr = na_if(PrecipYr, 99999))

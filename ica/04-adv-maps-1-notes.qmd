@@ -95,8 +95,8 @@ See [Spatial Data Appendix](https://hash-mac.github.io/stat212site-sp26/notes/sp
 nc <- st_read(system.file("shape/nc.shp", package = "sf"))
 
 # Read in shapefiles just downloaded
-mn_cities <- st_read("/Users/myq72/Documents/GitHub/portfolio-jmiao-eng/ica/Data/shp_loc_pop_centers")
-mn_water <- st_read("/Users/myq72/Documents/GitHub/portfolio-jmiao-eng/ica/Data/shp_water_lakes_rivers")
+mn_cities <- st_read("Data/shp_loc_pop_centers")
+mn_water <- st_read("Data/shp_water_lakes_rivers")
 ```
 
 The `sf` package reads in spatial data in `data.frame`-like format. Using the `class()` function we can check the **class** (type) of object that we just read in. Note the presence of the "sf" and "data.frame" classes:
@@ -149,16 +149,18 @@ Take a look at the **function** below that re-maps a spatial object using a new 
 - Use your function to make two new maps using your chosen CRSs.
 
 ```{r transform_via_function}
-transform_and_plot <- function(spatial_obj, new_crs) {
+transform_and_plot <- function(spatial_obj, new_crs, title) {
     spatial_obj |> 
         st_transform(crs = new_crs) |> 
         ggplot() +
-            geom_sf() +
-            theme_classic()
+        geom_sf() +
+        theme_classic() +
+        labs(title = title)
 }
 
+
 # Example usage of this function (using a South Carolina CRS)
-transform_and_plot(nc, new_crs = "EPSG:32133")
+transform_and_plot(nc, new_crs = "EPSG:32133", title = "South Carolina CRS")
 
 
 ```
