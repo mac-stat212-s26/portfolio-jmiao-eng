@@ -1,0 +1,161 @@
+---
+title: "Repair Cafes Worldwide Analysis"
+format: 
+  html: 
+    embed-resources: true
+---
+
+## TidyTuesday Section
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)](https://github.com/rfordatascience/tidytuesday). Provide sufficient background for readers to grasp your narrative.
+
+Repair Cafes are volunteer-run community events where people bring broken household items and try to fix them with help from experienced repairers. The dataset for this week comes from Repair Monitor and contains records of repair attempts from Repair Cafes worldwide. Since these events focus on reducing waste and extending product life, the data can help show which types of items are most likely to be repaired successfully.
+
+## Dataset Import From TidyTuesday
+
+```{r}
+library(tidytuesdayR)
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(forcats)
+library(scales)
+
+tuesdata <- tidytuesdayR::tt_load(2026, week = 14)
+
+repairs <- tuesdata$repairs
+repairs_text <- tuesdata$repairs_text
+```
+## Research Question
+
+Which product categories are repaired most successfully, and among commonly repaired categories, which ones have the highest repair success rates?
+
+## Data Exploration
+
+```{r}
+glimpse(repairs)
+```
+```{r}
+repairs %>%
+  summarise(
+    n_repairs = n(),
+    n_categories = n_distinct(category),
+    n_countries = n_distinct(country),
+    min_repairability = min(repairability, na.rm = TRUE),
+    median_repairability = median(repairability, na.rm = TRUE),
+    mean_repairability = mean(repairability, na.rm = TRUE),
+    max_repairability = max(repairability, na.rm = TRUE)
+  )
+```
+
+The dataset contains **178,749 repair records** across **15 product categories** and **25 countries**. This is a fairly large dataset, so the overall patterns should be meaningful rather than driven by only a few observations. The median repairability score is **7**, which suggests that many items brought to Repair Cafes are at least moderately repairable. The minimum repairability score is **0**, so some products are viewed as extremely difficult or effectively impossible to repair.
+
+
+
+```{r}
+repairs %>%
+  count(repaired, sort = TRUE)
+```
+
+The repair outcome counts show that **"yes"** is by far the most common result, with **112,775** successful repairs. This is much higher than **43,112** cases marked **"no"** and **22,859** marked **"half"**. The bar chart makes this pattern very clear: successful repairs dominate the dataset, while partial and unsuccessful repairs occur much less often. There are also a few unusual values, such as **"ja"** and **NA**, which likely reflect data entry inconsistencies and should be treated carefully in later cleaning.
+
+
+```{r}
+ggplot(repairs, aes(x = repaired)) +
+  geom_bar(fill = "steelblue") +
+  labs(
+    title = "Distribution of repair outcomes",
+    x = "Repair outcome",
+    y = "Number of repair cases"
+  ) +
+  theme_minimal()
+```
+
+The histogram shows that repairability scores are concentrated more heavily at the higher end of the scale, especially around **7 to 10**. This suggests that many of the products appearing in the dataset are considered fairly repairable. Lower scores are present, but they are less common. The warning above the plot indicates that many rows were removed because of missing repairability values, so this graph reflects only the cases where a repairability score was actually recorded.
+
+```{r}
+ggplot(repairs, aes(x = repairability)) +
+  geom_histogram(binwidth = 1, fill = "darkorange", color = "white") +
+  labs(
+    title = "Distribution of repairability scores",
+    x = "Repairability score",
+    y = "Number of repair cases"
+  ) +
+  theme_minimal()
+```
+The histogram shows that repairability scores are concentrated more heavily at the higher end of the scale, especially around **7 to 10**. This suggests that many of the products appearing in the dataset are considered fairly repairable. Lower scores are present, but they are less common. The warning above the plot indicates that many rows were removed because of missing repairability values, so this graph reflects only the cases where a repairability score was actually recorded.
+
+
+## Data Cleaning
+
+```{r}
+repair_summary <- repairs %>%
+  filter(!is.na(category), !is.na(repaired)) %>%
+  mutate(
+    repair_success = repaired == "yes"
+  ) %>%
+  group_by(category) %>%
+  summarise(
+    total_repairs = n(),
+    repaired_n = sum(repair_success, na.rm = TRUE),
+    repair_rate = mean(repair_success, na.rm = TRUE)
+  ) %>%
+  ungroup()
+
+top_categories <- repair_summary %>%
+  filter(total_repairs >= 100) %>%
+  arrange(desc(total_repairs)) %>%
+  slice_head(n = 10)
+
+top_categories
+```
+
+In this analysis, I focus on categories with at least 100 repair attempts so that the comparison is based on categories with substantial data. This avoids drawing conclusions from categories with very small counts.
+
+## Visualization
+```{r}
+
+ggplot(
+  top_categories,
+  aes(
+    x = repair_rate,
+    y = fct_reorder(category, repair_rate)
+  )
+) +
+  geom_col(fill = "forestgreen") +
+  scale_x_continuous(
+    labels = percent_format(accuracy = 1),
+    limits = c(0, 1)
+  ) +
+  labs(
+    title = "Repair success rates among the 10 most common product categories",
+    subtitle = "Only categories with at least 100 repair attempts are included",
+    x = "Repair success rate",
+    y = "Product category",
+    caption = "Source: TidyTuesday (2026-04-07) Repair Cafes Worldwide dataset. Author: Jerry Miao. Date: 2026-04-14."
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16),
+    plot.subtitle = element_text(size = 12),
+    axis.title.x = element_text(size = 13),
+    axis.title.y = element_text(size = 13),
+    axis.text.x = element_text(size = 11),
+    axis.text.y = element_text(size = 11)
+  )
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

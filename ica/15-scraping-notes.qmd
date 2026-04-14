@@ -165,6 +165,31 @@ Notes:
 - If the website has `Crawl-delay: x` in its `robots.txt`, include `Sys.sleep(x)` in your function to respect that.
 - Recall that `bind_rows()` from `dplyr` and `list_rbind()` from `purrr` takes a list of data frames and stacks them on top of each other.
 
+```{r}
+# Helper function to reduce html_elements() |> html_text() code duplication
+get_text_from_page <- function(page, css_selector) {
+    page |>
+        html_elements(css_selector) |>
+        html_text()
+}
+
+scrape_page <- function(url) {
+    Sys.sleep(2)
+    page <- read_html(url)
+    article_titles <- get_text_from_page(page, ".thumbnail-teaser__heading")
+    article_dates_abstracts <- get_text_from_page(page, ".thumbnail-teaser__description")
+    
+    tibble(
+        title = article_titles,
+        date_abstract = article_dates_abstracts
+    ) |> 
+    separate_wider_delim(
+    delim = " — ", 
+    cols = dates_abstract, 
+    names = c("pub_date", "abstract"))
+}
+```
+
 
 ## Example 2: NIH STEM Teaching Resources
 

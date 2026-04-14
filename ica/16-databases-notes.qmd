@@ -260,14 +260,18 @@ The SQL command `WHERE` is like the `filter` command we have been using in `dply
 **Exercise:** Find the title and score of Posts that have a score of at least 110. *Hint: TOP is not necessary here because you want all result rows.*
 
 ```{sql eval=FALSE}
-
+SELECT Title, Score
+FROM Posts
+WHERE PostTypeId = 1 AND Score >= 110
 ```
 
 **Exercise:** Find posts whose title contains some place you are interested in (you pick!). *Hint: use SQL's [LIKE operator](http://www.sqltutorial.org/sql-like/).*
 
 
 ```{sql eval=FALSE}
-
+SELECT Title, Score
+FROM Posts
+WHERE PostTypeId = 1 AND Title LIKE '%Paris%'
 ```
 
 
@@ -309,7 +313,9 @@ ORDER BY Score DESC
 
 
 ```{sql eval=FALSE}
-
+SELECT Title, Score, Tags
+FROM Posts
+WHERE PostTypeId = 1 AND Tags LIKE '%paris%' AND Tags LIKE '%france%'
 ```
 
 
@@ -334,13 +340,24 @@ Note two characteristics of SQL summarization here:
 - The aggregate column (in this case `COUNT(Id)`) must immediately be followed by a name that will be used for it in the results (in this case `numPosts`). This can be particularly useful if you want to order by the aggregated value.
 
 **Exercise:** Change the previous query so it orders the result rows by the number of posts of that type. *Hint: Reuse the name you assigned to the aggregate function.*
-
-
+```{sql eval=FALSE}
+SELECT 
+PostTypeId, COUNT(Id) numPosts
+FROM posts
+GROUP BY PostTypeId 
+ORDER BY numPosts
+```
 
 
 **Exercise:** Find the most commonly used tagsets (sets/combinations of tags) applied to posts. Note that this is not asking you to count the most common individual tags --- this would be more complex because multiple tags are squashed into the Tags field.
 
-
+```{sql eval=FALSE}
+SELECT
+Tags, COUNT(Tags) numTagsets
+FROM posts
+GROUP BY Tags
+ORDER BY numTagsets
+```
 
 
 
