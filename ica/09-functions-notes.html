@@ -446,6 +446,21 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ica/12-iteration-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12 Loops+Iter II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/14-apis-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">14 APIs II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/15-scraping-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">15 Web scraping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ica/16-databases-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">16 Databases and SQL</span></a>
   </div>
 </li>
@@ -768,12 +783,12 @@ cookieconsent.run({
 <span id="cb27-3"><a href="#cb27-3"></a>    area <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(nums, <span class="dv">1</span>, <span class="dv">3</span>)</span>
 <span id="cb27-4"><a href="#cb27-4"></a>    num3 <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(nums, <span class="dv">4</span>, <span class="dv">6</span>)</span>
 <span id="cb27-5"><a href="#cb27-5"></a>    num4 <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(nums, <span class="dv">7</span>, <span class="dv">10</span>)</span>
-<span id="cb27-6"><a href="#cb27-6"></a>    <span class="co"># str_glue("({area}) {num3}-{num4}")</span></span>
-<span id="cb27-7"><a href="#cb27-7"></a>    <span class="fu">str_c</span>(<span class="st">"("</span>, area, <span class="st">")"</span>, num3, <span class="st">"-"</span>, num4)</span>
-<span id="cb27-8"><a href="#cb27-8"></a>}</span>
+<span id="cb27-6"><a href="#cb27-6"></a>    <span class="fu">str_c</span>(<span class="st">"("</span>, area, <span class="st">") "</span>, num3, <span class="st">"-"</span>, num4)</span>
+<span id="cb27-7"><a href="#cb27-7"></a>}</span>
+<span id="cb27-8"><a href="#cb27-8"></a></span>
 <span id="cb27-9"><a href="#cb27-9"></a><span class="fu">format_phone_number</span>(<span class="fu">c</span>(<span class="st">"651-330-8661"</span>, <span class="st">"6516966000"</span>, <span class="st">"800 867 5309"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>[1] "(651)330-8661" "(651)696-6000" "(800)867-5309"</code></pre>
+<pre><code>[1] "(651) 330-8661" "(651) 696-6000" "(800) 867-5309"</code></pre>
 </div>
 </div>
 </section><section id="calling-a-function" class="level2"><h2 class="anchored" data-anchor-id="calling-a-function">Calling a Function</h2>
@@ -864,14 +879,16 @@ Error in `layer_sf()`:
 </ul>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>convert_temp <span class="ot">&lt;-</span> <span class="cf">function</span>(temp, unit) {</span>
-<span id="cb36-2"><a href="#cb36-2"></a>    <span class="cf">if</span> (unit<span class="sc">==</span><span class="st">"F"</span>) {</span>
+<span id="cb36-2"><a href="#cb36-2"></a>    <span class="cf">if</span> (unit <span class="sc">==</span> <span class="st">"F"</span>) {</span>
 <span id="cb36-3"><a href="#cb36-3"></a>        (temp <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> <span class="dv">5</span><span class="sc">/</span><span class="dv">9</span></span>
-<span id="cb36-4"><a href="#cb36-4"></a>    } <span class="cf">else</span> <span class="cf">if</span> (unit<span class="sc">==</span><span class="st">"C"</span>) {</span>
+<span id="cb36-4"><a href="#cb36-4"></a>    } <span class="cf">else</span> <span class="cf">if</span> (unit <span class="sc">==</span> <span class="st">"C"</span>) {</span>
 <span id="cb36-5"><a href="#cb36-5"></a>        (temp <span class="sc">*</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span></span>
-<span id="cb36-6"><a href="#cb36-6"></a>    }</span>
-<span id="cb36-7"><a href="#cb36-7"></a>}</span>
-<span id="cb36-8"><a href="#cb36-8"></a></span>
-<span id="cb36-9"><a href="#cb36-9"></a><span class="fu">convert_temp</span>(<span class="dv">0</span>, <span class="at">unit =</span> <span class="st">"C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb36-6"><a href="#cb36-6"></a>    } <span class="cf">else</span> {</span>
+<span id="cb36-7"><a href="#cb36-7"></a>        <span class="fu">stop</span>(<span class="st">"unit must be 'C' or 'F'"</span>)</span>
+<span id="cb36-8"><a href="#cb36-8"></a>    }</span>
+<span id="cb36-9"><a href="#cb36-9"></a>}</span>
+<span id="cb36-10"><a href="#cb36-10"></a></span>
+<span id="cb36-11"><a href="#cb36-11"></a><span class="fu">convert_temp</span>(<span class="dv">0</span>, <span class="at">unit =</span> <span class="st">"C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>[1] 32</code></pre>
 </div>
@@ -1765,9 +1782,9 @@ Caused by error:
 <span id="cb64-229"><a href="#cb64-229"></a>    area <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(nums, <span class="dv">1</span>, <span class="dv">3</span>)</span>
 <span id="cb64-230"><a href="#cb64-230"></a>    num3 <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(nums, <span class="dv">4</span>, <span class="dv">6</span>)</span>
 <span id="cb64-231"><a href="#cb64-231"></a>    num4 <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(nums, <span class="dv">7</span>, <span class="dv">10</span>)</span>
-<span id="cb64-232"><a href="#cb64-232"></a>    <span class="co"># str_glue("({area}) {num3}-{num4}")</span></span>
-<span id="cb64-233"><a href="#cb64-233"></a>    <span class="fu">str_c</span>(<span class="st">"("</span>, area, <span class="st">")"</span>, num3, <span class="st">"-"</span>, num4)</span>
-<span id="cb64-234"><a href="#cb64-234"></a>}</span>
+<span id="cb64-232"><a href="#cb64-232"></a>    <span class="fu">str_c</span>(<span class="st">"("</span>, area, <span class="st">") "</span>, num3, <span class="st">"-"</span>, num4)</span>
+<span id="cb64-233"><a href="#cb64-233"></a>}</span>
+<span id="cb64-234"><a href="#cb64-234"></a></span>
 <span id="cb64-235"><a href="#cb64-235"></a><span class="fu">format_phone_number</span>(<span class="fu">c</span>(<span class="st">"651-330-8661"</span>, <span class="st">"6516966000"</span>, <span class="st">"800 867 5309"</span>))</span>
 <span id="cb64-236"><a href="#cb64-236"></a><span class="in">```</span></span>
 <span id="cb64-237"><a href="#cb64-237"></a></span>
@@ -1848,149 +1865,151 @@ Caused by error:
 <span id="cb64-312"><a href="#cb64-312"></a></span>
 <span id="cb64-315"><a href="#cb64-315"></a><span class="in">```{r}</span></span>
 <span id="cb64-316"><a href="#cb64-316"></a>convert_temp <span class="ot">&lt;-</span> <span class="cf">function</span>(temp, unit) {</span>
-<span id="cb64-317"><a href="#cb64-317"></a>    <span class="cf">if</span> (unit<span class="sc">==</span><span class="st">"F"</span>) {</span>
+<span id="cb64-317"><a href="#cb64-317"></a>    <span class="cf">if</span> (unit <span class="sc">==</span> <span class="st">"F"</span>) {</span>
 <span id="cb64-318"><a href="#cb64-318"></a>        (temp <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> <span class="dv">5</span><span class="sc">/</span><span class="dv">9</span></span>
-<span id="cb64-319"><a href="#cb64-319"></a>    } <span class="cf">else</span> <span class="cf">if</span> (unit<span class="sc">==</span><span class="st">"C"</span>) {</span>
+<span id="cb64-319"><a href="#cb64-319"></a>    } <span class="cf">else</span> <span class="cf">if</span> (unit <span class="sc">==</span> <span class="st">"C"</span>) {</span>
 <span id="cb64-320"><a href="#cb64-320"></a>        (temp <span class="sc">*</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span></span>
-<span id="cb64-321"><a href="#cb64-321"></a>    }</span>
-<span id="cb64-322"><a href="#cb64-322"></a>}</span>
-<span id="cb64-323"><a href="#cb64-323"></a></span>
-<span id="cb64-324"><a href="#cb64-324"></a><span class="fu">convert_temp</span>(<span class="dv">0</span>, <span class="at">unit =</span> <span class="st">"C"</span>)</span>
-<span id="cb64-325"><a href="#cb64-325"></a><span class="fu">convert_temp</span>(<span class="dv">32</span>, <span class="at">unit =</span> <span class="st">"F"</span>)</span>
-<span id="cb64-326"><a href="#cb64-326"></a></span>
-<span id="cb64-327"><a href="#cb64-327"></a><span class="in">```</span></span>
+<span id="cb64-321"><a href="#cb64-321"></a>    } <span class="cf">else</span> {</span>
+<span id="cb64-322"><a href="#cb64-322"></a>        <span class="fu">stop</span>(<span class="st">"unit must be 'C' or 'F'"</span>)</span>
+<span id="cb64-323"><a href="#cb64-323"></a>    }</span>
+<span id="cb64-324"><a href="#cb64-324"></a>}</span>
+<span id="cb64-325"><a href="#cb64-325"></a></span>
+<span id="cb64-326"><a href="#cb64-326"></a><span class="fu">convert_temp</span>(<span class="dv">0</span>, <span class="at">unit =</span> <span class="st">"C"</span>)</span>
+<span id="cb64-327"><a href="#cb64-327"></a><span class="fu">convert_temp</span>(<span class="dv">32</span>, <span class="at">unit =</span> <span class="st">"F"</span>)</span>
 <span id="cb64-328"><a href="#cb64-328"></a></span>
-<span id="cb64-329"><a href="#cb64-329"></a></span>
-<span id="cb64-330"><a href="#cb64-330"></a><span class="ss">5. </span>**Domain Name** Write a function that extracts the domain name of a supplied email address. The function should return the domain name (e.g., "gmail.com"). If the input is not a valid email address, return "Invalid Email". (A valid email ends in "dot something".)</span>
+<span id="cb64-329"><a href="#cb64-329"></a><span class="in">```</span></span>
+<span id="cb64-330"><a href="#cb64-330"></a></span>
 <span id="cb64-331"><a href="#cb64-331"></a></span>
-<span id="cb64-334"><a href="#cb64-334"></a><span class="in">```{r}</span></span>
-<span id="cb64-335"><a href="#cb64-335"></a>extract_domain <span class="ot">&lt;-</span> <span class="cf">function</span>(email) {</span>
-<span id="cb64-336"><a href="#cb64-336"></a>    is_valid <span class="ot">&lt;-</span> <span class="fu">str_detect</span>(email, <span class="st">"@.+</span><span class="sc">\\</span><span class="st">..+"</span>)</span>
-<span id="cb64-337"><a href="#cb64-337"></a>    <span class="cf">if</span> (is_valid) {</span>
-<span id="cb64-338"><a href="#cb64-338"></a>        <span class="fu">str_extract</span>(email, <span class="st">"@.+$"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb64-339"><a href="#cb64-339"></a>            <span class="fu">str_remove</span>(<span class="st">"@"</span>)</span>
-<span id="cb64-340"><a href="#cb64-340"></a>    } <span class="cf">else</span> {</span>
-<span id="cb64-341"><a href="#cb64-341"></a>        <span class="st">"Invalid Email"</span></span>
-<span id="cb64-342"><a href="#cb64-342"></a>    }</span>
-<span id="cb64-343"><a href="#cb64-343"></a>}</span>
-<span id="cb64-344"><a href="#cb64-344"></a></span>
-<span id="cb64-345"><a href="#cb64-345"></a><span class="fu">extract_domain</span>(<span class="at">email =</span> <span class="st">"les@mac.edu"</span>)</span>
-<span id="cb64-346"><a href="#cb64-346"></a><span class="fu">extract_domain</span>(<span class="at">email =</span> <span class="st">"les@mac.net"</span>)</span>
-<span id="cb64-347"><a href="#cb64-347"></a><span class="fu">extract_domain</span>(<span class="at">email =</span> <span class="st">"les@mac."</span>)</span>
-<span id="cb64-348"><a href="#cb64-348"></a><span class="fu">extract_domain</span>(<span class="at">email =</span> <span class="st">"les@macedu"</span>)</span>
-<span id="cb64-349"><a href="#cb64-349"></a></span>
-<span id="cb64-350"><a href="#cb64-350"></a><span class="in">```</span></span>
+<span id="cb64-332"><a href="#cb64-332"></a><span class="ss">5. </span>**Domain Name** Write a function that extracts the domain name of a supplied email address. The function should return the domain name (e.g., "gmail.com"). If the input is not a valid email address, return "Invalid Email". (A valid email ends in "dot something".)</span>
+<span id="cb64-333"><a href="#cb64-333"></a></span>
+<span id="cb64-336"><a href="#cb64-336"></a><span class="in">```{r}</span></span>
+<span id="cb64-337"><a href="#cb64-337"></a>extract_domain <span class="ot">&lt;-</span> <span class="cf">function</span>(email) {</span>
+<span id="cb64-338"><a href="#cb64-338"></a>    is_valid <span class="ot">&lt;-</span> <span class="fu">str_detect</span>(email, <span class="st">"@.+</span><span class="sc">\\</span><span class="st">..+"</span>)</span>
+<span id="cb64-339"><a href="#cb64-339"></a>    <span class="cf">if</span> (is_valid) {</span>
+<span id="cb64-340"><a href="#cb64-340"></a>        <span class="fu">str_extract</span>(email, <span class="st">"@.+$"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb64-341"><a href="#cb64-341"></a>            <span class="fu">str_remove</span>(<span class="st">"@"</span>)</span>
+<span id="cb64-342"><a href="#cb64-342"></a>    } <span class="cf">else</span> {</span>
+<span id="cb64-343"><a href="#cb64-343"></a>        <span class="st">"Invalid Email"</span></span>
+<span id="cb64-344"><a href="#cb64-344"></a>    }</span>
+<span id="cb64-345"><a href="#cb64-345"></a>}</span>
+<span id="cb64-346"><a href="#cb64-346"></a></span>
+<span id="cb64-347"><a href="#cb64-347"></a><span class="fu">extract_domain</span>(<span class="at">email =</span> <span class="st">"les@mac.edu"</span>)</span>
+<span id="cb64-348"><a href="#cb64-348"></a><span class="fu">extract_domain</span>(<span class="at">email =</span> <span class="st">"les@mac.net"</span>)</span>
+<span id="cb64-349"><a href="#cb64-349"></a><span class="fu">extract_domain</span>(<span class="at">email =</span> <span class="st">"les@mac."</span>)</span>
+<span id="cb64-350"><a href="#cb64-350"></a><span class="fu">extract_domain</span>(<span class="at">email =</span> <span class="st">"les@macedu"</span>)</span>
 <span id="cb64-351"><a href="#cb64-351"></a></span>
-<span id="cb64-352"><a href="#cb64-352"></a></span>
-<span id="cb64-353"><a href="#cb64-353"></a><span class="fu">## Writing Functions with `tidyverse` Verbs </span></span>
+<span id="cb64-352"><a href="#cb64-352"></a><span class="in">```</span></span>
+<span id="cb64-353"><a href="#cb64-353"></a></span>
 <span id="cb64-354"><a href="#cb64-354"></a></span>
-<span id="cb64-355"><a href="#cb64-355"></a>Perhaps we are using <span class="in">`group_by()`</span> and <span class="in">`summarize()`</span> a lot to compute group means. We might write this function:</span>
+<span id="cb64-355"><a href="#cb64-355"></a><span class="fu">## Writing Functions with `tidyverse` Verbs </span></span>
 <span id="cb64-356"><a href="#cb64-356"></a></span>
-<span id="cb64-359"><a href="#cb64-359"></a><span class="in">```{r}</span></span>
-<span id="cb64-360"><a href="#cb64-360"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
-<span id="cb64-361"><a href="#cb64-361"></a>    df <span class="sc">|&gt;</span></span>
-<span id="cb64-362"><a href="#cb64-362"></a>        <span class="fu">group_by</span>(group_var) <span class="sc">|&gt;</span></span>
-<span id="cb64-363"><a href="#cb64-363"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(mean_var))</span>
-<span id="cb64-364"><a href="#cb64-364"></a>}</span>
-<span id="cb64-365"><a href="#cb64-365"></a><span class="in">```</span></span>
-<span id="cb64-366"><a href="#cb64-366"></a></span>
-<span id="cb64-367"><a href="#cb64-367"></a>Let's use it on the <span class="in">`diamonds`</span> dataset to compute the mean size (<span class="in">`carat`</span>) by diamond <span class="in">`cut`</span>:</span>
+<span id="cb64-357"><a href="#cb64-357"></a>Perhaps we are using <span class="in">`group_by()`</span> and <span class="in">`summarize()`</span> a lot to compute group means. We might write this function:</span>
+<span id="cb64-358"><a href="#cb64-358"></a></span>
+<span id="cb64-361"><a href="#cb64-361"></a><span class="in">```{r}</span></span>
+<span id="cb64-362"><a href="#cb64-362"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
+<span id="cb64-363"><a href="#cb64-363"></a>    df <span class="sc">|&gt;</span></span>
+<span id="cb64-364"><a href="#cb64-364"></a>        <span class="fu">group_by</span>(group_var) <span class="sc">|&gt;</span></span>
+<span id="cb64-365"><a href="#cb64-365"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(mean_var))</span>
+<span id="cb64-366"><a href="#cb64-366"></a>}</span>
+<span id="cb64-367"><a href="#cb64-367"></a><span class="in">```</span></span>
 <span id="cb64-368"><a href="#cb64-368"></a></span>
-<span id="cb64-369"><a href="#cb64-369"></a><span class="in">```{r error=TRUE}</span></span>
-<span id="cb64-370"><a href="#cb64-370"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> cut, <span class="at">mean_var =</span> carat)</span>
-<span id="cb64-371"><a href="#cb64-371"></a><span class="in">```</span></span>
-<span id="cb64-372"><a href="#cb64-372"></a></span>
-<span id="cb64-373"><a href="#cb64-373"></a></span>
-<span id="cb64-374"><a href="#cb64-374"></a>What if the problem is that the variable names need to be in quotes?</span>
+<span id="cb64-369"><a href="#cb64-369"></a>Let's use it on the <span class="in">`diamonds`</span> dataset to compute the mean size (<span class="in">`carat`</span>) by diamond <span class="in">`cut`</span>:</span>
+<span id="cb64-370"><a href="#cb64-370"></a></span>
+<span id="cb64-371"><a href="#cb64-371"></a><span class="in">```{r error=TRUE}</span></span>
+<span id="cb64-372"><a href="#cb64-372"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> cut, <span class="at">mean_var =</span> carat)</span>
+<span id="cb64-373"><a href="#cb64-373"></a><span class="in">```</span></span>
+<span id="cb64-374"><a href="#cb64-374"></a></span>
 <span id="cb64-375"><a href="#cb64-375"></a></span>
-<span id="cb64-376"><a href="#cb64-376"></a><span class="in">```{r error=TRUE}</span></span>
-<span id="cb64-377"><a href="#cb64-377"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> <span class="st">"cut"</span>, <span class="at">mean_var =</span> <span class="st">"carat"</span>)</span>
-<span id="cb64-378"><a href="#cb64-378"></a><span class="in">```</span></span>
-<span id="cb64-379"><a href="#cb64-379"></a></span>
-<span id="cb64-380"><a href="#cb64-380"></a></span>
+<span id="cb64-376"><a href="#cb64-376"></a>What if the problem is that the variable names need to be in quotes?</span>
+<span id="cb64-377"><a href="#cb64-377"></a></span>
+<span id="cb64-378"><a href="#cb64-378"></a><span class="in">```{r error=TRUE}</span></span>
+<span id="cb64-379"><a href="#cb64-379"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> <span class="st">"cut"</span>, <span class="at">mean_var =</span> <span class="st">"carat"</span>)</span>
+<span id="cb64-380"><a href="#cb64-380"></a><span class="in">```</span></span>
 <span id="cb64-381"><a href="#cb64-381"></a></span>
-<span id="cb64-382"><a href="#cb64-382"></a>What's Going On?</span>
+<span id="cb64-382"><a href="#cb64-382"></a></span>
 <span id="cb64-383"><a href="#cb64-383"></a></span>
-<span id="cb64-384"><a href="#cb64-384"></a>The <span class="in">`tidyverse`</span> uses something called **tidy evaluation**: this allows you to refer to a variable by typing it directly (e.g., no need to put it in quotes). </span>
+<span id="cb64-384"><a href="#cb64-384"></a>What's Going On?</span>
 <span id="cb64-385"><a href="#cb64-385"></a></span>
-<span id="cb64-386"><a href="#cb64-386"></a><span class="ss">- </span><span class="in">`group_by(group_var)`</span> is expecting a variable that is actually called <span class="in">`group_var`</span>, and <span class="in">`mean(mean_var)`</span> is expecting a variable that is actually called <span class="in">`mean_var`</span>.</span>
+<span id="cb64-386"><a href="#cb64-386"></a>The <span class="in">`tidyverse`</span> uses something called **tidy evaluation**: this allows you to refer to a variable by typing it directly (e.g., no need to put it in quotes). </span>
 <span id="cb64-387"><a href="#cb64-387"></a></span>
-<span id="cb64-388"><a href="#cb64-388"></a></span>
+<span id="cb64-388"><a href="#cb64-388"></a><span class="ss">- </span><span class="in">`group_by(group_var)`</span> is expecting a variable that is actually called <span class="in">`group_var`</span>, and <span class="in">`mean(mean_var)`</span> is expecting a variable that is actually called <span class="in">`mean_var`</span>.</span>
 <span id="cb64-389"><a href="#cb64-389"></a></span>
 <span id="cb64-390"><a href="#cb64-390"></a></span>
-<span id="cb64-391"><a href="#cb64-391"></a>To fix this we need to **embrace** the variables inside the function with <span class="in">`{ var }`</span>:</span>
+<span id="cb64-391"><a href="#cb64-391"></a></span>
 <span id="cb64-392"><a href="#cb64-392"></a></span>
-<span id="cb64-395"><a href="#cb64-395"></a><span class="in">```{r}</span></span>
-<span id="cb64-396"><a href="#cb64-396"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
-<span id="cb64-397"><a href="#cb64-397"></a>    df <span class="sc">|&gt;</span></span>
-<span id="cb64-398"><a href="#cb64-398"></a>        <span class="fu">group_by</span>({{ group_var }}) <span class="sc">|&gt;</span></span>
-<span id="cb64-399"><a href="#cb64-399"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ mean_var }}))</span>
-<span id="cb64-400"><a href="#cb64-400"></a>}</span>
-<span id="cb64-401"><a href="#cb64-401"></a><span class="in">```</span></span>
-<span id="cb64-402"><a href="#cb64-402"></a></span>
-<span id="cb64-403"><a href="#cb64-403"></a>The <span class="in">`{ var }`</span> tells R to look at what the variable specified by the input  <span class="in">`var`</span> rather than look for a variable called <span class="in">`var`</span>.</span>
+<span id="cb64-393"><a href="#cb64-393"></a>To fix this we need to **embrace** the variables inside the function with <span class="in">`{ var }`</span>:</span>
+<span id="cb64-394"><a href="#cb64-394"></a></span>
+<span id="cb64-397"><a href="#cb64-397"></a><span class="in">```{r}</span></span>
+<span id="cb64-398"><a href="#cb64-398"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
+<span id="cb64-399"><a href="#cb64-399"></a>    df <span class="sc">|&gt;</span></span>
+<span id="cb64-400"><a href="#cb64-400"></a>        <span class="fu">group_by</span>({{ group_var }}) <span class="sc">|&gt;</span></span>
+<span id="cb64-401"><a href="#cb64-401"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ mean_var }}))</span>
+<span id="cb64-402"><a href="#cb64-402"></a>}</span>
+<span id="cb64-403"><a href="#cb64-403"></a><span class="in">```</span></span>
 <span id="cb64-404"><a href="#cb64-404"></a></span>
-<span id="cb64-407"><a href="#cb64-407"></a><span class="in">```{r}</span></span>
-<span id="cb64-408"><a href="#cb64-408"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> cut, <span class="at">mean_var =</span> carat)</span>
-<span id="cb64-409"><a href="#cb64-409"></a><span class="in">```</span></span>
-<span id="cb64-410"><a href="#cb64-410"></a></span>
-<span id="cb64-411"><a href="#cb64-411"></a></span>
-<span id="cb64-412"><a href="#cb64-412"></a>Let's group by both <span class="in">`cut`</span> and <span class="in">`color`</span>:</span>
+<span id="cb64-405"><a href="#cb64-405"></a>The <span class="in">`{ var }`</span> tells R to look at what the variable specified by the input  <span class="in">`var`</span> rather than look for a variable called <span class="in">`var`</span>.</span>
+<span id="cb64-406"><a href="#cb64-406"></a></span>
+<span id="cb64-409"><a href="#cb64-409"></a><span class="in">```{r}</span></span>
+<span id="cb64-410"><a href="#cb64-410"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> cut, <span class="at">mean_var =</span> carat)</span>
+<span id="cb64-411"><a href="#cb64-411"></a><span class="in">```</span></span>
+<span id="cb64-412"><a href="#cb64-412"></a></span>
 <span id="cb64-413"><a href="#cb64-413"></a></span>
-<span id="cb64-414"><a href="#cb64-414"></a><span class="in">```{r error=TRUE}</span></span>
-<span id="cb64-415"><a href="#cb64-415"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> <span class="fu">c</span>(cut, color), <span class="at">mean_var =</span> carat)</span>
-<span id="cb64-416"><a href="#cb64-416"></a><span class="in">```</span></span>
-<span id="cb64-417"><a href="#cb64-417"></a></span>
-<span id="cb64-418"><a href="#cb64-418"></a></span>
+<span id="cb64-414"><a href="#cb64-414"></a>Let's group by both <span class="in">`cut`</span> and <span class="in">`color`</span>:</span>
+<span id="cb64-415"><a href="#cb64-415"></a></span>
+<span id="cb64-416"><a href="#cb64-416"></a><span class="in">```{r error=TRUE}</span></span>
+<span id="cb64-417"><a href="#cb64-417"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> <span class="fu">c</span>(cut, color), <span class="at">mean_var =</span> carat)</span>
+<span id="cb64-418"><a href="#cb64-418"></a><span class="in">```</span></span>
 <span id="cb64-419"><a href="#cb64-419"></a></span>
-<span id="cb64-420"><a href="#cb64-420"></a>Oh No! What Now?! </span>
+<span id="cb64-420"><a href="#cb64-420"></a></span>
 <span id="cb64-421"><a href="#cb64-421"></a></span>
-<span id="cb64-422"><a href="#cb64-422"></a>When <span class="in">`c(cut, color)`</span> is put inside <span class="in">`{ c(cut, color) }`</span> within the function, R is actually running the code inside <span class="in">`{ }`</span>. </span>
+<span id="cb64-422"><a href="#cb64-422"></a>Oh No! What Now?! </span>
 <span id="cb64-423"><a href="#cb64-423"></a></span>
-<span id="cb64-424"><a href="#cb64-424"></a><span class="ss">- </span>This combines the columns for those 2 variables into one long vector. What we really meant by <span class="in">`c(cut, color)`</span> is "group by both cut and color".</span>
+<span id="cb64-424"><a href="#cb64-424"></a>When <span class="in">`c(cut, color)`</span> is put inside <span class="in">`{ c(cut, color) }`</span> within the function, R is actually running the code inside <span class="in">`{ }`</span>. </span>
 <span id="cb64-425"><a href="#cb64-425"></a></span>
-<span id="cb64-426"><a href="#cb64-426"></a></span>
+<span id="cb64-426"><a href="#cb64-426"></a><span class="ss">- </span>This combines the columns for those 2 variables into one long vector. What we really meant by <span class="in">`c(cut, color)`</span> is "group by both cut and color".</span>
 <span id="cb64-427"><a href="#cb64-427"></a></span>
-<span id="cb64-428"><a href="#cb64-428"></a>To fix this, we need the <span class="in">`pick()`</span> function to get R to see <span class="in">`{ group_var }`</span> as a vector of separate variables (like the way <span class="in">`select()`</span> works).</span>
+<span id="cb64-428"><a href="#cb64-428"></a></span>
 <span id="cb64-429"><a href="#cb64-429"></a></span>
-<span id="cb64-432"><a href="#cb64-432"></a><span class="in">```{r}</span></span>
-<span id="cb64-433"><a href="#cb64-433"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
-<span id="cb64-434"><a href="#cb64-434"></a>    df <span class="sc">|&gt;</span></span>
-<span id="cb64-435"><a href="#cb64-435"></a>        <span class="fu">group_by</span>(<span class="fu">pick</span>({{ group_var }})) <span class="sc">|&gt;</span></span>
-<span id="cb64-436"><a href="#cb64-436"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ mean_var }}))</span>
-<span id="cb64-437"><a href="#cb64-437"></a>}</span>
-<span id="cb64-438"><a href="#cb64-438"></a><span class="in">```</span></span>
-<span id="cb64-439"><a href="#cb64-439"></a></span>
-<span id="cb64-440"><a href="#cb64-440"></a></span>
-<span id="cb64-441"><a href="#cb64-441"></a><span class="ss">6. </span>**Prop function** Create a new version of <span class="in">`dplyr::count()`</span> that also shows proportions instead of just sample sizes. The function should be able to handle counting by multiple variables. Test your function with two different sets of arguments using the <span class="in">`diamonds`</span> dataset.</span>
+<span id="cb64-430"><a href="#cb64-430"></a>To fix this, we need the <span class="in">`pick()`</span> function to get R to see <span class="in">`{ group_var }`</span> as a vector of separate variables (like the way <span class="in">`select()`</span> works).</span>
+<span id="cb64-431"><a href="#cb64-431"></a></span>
+<span id="cb64-434"><a href="#cb64-434"></a><span class="in">```{r}</span></span>
+<span id="cb64-435"><a href="#cb64-435"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
+<span id="cb64-436"><a href="#cb64-436"></a>    df <span class="sc">|&gt;</span></span>
+<span id="cb64-437"><a href="#cb64-437"></a>        <span class="fu">group_by</span>(<span class="fu">pick</span>({{ group_var }})) <span class="sc">|&gt;</span></span>
+<span id="cb64-438"><a href="#cb64-438"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ mean_var }}))</span>
+<span id="cb64-439"><a href="#cb64-439"></a>}</span>
+<span id="cb64-440"><a href="#cb64-440"></a><span class="in">```</span></span>
+<span id="cb64-441"><a href="#cb64-441"></a></span>
 <span id="cb64-442"><a href="#cb64-442"></a></span>
-<span id="cb64-445"><a href="#cb64-445"></a><span class="in">```{r}</span></span>
-<span id="cb64-446"><a href="#cb64-446"></a>count_prop <span class="ot">&lt;-</span> <span class="cf">function</span>(df, count_vars) {</span>
-<span id="cb64-447"><a href="#cb64-447"></a>    df <span class="sc">|&gt;</span></span>
-<span id="cb64-448"><a href="#cb64-448"></a>        <span class="fu">count</span>(<span class="fu">pick</span>({{ count_vars }})) <span class="sc">|&gt;</span></span>
-<span id="cb64-449"><a href="#cb64-449"></a>        <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
-<span id="cb64-450"><a href="#cb64-450"></a>}</span>
-<span id="cb64-451"><a href="#cb64-451"></a></span>
-<span id="cb64-452"><a href="#cb64-452"></a><span class="fu">count_prop</span>(diamonds, <span class="at">count_vars =</span> cut)</span>
-<span id="cb64-453"><a href="#cb64-453"></a><span class="fu">count_prop</span>(diamonds, <span class="at">count_vars =</span> <span class="fu">c</span>(cut, color))</span>
-<span id="cb64-454"><a href="#cb64-454"></a><span class="in">```</span></span>
-<span id="cb64-455"><a href="#cb64-455"></a></span>
-<span id="cb64-456"><a href="#cb64-456"></a><span class="ss">7. </span>**Scatterplot + Smooth function** Create a function that creates a scatterplot from a user-supplied dataset with user-supplied x and y variables. The plot should also show a curvy smoothing line in blue, and a linear smoothing line in red. Test your function using the <span class="in">`diamonds`</span> dataset.</span>
+<span id="cb64-443"><a href="#cb64-443"></a><span class="ss">6. </span>**Prop function** Create a new version of <span class="in">`dplyr::count()`</span> that also shows proportions instead of just sample sizes. The function should be able to handle counting by multiple variables. Test your function with two different sets of arguments using the <span class="in">`diamonds`</span> dataset.</span>
+<span id="cb64-444"><a href="#cb64-444"></a></span>
+<span id="cb64-447"><a href="#cb64-447"></a><span class="in">```{r}</span></span>
+<span id="cb64-448"><a href="#cb64-448"></a>count_prop <span class="ot">&lt;-</span> <span class="cf">function</span>(df, count_vars) {</span>
+<span id="cb64-449"><a href="#cb64-449"></a>    df <span class="sc">|&gt;</span></span>
+<span id="cb64-450"><a href="#cb64-450"></a>        <span class="fu">count</span>(<span class="fu">pick</span>({{ count_vars }})) <span class="sc">|&gt;</span></span>
+<span id="cb64-451"><a href="#cb64-451"></a>        <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
+<span id="cb64-452"><a href="#cb64-452"></a>}</span>
+<span id="cb64-453"><a href="#cb64-453"></a></span>
+<span id="cb64-454"><a href="#cb64-454"></a><span class="fu">count_prop</span>(diamonds, <span class="at">count_vars =</span> cut)</span>
+<span id="cb64-455"><a href="#cb64-455"></a><span class="fu">count_prop</span>(diamonds, <span class="at">count_vars =</span> <span class="fu">c</span>(cut, color))</span>
+<span id="cb64-456"><a href="#cb64-456"></a><span class="in">```</span></span>
 <span id="cb64-457"><a href="#cb64-457"></a></span>
-<span id="cb64-458"><a href="#cb64-458"></a></span>
-<span id="cb64-461"><a href="#cb64-461"></a><span class="in">```{r}</span></span>
-<span id="cb64-462"><a href="#cb64-462"></a>scatter_with_smooths <span class="ot">&lt;-</span> <span class="cf">function</span>(df, x, y) {</span>
-<span id="cb64-463"><a href="#cb64-463"></a>    <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> {{ x }}, <span class="at">y =</span> {{ y }})) <span class="sc">+</span></span>
-<span id="cb64-464"><a href="#cb64-464"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb64-465"><a href="#cb64-465"></a>        <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb64-466"><a href="#cb64-466"></a>        <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
-<span id="cb64-467"><a href="#cb64-467"></a>}</span>
-<span id="cb64-468"><a href="#cb64-468"></a></span>
-<span id="cb64-469"><a href="#cb64-469"></a><span class="fu">scatter_with_smooths</span>(diamonds, <span class="at">x =</span> carat, <span class="at">y =</span> price)</span>
-<span id="cb64-470"><a href="#cb64-470"></a><span class="in">```</span></span>
-<span id="cb64-471"><a href="#cb64-471"></a><span class="fu">## Done!</span></span>
-<span id="cb64-472"><a href="#cb64-472"></a></span>
-<span id="cb64-473"><a href="#cb64-473"></a><span class="ss">- </span>Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website</span>
+<span id="cb64-458"><a href="#cb64-458"></a><span class="ss">7. </span>**Scatterplot + Smooth function** Create a function that creates a scatterplot from a user-supplied dataset with user-supplied x and y variables. The plot should also show a curvy smoothing line in blue, and a linear smoothing line in red. Test your function using the <span class="in">`diamonds`</span> dataset.</span>
+<span id="cb64-459"><a href="#cb64-459"></a></span>
+<span id="cb64-460"><a href="#cb64-460"></a></span>
+<span id="cb64-463"><a href="#cb64-463"></a><span class="in">```{r}</span></span>
+<span id="cb64-464"><a href="#cb64-464"></a>scatter_with_smooths <span class="ot">&lt;-</span> <span class="cf">function</span>(df, x, y) {</span>
+<span id="cb64-465"><a href="#cb64-465"></a>    <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> {{ x }}, <span class="at">y =</span> {{ y }})) <span class="sc">+</span></span>
+<span id="cb64-466"><a href="#cb64-466"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb64-467"><a href="#cb64-467"></a>        <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb64-468"><a href="#cb64-468"></a>        <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb64-469"><a href="#cb64-469"></a>}</span>
+<span id="cb64-470"><a href="#cb64-470"></a></span>
+<span id="cb64-471"><a href="#cb64-471"></a><span class="fu">scatter_with_smooths</span>(diamonds, <span class="at">x =</span> carat, <span class="at">y =</span> price)</span>
+<span id="cb64-472"><a href="#cb64-472"></a><span class="in">```</span></span>
+<span id="cb64-473"><a href="#cb64-473"></a><span class="fu">## Done!</span></span>
+<span id="cb64-474"><a href="#cb64-474"></a></span>
+<span id="cb64-475"><a href="#cb64-475"></a><span class="ss">- </span>Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

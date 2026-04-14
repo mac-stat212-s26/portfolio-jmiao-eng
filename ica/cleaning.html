@@ -446,6 +446,21 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ica/12-iteration-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12 Loops+Iter II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/14-apis-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">14 APIs II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/15-scraping-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">15 Web scraping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ica/16-databases-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">16 Databases and SQL</span></a>
   </div>
 </li>
@@ -1115,27 +1130,28 @@ cookieconsent.run({
 <span id="cb7-39"><a href="#cb7-39"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb7-40"><a href="#cb7-40"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/weather.csv"</span>)</span>
 <span id="cb7-41"><a href="#cb7-41"></a><span class="in">```</span></span>
-<span id="cb7-44"><a href="#cb7-44"></a><span class="in">```{r}</span></span>
-<span id="cb7-45"><a href="#cb7-45"></a>weather_clean <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
-<span id="cb7-46"><a href="#cb7-46"></a>  <span class="fu">mutate</span>(<span class="at">PrecipYr =</span> <span class="fu">na_if</span>(PrecipYr, <span class="dv">99999</span>))</span>
-<span id="cb7-47"><a href="#cb7-47"></a><span class="in">```</span></span>
-<span id="cb7-48"><a href="#cb7-48"></a></span>
-<span id="cb7-51"><a href="#cb7-51"></a><span class="in">```{r}</span></span>
-<span id="cb7-52"><a href="#cb7-52"></a>weather_clean <span class="ot">&lt;-</span> weather_clean <span class="sc">%&gt;%</span></span>
-<span id="cb7-53"><a href="#cb7-53"></a>  <span class="fu">mutate</span>(<span class="at">dateInYear =</span> <span class="fu">yday</span>(<span class="fu">mdy</span>(date)))</span>
-<span id="cb7-54"><a href="#cb7-54"></a><span class="in">```</span></span>
-<span id="cb7-55"><a href="#cb7-55"></a></span>
-<span id="cb7-58"><a href="#cb7-58"></a><span class="in">```{r}</span></span>
-<span id="cb7-59"><a href="#cb7-59"></a>weather <span class="sc">%&gt;%</span></span>
-<span id="cb7-60"><a href="#cb7-60"></a>  <span class="fu">mutate</span>(<span class="at">month_name =</span> month.abb[Month]) <span class="sc">%&gt;%</span></span>
-<span id="cb7-61"><a href="#cb7-61"></a>  <span class="fu">head</span>()</span>
-<span id="cb7-62"><a href="#cb7-62"></a><span class="in">```</span></span>
-<span id="cb7-65"><a href="#cb7-65"></a><span class="in">```{r}</span></span>
-<span id="cb7-66"><a href="#cb7-66"></a><span class="fu">write_csv</span>(weather_clean, <span class="st">"data/processed/weather_clean.csv"</span>)</span>
-<span id="cb7-67"><a href="#cb7-67"></a><span class="in">```</span></span>
-<span id="cb7-68"><a href="#cb7-68"></a></span>
+<span id="cb7-42"><a href="#cb7-42"></a></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="in">```{r}</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a>weather_clean <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a>  <span class="fu">mutate</span>(<span class="at">PrecipYr =</span> <span class="fu">na_if</span>(PrecipYr, <span class="dv">99999</span>))</span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="in">```</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a></span>
+<span id="cb7-52"><a href="#cb7-52"></a><span class="in">```{r}</span></span>
+<span id="cb7-53"><a href="#cb7-53"></a>weather_clean <span class="ot">&lt;-</span> weather_clean <span class="sc">%&gt;%</span></span>
+<span id="cb7-54"><a href="#cb7-54"></a>  <span class="fu">mutate</span>(<span class="at">dateInYear =</span> <span class="fu">yday</span>(<span class="fu">mdy</span>(date)))</span>
+<span id="cb7-55"><a href="#cb7-55"></a><span class="in">```</span></span>
+<span id="cb7-56"><a href="#cb7-56"></a></span>
+<span id="cb7-59"><a href="#cb7-59"></a><span class="in">```{r}</span></span>
+<span id="cb7-60"><a href="#cb7-60"></a>weather <span class="sc">%&gt;%</span></span>
+<span id="cb7-61"><a href="#cb7-61"></a>  <span class="fu">mutate</span>(<span class="at">month_name =</span> month.abb[Month]) <span class="sc">%&gt;%</span></span>
+<span id="cb7-62"><a href="#cb7-62"></a>  <span class="fu">head</span>()</span>
+<span id="cb7-63"><a href="#cb7-63"></a><span class="in">```</span></span>
+<span id="cb7-66"><a href="#cb7-66"></a><span class="in">```{r}</span></span>
+<span id="cb7-67"><a href="#cb7-67"></a><span class="fu">write_csv</span>(weather_clean, <span class="st">"data/processed/weather_clean.csv"</span>)</span>
+<span id="cb7-68"><a href="#cb7-68"></a><span class="in">```</span></span>
 <span id="cb7-69"><a href="#cb7-69"></a></span>
 <span id="cb7-70"><a href="#cb7-70"></a></span>
+<span id="cb7-71"><a href="#cb7-71"></a></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
