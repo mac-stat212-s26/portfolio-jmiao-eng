@@ -1,5 +1,5 @@
 ---
-title: "Homework 06 - TidyTuesday (Pi Digits) "
+title: "Homework 06 TidyTuesday (Pi Digits) "
 format: 
   html: 
     embed-resources: true
