@@ -6,7 +6,10 @@ format:
     toc: false
     number-sections: true
     css: styles.css
+<<<<<<< HEAD
     code-fold: true
+=======
+>>>>>>> 035259fc5832dbad87d2f32b907a27c5c26101af
 ---
 
 ## Overview
