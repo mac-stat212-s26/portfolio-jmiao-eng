@@ -343,6 +343,29 @@ str(mod)
 str(mod_summ)
 ```
 
+```{r}
+# a. Elements at even-numbered positions
+get_even_positions <- function(x) {
+  x[seq(from = 2, to = length(x), by = 2)]
+}
+
+# b. Every element except the last value
+drop_last <- function(x) {
+  x[-length(x)]
+}
+
+# c. Only even values and no missing values
+get_even_values <- function(x) {
+  x[!is.na(x) & x %% 2 == 0]
+}
+
+# examples
+get_even_positions(c(10, 20, 30, 40, 50, 60))
+drop_last(c("a", "b", "c", "d"))
+get_even_values(c(1, 2, NA, 4, 5, 8, NA, 10))
+```
+
+
 ## Exercise 
 
 2. **CI Function** Write a function that fits a linear model on the dataset using the given outcome and predictor variables and return a data frame (`tibble`) with the coefficient estimate and CI for the predictor of interest. It should take the following inputs:

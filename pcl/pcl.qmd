@@ -53,3 +53,15 @@ title: "Pre-Class Learning Summaries"
 ![](IMG_7468.png)
 
 ## Preclass learning 19 Quality Control 
+
+- What is the data story?
+
+The data story is about where happiness comes from in everyday life. The visualization uses responses from 10,000 people who described recent happy moments, then breaks those moments into who was involved, what action happened, and what the happiness was about. The main point is that happiness is not just one thing — it comes from different sources, especially from ourselves, other people, and pets, and often involves simple everyday experiences like meals, time together, gifts, hugs, jobs, or coming home.
+
+- What is effective?
+
+One thing that is effective is that the story has a clear structure. It starts with the big overview of “Moments of Happiness,” then breaks it into more specific sections like happiness with others and happiness with pets. That helps the reader move from the general pattern to more detailed examples. Another strong feature is the use of circle size to show frequency, so you can quickly tell which words or connections appear most often. The labeled example sentences also help make the abstract idea more understandable, because readers can connect the visualization back to real human experiences. Overall, the piece is interesting because it combines large-scale text analysis with a very human topic.
+
+- What could be improved?
+
+The main problem is that the visualization is very crowded and hard to read. There are too many circles, labels, and connecting lines on the main graphic, so it can feel overwhelming at first. Some of the text is also very small, which makes it difficult to interpret without zooming in. I think it would be improved by simplifying the display, reducing clutter, or highlighting only the most important relationships first. It might also help to use stronger color contrast or a more guided step-by-step explanation, because right now the graphic is visually interesting but not immediately easy to understand.

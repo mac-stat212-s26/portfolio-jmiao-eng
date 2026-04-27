@@ -166,28 +166,44 @@ Notes:
 - Recall that `bind_rows()` from `dplyr` and `list_rbind()` from `purrr` takes a list of data frames and stacks them on top of each other.
 
 ```{r}
-# Helper function to reduce html_elements() |> html_text() code duplication
+# Helper function to reduce html_elements() |> html_text() duplication
 get_text_from_page <- function(page, css_selector) {
-    page |>
-        html_elements(css_selector) |>
-        html_text()
+  page |>
+    html_elements(css_selector) |>
+    html_text(trim = TRUE)
 }
 
 scrape_page <- function(url) {
-    Sys.sleep(2)
-    page <- read_html(url)
-    article_titles <- get_text_from_page(page, ".thumbnail-teaser__heading")
-    article_dates_abstracts <- get_text_from_page(page, ".thumbnail-teaser__description")
-    
-    tibble(
-        title = article_titles,
-        date_abstract = article_dates_abstracts
-    ) |> 
+  Sys.sleep(2)
+  
+  page <- read_html(url)
+  
+  article_titles <- get_text_from_page(page, ".thumbnail-teaser__heading")
+  article_dates_abstracts <- get_text_from_page(page, ".thumbnail-teaser__description")
+  
+  tibble(
+    title = article_titles,
+    date_abstract = article_dates_abstracts
+  ) |>
     separate_wider_delim(
-    delim = " — ", 
-    cols = dates_abstract, 
-    names = c("pub_date", "abstract"))
+      cols = date_abstract,
+      delim = " — ",
+      names = c("pub_date", "abstract"),
+      too_few = "align_start"
+    ) |>
+    mutate(source_url = url)
 }
+
+base_url <- "https://www.nih.gov/news-events/news-releases"
+page_urls <- c(
+  base_url,
+  paste0(base_url, "?page=", 1:4)
+)
+
+nih_news <- map(page_urls, scrape_page) |>
+  list_rbind()
+
+nih_news
 ```
 
 

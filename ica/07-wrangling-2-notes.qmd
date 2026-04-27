@@ -97,9 +97,15 @@ str_view(string3)
 
 ```{r ex_create_string}
 # Your code
+string_single <- "It's Thursday"
+string_double <- 'It\'s Thursday'
 
+string_single
+string_double
 ```
 
+
+Using double quotes is easier for this string because the apostrophe in `It's` does not need to be escaped. If I use single quotes, I need to escape the apostrophe with `\'`.
 
 Because `"` and `'` are special characters in the creation of strings, R offers another way to put them inside a string. We can **escape** these special characters by putting a `\` in front of them:
 
@@ -117,7 +123,12 @@ Given that `\` is a special character, how can we put the `\` character in strin
 
 ```{r ex_create_string_slash}
 # Your code
+path_string <- "C:\\Users"
+path_string
+str_view(path_string)
 ```
+
+If I do not escape the backslash, R treats `\` as the start of a special character sequence, so the string will not be interpreted correctly.
 
 
 Other special characters include:
@@ -171,7 +182,11 @@ df_dates <- tibble(
     day = c(3, 4, 5)
 )
 
-
+df_dates |>
+    mutate(
+        full_date1 = str_c(month, "-", day, "-", year),
+        full_date2 = str_glue("{month}-{day}-{year}")
+    )
 ```
 
 
@@ -216,7 +231,11 @@ df <- tibble(
     word = c("replace", "match", "pattern")
 )
 
-
+df |>
+    mutate(
+        middle_pos = ceiling(str_length(word) / 2),
+        middle_letter = str_sub(word, start = middle_pos, end = middle_pos)
+    )
 
 ```
 
@@ -280,7 +299,7 @@ str_view(words, "[^aeiou]y[^aeiou]")
 
 ```{r ex_regex_classes}
 # Your code
-
+str_view(words, "[aeiou][aeiou]m")
 ```
 
 
@@ -297,7 +316,7 @@ str_view(fruit, "apple|melon|nut")
 
 ```{r ex_regex_alternation}
 # Your code
-
+str_view(fruit, "aa|ee|ii|oo|uu")
 ```
 
 
@@ -311,7 +330,8 @@ str_view(fruit, "apple|melon|nut")
 
 ```{r ex_regex_start_end_group}
 # Your code
-
+str_view(words, "^y")
+str_view(words, "^[^y]")
 
 ```
 
@@ -322,6 +342,7 @@ str_view(fruit, "apple|melon|nut")
 Read in the "Dear Abby" data underlying The Pudding's [30 Years of American Anxieties](https://pudding.cool/2018/11/dearabby/) article.
 
 ```{r read_dear_abby}
+library(readr)
 posts <- read_csv("https://raw.githubusercontent.com/the-pudding/data/master/dearabby/raw_da_qs.csv")
 ```
 
@@ -342,7 +363,37 @@ The following are core `stringr` functions that use regular expressions:
 **Exercise:** Starting from `str_count()`, explore each of these functions by pulling up the function documentation page and reading through the arguments. Try out each function using the `posts` data.
 
 ```{r}
+library(tidyverse)
+```{r}
+# Count
+posts |>
+    summarize(num_love = sum(str_count(question_only, "love")))
 
+# Detect
+posts |>
+    mutate(has_love = str_detect(question_only, "love")) |>
+    count(has_love)
+
+# Subset
+str_subset(posts$question_only, "love") |> head()
+
+# Extract
+str_extract(posts$question_only, "love") |> head()
+
+# Extract all
+str_extract_all(posts$question_only, "love") |> head()
+
+# Replace
+str_replace(posts$question_only[1:5], "love", "care")
+
+# Replace all
+str_replace_all(posts$question_only[1:5], "love", "care")
+
+# Remove
+str_remove(posts$question_only[1:5], "love")
+
+# Remove all
+str_remove_all(posts$question_only[1:5], "love")
 ```
 
 ## Done!
