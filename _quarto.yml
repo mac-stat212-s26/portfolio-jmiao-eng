@@ -60,14 +60,11 @@ book:
     - text: "Welcome"
       href: index.qmd
 
-    - part: "Prof Viz"
-      chapters:
-      - pv/pv-01.qmd
-
     - part: "TidyTuesday"
       chapters:
       - tt/hw01-tt.qmd
       - tt/hw02-tt.qmd
+      - tt/hw04-tt.qmd
       - tt/hw06-tt.qmd
       - tt/hw08-tt.qmd
 
@@ -93,9 +90,6 @@ book:
       - ica/18-interactive-viz-notes.qmd
 
     - part: "Extras"
-      chapters:
-      - extra/extra-sample1.qmd
-      - extra/extra-sample2.qmd
 
 
 

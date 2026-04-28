@@ -1,5 +1,8 @@
 ---
 title: "Homework 01 Brazilian Companies Capital Stock Analysis"
+format: 
+  html: 
+    embed-resources: true
 ---
 
 
@@ -98,34 +101,89 @@ summary(top10_top5$pct)
 
 ## Visualization
 ```{r fig.width=12, fig.height=10}
-library(dplyr)
-library(ggplot2)
-library(tidytext)   
+library(tidyverse)
 library(scales)
 library(forcats)
+library(tidytext)
 
-top10_top5_fixed <- top10_top5 %>%
-  mutate(company_size = recode(company_size, "micro-enterprise" = "Micro enterprise", "small-enterprise" = "Small enterprise", "other" = "Other")) %>%
+top10 <- companies %>%
+  filter(!is.na(company_size), !is.na(owner_qualification), !is.na(capital_stock)) %>%
   group_by(company_size) %>%
-  mutate(owner_qualification_sorted = fct_reorder(owner_qualification, pct, .desc = TRUE)) %>%
+  filter(capital_stock >= quantile(capital_stock, 0.90, na.rm = TRUE)) %>%
   ungroup()
 
+top10_counts <- top10 %>%
+  count(company_size, owner_qualification, name = "n") %>%
+  group_by(company_size) %>%
+  mutate(pct = n / sum(n)) %>%
+  ungroup()
 
-ggplot(top10_top5_fixed, aes(x = pct, y = owner_qualification_sorted)) +
-  geom_col() +
-  facet_wrap(~ company_size, ncol = 1) +
-  scale_x_continuous(labels = scales::percent_format(accuracy = 1), breaks = c(0, 0.25, 0.5, 0.75, 1), limits = c(0, 1)) +
+top10_top5_fixed <- top10_counts %>%
+  group_by(company_size) %>%
+  slice_max(order_by = pct, n = 5, with_ties = FALSE) %>%
+  ungroup() %>%
+  mutate(
+    company_size = recode(
+      company_size,
+      "micro-enterprise" = "Micro enterprise",
+      "small-enterprise" = "Small enterprise",
+      "other" = "Other"
+    ),
+    owner_qualification = str_wrap(owner_qualification, width = 32),
+    highlight = if_else(
+      str_detect(owner_qualification, "Managing Partner|Administrator / Manager"),
+      "Most common owner roles",
+      "Other owner roles"
+    )
+  )
+
+ggplot(
+  top10_top5_fixed,
+  aes(
+    x = pct,
+    y = reorder_within(owner_qualification, pct, company_size),
+    fill = highlight
+  )
+) +
+  geom_col(width = 0.7) +
+  geom_text(
+    aes(label = percent(pct, accuracy = 1)),
+    hjust = -0.15,
+    size = 3.3
+  ) +
+  facet_wrap(~ company_size, ncol = 1, scales = "free_y") +
+  scale_y_reordered() +
+  scale_x_continuous(
+    labels = percent_format(accuracy = 1),
+    breaks = seq(0, 1, 0.25),
+    limits = c(0, 1),
+    expand = expansion(mult = c(0, 0.08))
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Most common owner roles" = "#0B6B3A",
+      "Other owner roles" = "grey75"
+    )
+  ) +
   labs(
-    title = "Owner qualifications among top 10% high-capital firms vary by company size",
-    x = "Share of high-capital firms (within size)",
-    y = "Owner Qualification",
-    caption = "Source: TidyTuesday (2026-01-27) Brazilian companies dataset. Author: Jerry Miao. Date: 2026-02-02.") +
-  theme_minimal() +
-  theme(plot.title = element_text(size = 16),
-        axis.title.x = element_text(size = 14),
-        axis.title.y = element_text(size = 14),
-        axis.text.x  = element_text(size = 11),
-        axis.text.y  = element_text(size = 11)) 
+    title = "Managing partners dominate high-capital small firms",
+    subtitle = "Among firms in the top 10% of capital stock within each size group, owner-role patterns differ sharply by company size.",
+    x = "Share of top-capital firms within company size",
+    y = NULL,
+    caption = "Source: Brazilian Companies dataset (TidyTuesday 2026-01-27) | Author: Jerry Miao | Date: 2026-02-02"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 17),
+    plot.subtitle = element_text(size = 11),
+    plot.caption = element_text(size = 8, hjust = 0),
+    strip.text = element_text(face = "bold", size = 11),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text.y = element_text(size = 9),
+    axis.text.x = element_text(size = 9)
+  )
 ```
 
 The Owner qualifications among top 10% high-capital firms vary by company size visualization shows that:
@@ -140,12 +198,7 @@ The Owner qualifications among top 10% high-capital firms vary by company size v
 Across company sizes, the owner qualification among the high capital firms performance in the capital market in BRL is not the same. In both the micro-enterprise and small_enterprise groups, Managing Partner/Partner-Administrator appears to be the most common owner qualification(dominates the small_enterprise firms). The other category shows a more combines patterns with Owner qualifications with the Administrator/Manager appearing most frequently but the Managing Partner Partner-Administrator still shows strong performance. Overall the high capital firms in top 10% shows a pattern of strong performance for Managing Partner/Partner-Administrator firms differ in company size group.
 
 
-```{r}
-top10_top5 %>%
-  count(company_size, owner_qualification) %>%
-  filter(n > 1) %>%
-  arrange(desc(n))
-```
+
 
 
 

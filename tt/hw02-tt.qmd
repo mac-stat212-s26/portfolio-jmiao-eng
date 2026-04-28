@@ -65,16 +65,100 @@ plants <- edible_plants %>%
 ## Visualization
 
 ```{r}
-ggplot(plants, aes(x = water, y = ph_mid)) +
-  geom_boxplot(alpha = 0.7) +
-  geom_jitter(width = 0.12, alpha = 0.4) +
+plant_summary <- plants %>%
+  group_by(water) %>%
+  summarise(
+    median_ph = median(ph_mid),
+    q1 = quantile(ph_mid, 0.25),
+    q3 = quantile(ph_mid, 0.75),
+    n = n(),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    water_label = paste0(water, "\n", "n = ", n)
+  )
+
+plants_labeled <- plants %>%
+  left_join(
+    plant_summary %>% select(water, water_label),
+    by = "water"
+  ) %>%
+  mutate(
+    water_label = factor(water_label, levels = plant_summary$water_label)
+  )
+
+plant_summary <- plant_summary %>%
+  mutate(
+    water_label = factor(water_label, levels = water_label)
+  )
+
+ggplot(plants_labeled, aes(x = water_label, y = ph_mid)) +
+  geom_rect(
+    aes(xmin = -Inf, xmax = Inf, ymin = 6, ymax = 7),
+    inherit.aes = FALSE,
+    fill = "gray90",
+    alpha = 0.75
+  ) +
+  geom_jitter(
+    width = 0.12,
+    alpha = 0.32,
+    size = 1.8,
+    color = "gray35"
+  ) +
+  geom_line(
+    data = plant_summary,
+    aes(x = water_label, y = median_ph, group = 1),
+    color = "#0B6B3A",
+    linewidth = 1
+  ) +
+  geom_pointrange(
+    data = plant_summary,
+    aes(x = water_label, y = median_ph, ymin = q1, ymax = q3),
+    color = "#0B6B3A",
+    linewidth = 0.9,
+    size = 1.2
+  ) +
+  geom_text(
+    data = plant_summary,
+    aes(
+      x = water_label,
+      y = median_ph,
+      label = paste0("median = ", round(median_ph, 1))
+    ),
+    nudge_y = -0.22,
+    size = 3.3,
+    color = "#0B6B3A"
+  ) +
+  annotate(
+    "text",
+    x = 1.05,
+    y = 6.92,
+    label = "common preferred range: pH 6–7",
+    hjust = 0,
+    size = 3.5,
+    color = "gray25"
+  ) +
+  scale_y_continuous(
+    limits = c(5, 8),
+    breaks = seq(5, 8, 0.5)
+  ) +
   labs(
-    title = "Distribution of Soil pH Across Water Requirement Groups",
-    subtitle = "Preferred pH lower and upper limits(midpoint)",
-    x = "Water Requirement",
-    y = "Preferred Soil pH (midpoint)", 
-    caption = "Source: Edible Plant Database (TidyTuesday 2026-02-03). Author: Jerry Miao. Date: 2026-02-10.") +
-  theme_minimal()
+    title = "Preferred soil pH barely changes by water need",
+    subtitle = "Median preferred pH stays near 6.5 across low-, medium-, and high-water plants.",
+    x = "Water requirement",
+    y = "Preferred soil pH midpoint",
+    caption = "Source: Edible Plant Database (TidyTuesday 2026-02-03) | Author: Jerry Miao | Date: 2026-02-10"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 17),
+    plot.subtitle = element_text(size = 11),
+    plot.caption = element_text(size = 8, hjust = 0),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    axis.title.x = element_text(margin = margin(t = 8)),
+    axis.title.y = element_text(margin = margin(r = 8))
+  )
 ```
 
 ## Conclusion

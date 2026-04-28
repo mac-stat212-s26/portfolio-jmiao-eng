@@ -1,97 +1,154 @@
 ---
-title: "Homework 04"
+title: "Homework 04 SFI Grants Analysis"
 format: 
   html: 
     embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
 ---
 
+## TidyTuesday Section
 
-## TidyTuesday Section (optional)
+Explore the week's TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.
 
-::: {.callout-important title="Instructions"}
-
-You can count work on this week's TidyTuesday toward the exceptional work required for an A in the Homework component.
-
-:::
-
-
-Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.
-
-#### Read Data
+## Dataset Import From TidyTuesday
 
 ```{r}
 library(tidyverse)
-library(tidytuesdayR)
 library(lubridate)
 library(scales)
 
-sfi_grants <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-02-24/sfi_grants.csv')
-glimpse(sfi_grants)
+sfi_grants <- readr::read_csv(
+  "https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-02-24/sfi_grants.csv"
+)
 ```
 
-### Research Question
+## Background
 
-Is SFI funding concentrated in a few institutions? (2000 - 2024)
+This dataset contains Science Foundation Ireland grant commitments from 2000 to 2024. Each row represents a grant award and includes information such as the research body, start date, programme name, and the current total funding commitment. Since my question focuses on concentration, I use the research body and total commitment variables to compare how much funding different institutions received.
 
+## Research Question
 
-### Data Wrangling
+Was SFI funding concentrated in a few institutions from 2000 to 2024?
+
+## Data Cleaning and Wrangling
 
 ```{r}
 sfi_clean <- sfi_grants |>
-  mutate(year = year(start_date),
-         funding = current_total_commitment,
-         research_body = str_squish(research_body)) |>
-  filter(!is.na(year), !is.na(research_body), !is.na(funding)) |>
-  filter(year >= 2000, year <= 2024)
-```
+  mutate(
+    year = year(start_date),
+    funding = current_total_commitment,
+    research_body = str_squish(research_body)
+  ) |>
+  filter(
+    !is.na(year),
+    !is.na(research_body),
+    !is.na(funding),
+    year >= 2000,
+    year <= 2024
+  )
 
-```{r}
-nrow(sfi_clean)
-summary(sfi_clean$funding)
-count(sfi_clean, year) |> arrange(year)
-```
-
-Top 10 Institutions 
-```{r}
-top10_share <- sfi_clean |>
+institution_share <- sfi_clean |>
   group_by(research_body) |>
-  summarise(total_funding = sum(funding), .groups = "drop") |>
-  mutate(share = total_funding / sum(total_funding)) |>
-  arrange(desc(total_funding)) |>
-  slice_head(n = 10)
+  summarise(
+    total_funding = sum(funding),
+    .groups = "drop"
+  ) |>
+  mutate(
+    share = total_funding / sum(total_funding),
+    rank = min_rank(desc(total_funding))
+  )
 
-top10_total_share <- sum(top10_share$share)
-top10_total_share
+plot_data <- institution_share |>
+  mutate(
+    research_body = if_else(rank <= 10, research_body, "All other institutions")
+  ) |>
+  group_by(research_body) |>
+  summarise(
+    total_funding = sum(total_funding),
+    share = sum(share),
+    .groups = "drop"
+  ) |>
+  arrange(desc(share)) |>
+  mutate(
+    highlight = if_else(
+      research_body == "All other institutions",
+      "All other institutions",
+      "Top 10 institutions"
+    ),
+    label = paste0(
+      percent(share, accuracy = 0.1),
+      "  ",
+      dollar(total_funding, prefix = "€", scale = 1e-6, suffix = "M")
+    )
+  )
+
+top10_total_share <- plot_data |>
+  filter(research_body != "All other institutions") |>
+  summarise(total = sum(share)) |>
+  pull(total)
 ```
 
+## Visualization
 
-```{r}
-range(top5_share$top5_share)
-```
-
-### Data Visualizations
-
-```{r}
-ggplot(top10_share, aes(x = reorder(research_body, share), y = share)) +
-  geom_col(fill = "#2C7BB6") +
+```{r fig.width=12, fig.height=7}
+ggplot(plot_data, aes(x = share, y = fct_reorder(research_body, share), fill = highlight)) +
+  geom_col(width = 0.72) +
   geom_text(
-    aes(label = scales::dollar(total_funding, prefix = "€", scale = 1e-6, suffix = "M")),
-    hjust = -0.05, size = 3.5
+    aes(label = label),
+    hjust = -0.02,
+    size = 3.3
   ) +
-  coord_flip() +
-  scale_y_continuous(
-    labels = scales::percent_format(accuracy = 0.1),
-    expand = expansion(mult = c(0, 0.12))  # adds room for labels
+  scale_x_continuous(
+    labels = percent_format(accuracy = 1),
+    limits = c(0, 0.40),
+    breaks = seq(0, 0.40, 0.05),
+    expand = expansion(mult = c(0, 0.08))
   ) +
+  scale_fill_manual(
+    values = c(
+      "Top 10 institutions" = "#2C7BB6",
+      "All other institutions" = "grey70"
+    )
+  ) +
+  coord_cartesian(clip = "off") +
   labs(
-    title = "Top 10 Institutions by Share of Total SFI Funding (2000–2024)",
-    subtitle = paste0("Combined, the top 10 institutions received ",
-                      scales::percent(top10_total_share, accuracy = 0.1),
-                      " of all SFI funding"),
-    x = NULL,
-    y = "Share of total funding",
-    caption = "Source: Science Foundation Ireland Grants Data (TidyTuesday 2026 Week 8). Author: Jerry Miao"
+    title = "SFI funding concentrated in a few institutions",
+    subtitle = paste0(
+      "Top 10 institutions received ",
+      percent(top10_total_share, accuracy = 0.1),
+      " of total funding from 2000–2024."
+    ),
+    x = "Share of total SFI funding",
+    y = NULL,
+    caption = "Source: Science Foundation Ireland Grants Commitments (TidyTuesday 2026-02-24) | Author: Jerry Miao | Date: 2026-02-24"
   ) +
-  theme_minimal(base_size = 13)
+  theme_minimal(base_size = 13) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 16, hjust = 0),
+    plot.subtitle = element_text(size = 10, hjust = 0),
+    plot.caption = element_text(size = 8, hjust = 0),
+    plot.title.position = "plot",
+    plot.caption.position = "plot",
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text.y = element_text(size = 9),
+    axis.text.x = element_text(size = 9),
+    plot.margin = margin(t = 20, r = 80, b = 20, l = 0)
+  )
 ```
+
+## Interpretation
+
+The visualization shows that SFI funding was highly concentrated among a small number of institutions. The top 10 institutions received about 95% of the total recorded SFI grant commitments from 2000 to 2024. Trinity College Dublin received the largest share, followed by University College Dublin, University of Galway, and University College Cork.
+
+The “All other institutions” category is important because it gives context. Instead of only ranking the top 10, the chart shows that all remaining institutions combined received a much smaller share than most of the leading institutions individually. This makes the funding concentration much easier to see.
+
+## Conclusion
+
+Overall, the data suggests that SFI grant funding was not evenly distributed across research bodies. A small group of universities and research institutions received most of the total funding. This does not mean the distribution was unfair, because funding decisions may depend on research capacity, project scale, and grant quality. However, the visualization clearly shows that SFI investment was concentrated in a few major institutions.
+
 

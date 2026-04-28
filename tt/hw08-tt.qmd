@@ -1,8 +1,12 @@
 ---
 title: "Homework 08 Repair Cafes Worldwide Analysis"
-format: 
-  html: 
-    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+format:
+  html:
+    embed-resources: false
 ---
 
 ## TidyTuesday Section
@@ -113,33 +117,67 @@ In this analysis, I focus on categories with at least 100 repair attempts so tha
 
 ## Visualization
 ```{r}
+library(tidyverse)
+library(scales)
+library(ggrepel)
 
-ggplot(
-  top_categories,
-  aes(
-    x = repair_rate,
-    y = fct_reorder(category, repair_rate)
+repair_summary <- repairs %>%
+  filter(
+    !is.na(category),
+    repaired %in% c("yes", "no", "half")
+  ) %>%
+  mutate(
+    repaired_success = repaired == "yes"
+  ) %>%
+  group_by(category) %>%
+  summarise(
+    repair_attempts = n(),
+    success_rate = mean(repaired_success),
+    .groups = "drop"
+  ) %>%
+  filter(repair_attempts >= 100) %>%
+  arrange(desc(success_rate)) %>%
+  slice_head(n = 10) %>%
+  mutate(
+    category = fct_reorder(category, success_rate),
+    highlight = if_else(success_rate >= 0.75, "Highest repair success", "Other common categories")
   )
-) +
-  geom_col(fill = "forestgreen") +
+
+ggplot(repair_summary, aes(x = success_rate, y = category, fill = highlight)) +
+  geom_col(width = 0.72) +
+  geom_text(
+    aes(label = percent(success_rate, accuracy = 1)),
+    hjust = -0.15,
+    size = 3.7
+  ) +
   scale_x_continuous(
-    labels = percent_format(accuracy = 1),
-    limits = c(0, 1)
+    labels = percent_format(),
+    limits = c(0, 1),
+    breaks = seq(0, 1, 0.25),
+    expand = expansion(mult = c(0, 0.08))
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Highest repair success" = "#0B6B3A",
+      "Other common categories" = "grey75"
+    )
   ) +
   labs(
-    title = "Repair success rates among the 10 most common product categories",
-    subtitle = "Categories with at least 100 repair attempts are included",
-    x = "Repair success rate",
-    y = "Product category",
-    caption = "Source: TidyTuesday (2026-04-07) Repair Cafes Worldwide dataset. Author: Jerry Miao. Date: 2026-04-14."
+    title = "Repair Success Rates for 10 most common product categories",
+    subtitle = "Low-tech items are the easiest to repair at Repair Cafes",
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    caption = "Source: Repair Cafes Worldwide dataset (TidyTuesday 2026-04-07) | Author: Jerry Miao | Date: 2026-04-14"
   ) +
-  theme_minimal() +
+  theme_minimal(base_size = 10) +
   theme(
-    plot.title = element_text(size = 11),
-    plot.subtitle = element_text(size = 8),
-    axis.title.x = element_text(size = 10),
-    axis.title.y = element_text(size = 10),
-    axis.text.x = element_text(size = 11),
+    legend.position = "top",
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", size = 12),
+    plot.subtitle = element_text(size = 10),
+    plot.caption = element_text(size = 6, hjust = 0),
     axis.text.y = element_text(size = 8)
   )
 ```

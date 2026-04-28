@@ -2,6 +2,26 @@
 title: "Pre-Class Learning Summaries"
 ---
 
+## Review
+
+Appendix A: File Organization & Paths
+
+This reading explained how to organize files in a data science project. I learned that projects should have clear folders such as code and data, and that raw data should never be changed. Instead, cleaned data should be stored separately, and scripts should document how the data was processed.
+
+I also learned about file paths and the difference between absolute and relative paths. Relative paths are preferred because they work across different computers and make projects reproducible. Understanding file structure and paths is important for keeping projects organized and avoiding errors when reading files.
+
+ Appendix B: Git and GitHub
+
+This reading introduced Git and GitHub as tools for version control and collaboration. I learned that Git tracks changes in files through commits, while GitHub stores repositories online and allows multiple people to work together.
+
+I also learned key concepts such as add, commit, push, and pull, which describe how changes are saved and shared. The reading explained merge conflicts and how they occur when two people edit the same part of a file. Understanding Git and GitHub is important for managing code and collaborating effectively on projects.
+
+Appendix C: Keyboard Shortcuts
+
+This reading covered keyboard shortcuts that improve efficiency when working in RStudio. I learned how to move the cursor, delete text, and highlight code using shortcuts instead of the mouse.
+
+I also learned useful RStudio shortcuts such as inserting code chunks, running code, and using autocomplete. These shortcuts help speed up coding and make the workflow more efficient, especially when working on longer scripts or projects.
+
 ## Preclass learning 3 Adv Data Viz
 ![](IMG_6753.png)
 
@@ -34,7 +54,7 @@ title: "Pre-Class Learning Summaries"
 
 ## Preclass learning 12 Loops + Iter II
 ![](IMG_7356.png)
-## Preclass learning 13 APIs I
+### Preclass learning 13 APIs I
 ![](IMG_7336.png)
 
 
